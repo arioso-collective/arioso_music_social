@@ -23,7 +23,7 @@
 ---
 
 ## General Information
-- [!Arioso_Logo-03](Arioso_Logo-03.png)
+![Arioso_Logo-03](https://bitbucket.org/cs3398-enceladus-s25/arioso/raw/60f77e0922d6db40675d2d85d7fa504b468c7c37/Arioso_Logo-03.png)
   
 
 ---
