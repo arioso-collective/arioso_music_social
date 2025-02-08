@@ -9,16 +9,13 @@
 * [Features](#features)
 
 <--!
-
 * [Screenshots](#screenshots)
 * [Setup](#setup)
 * [Usage](#usage)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
 * [Acknowledgements](#acknowledgements)
-* [Contact](#contact)
-
--->
+* [Contact](#contact) -->
 
 ---
 
@@ -45,7 +42,7 @@
 ---
 
 ## Technologies Used
-- [MongoDB](https://www.mongodb.com/docs/manual/) 
+- [SQLite](https://www.sqlite.org/docs.html) 
 - [Flask](https://flask.palletsprojects.com/en/stable/)
 - [React](https://react.dev/reference/react) 
 <!-- Include links to documentation where possible. -->
