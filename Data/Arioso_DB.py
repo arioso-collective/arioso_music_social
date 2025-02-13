@@ -1,17 +1,22 @@
-import sqlite3, uuid
+import sqlite3, uuid, hashlib
 
 conn = sqlite3.connect('arioso.db')
 cursor = conn.cursor()
 
-def addUser(userid, username, email):
+def generateUserID():
+    new_userid = uuid.uuid4()
+    int_userid = new_userid.int
+    userid = int_userid >> 64
+    return userid
+
+def addUser(username, email):
+    userid = generateUserID()
     cursor.execute("""INSERT OR IGNORE INTO users (id, username, email) VALUES (?, ?, ?)""", (userid, username, email))
     return
 
-def deleteUser(userid):
-    cursor.execute("DELETE FROM users WHERE id = ?", (userid,))
+def deleteUser(email):
+    cursor.execute("DELETE FROM users WHERE id = ?", (email,))
     return
-
-addUser(1234, 'testuser', 'testuser@arioso.com')
 
 #cursor.execute("INSERT INTO users (id, username, email) VALUES (3398, 'aria', 'aria@arioso.com')")
 conn.commit()
