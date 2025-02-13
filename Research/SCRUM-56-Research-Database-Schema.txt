@@ -1,0 +1,9 @@
+1. Research Database Schema and Relationships
+2. I am researching Database Schema and Relationships to better organize our project's database file.
+3. I expect to learn the different types of relationships present in databases and between tables within databases. This will assist me in the "Database Connection" Jira task.
+4. Once I have determined the different types of relationships present in databases, I will use this information to rewrite the Database file to include new organizational tables and create new Databases to securely store different types of user data.
+5. The biggest task that this research is for is the Database Connection task. 
+
+Resources/References Studied:
+https://www.ibm.com/think/topics/database-schema
+https://www.geeksforgeeks.org/difference-between-star-schema-and-snowflake-schema/#
