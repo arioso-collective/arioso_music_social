@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h2>Transcribe me</h2>
+
+    {% if success %}
+        <!-- You fill in the variables in the two statements below-->
+        <p> 
+            <b> You gave me:  </b> "{{transcribe_me_prompt}}".  
+        </p>
+        <p> 
+            <b>Here's your transcription:  </b> {{transcribe_me_response}}   
+        </p>
+    {% else %}  
+        {% for prompt in form.prompt.errors %}
+            <div class="flash">{{ prompt }}</div>
+        {% endfor %}
+
+        <form action="{{ url_for('transcribeme') }}" method=post>
+            <!-- 
+            This form has no CSRF protection.  To add, see:
+            https://flask-wtf.readthedocs.io/en/0.15.x/csrf/
+            --> 
+
+            {{ form.prompt.label }}
+            {{ form.prompt }}
+
+            {{ form.submit }}
+        </form>
+    {% endif %}
+
+{% endblock %}
