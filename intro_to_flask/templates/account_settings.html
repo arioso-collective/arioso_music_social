@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}Account Settings{% endblock %}
+
+{% block content %}
+<div class="settings-container">
+    <h2>Account Settings</h2>
+    <form action="/update-settings" method="POST" enctype="multipart/form-data">
+        <!-- Username -->
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="{{ user.username }}" required>
+
+        <!-- Email -->
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ user.email }}" required>
+
+        <!-- Password -->
+        <label for="password">New Password (leave blank to keep current):</label>
+        <input type="password" id="password" name="password">
+
+        <!-- Profile Picture -->
+        <label for="profile_picture">Profile Picture:</label>
+        <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
+
+        <!-- Bio -->
+        <label for="bio">Bio:</label>
+        <textarea id="bio" name="bio" rows="4">{{ user.bio }}</textarea>
+
+        <!-- Music Preferences -->
+        <label for="music_preferences">Favorite Genres:</label>
+        <input type="text" id="music_preferences" name="music_preferences" value="{{ user.music_preferences }}">
+
+        <!-- Submit Button -->
+        <button type="submit">Save Changes</button>
+        <button type="button" onclick="window.location.href='/dashboard'">Cancel</button>
+    </form>
+</div>
+{% endblock %}
