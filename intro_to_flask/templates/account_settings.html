@@ -5,34 +5,74 @@
 {% block content %}
 <div class="settings-container">
     <h2>Account Settings</h2>
-    <form action="/update-settings" method="POST" enctype="multipart/form-data">
+
+    <form action="" method="POST" enctype="multipart/form-data">
+
         <!-- Username -->
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" value="{{ user.username }}" required>
+        <div class="form-group">
+            {{ form.username.label }}<br>
+            {{ form.username(class="form-control") }}
+            {% for error in form.username.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
 
         <!-- Email -->
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="{{ user.email }}" required>
+        <div class="form-group">
+            {{ form.email.label }}<br>
+            {{ form.email(class="form-control") }}
+            {% for error in form.email.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
 
         <!-- Password -->
-        <label for="password">New Password (leave blank to keep current):</label>
-        <input type="password" id="password" name="password">
+        <div class="form-group">
+            {{ form.password.label }}<br>
+            {{ form.password(class="form-control") }}
+            {% for error in form.password.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
 
-        <!-- Profile Picture -->
-        <label for="profile_picture">Profile Picture:</label>
-        <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
+        <!-- Confirm Password -->
+        <div class="form-group">
+            {{ form.confirm_password.label }}<br>
+            {{ form.confirm_password(class="form-control") }}
+            {% for error in form.confirm_password.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
 
         <!-- Bio -->
-        <label for="bio">Bio:</label>
-        <textarea id="bio" name="bio" rows="4">{{ user.bio }}</textarea>
+        <div class="form-group">
+            {{ form.bio.label }}<br>
+            {{ form.bio(class="form-control") }}
+            {% for error in form.bio.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
 
         <!-- Music Preferences -->
-        <label for="music_preferences">Favorite Genres:</label>
-        <input type="text" id="music_preferences" name="music_preferences" value="{{ user.music_preferences }}">
+        <div class="form-group">
+            {{ form.music_preferences.label }}<br>
+            {{ form.music_preferences(class="form-control") }}
+            {% for error in form.music_preferences.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <!-- Profile Picture -->
+        <div class="form-group">
+            {{ form.profile_picture.label }}<br>
+            {{ form.profile_picture(class="form-control") }}
+            {% for error in form.profile_picture.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
 
         <!-- Submit Button -->
-        <button type="submit">Save Changes</button>
-        <button type="button" onclick="window.location.href='/dashboard'">Cancel</button>
+        {{ form.submit(class="btn btn-primary") }}
     </form>
 </div>
 {% endblock %}
