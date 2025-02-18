@@ -26,6 +26,14 @@ def encryptPassword(password):
 
     return encryptedPassword
 
-#cursor.execute("INSERT INTO users (id, username, email) VALUES (3398, 'aria', 'aria@arioso.com')")
+def addPassword(userid):
+    userpassword = input()
+    encryptedPassword = encryptPassword(userpassword)
+    cursor.execute ("INSERT INTO passwords (password, userid) VALUES (?, ?)", (encryptedPassword, userid))
+    
+    return
+
+addPassword(3398)
+
 conn.commit()
 conn.close()
