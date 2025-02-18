@@ -51,6 +51,13 @@ def contact():
 
   elif request.method == 'GET':
       return render_template('contact.html', form=form)
+  
+@app.route('/comments')
+def comments():
+    return render_template('comments.html')
+
        
 app.register_blueprint(about_blueprint) 
+
+
   
