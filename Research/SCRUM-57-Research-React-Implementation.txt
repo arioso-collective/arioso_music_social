@@ -9,7 +9,53 @@ When it comes to website deployment, a typical React workflow is as follows:
 
 This approach leverages the Virtual DOM for efficient updates and ensures that the final build is optimized for performance and scalability.
 
+Setting up and running React:
+To install and run a React application in the terminal, start by ensuring Node.js and npm are installed on your system. You can then create a new React 
+project using the command npx create-react-app my-app followed by navigating into the project directory with cd my-app.
+ Install the dependencies by running npm install.
+ To start the development server and launch the app in your default web browser, use the command npm start.
+ This command will initiate the app and display it in your browser.
+ To stop the running React app, you can use Ctrl + c in the command line.
+
+For an alternative setup, you can use Vite, a fast and customizable modern tool for web projects. To create a new React app with Vite, navigate to your 
+desired directory, open the terminal, and run npm create vite@latest my-vite-app followed by cd my-vite-app and npm install.
+ After installing the dependencies, start the development server with npm run dev.
+
+ In my experimentation I used Vite to set up and install React.
+
 Notes:
 - React page consists of components
 - Uses Javascript or typescript
 - "App" react page is the root of the application, compnents are combined to make up entire react pages
+- Components are define as functions in their own file, PascalCase is used for naming conventions.
+
+======================================================================================
+
+function ListGroup() {
+  let items = ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix"];
+  items = [];
+
+  const message = items.length === 0 ? <p>No item found</p> : null;
+
+  return (
+    <>
+      <h1>List Group</h1>
+      {message}
+      <ul className="list-group">
+        {items.map((item) => (
+          <li key={item} className="list-group-item">
+            {item}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+=============================================================
+
+- In the example above, we see a Javascript function called ListGroup. 
+    Inside the return statement, you place html code and React converts html into javascript 
+    for the application. 
+- The "<>" syntax inside the return statement wraps multiple html blocks into one; it's called a Fragment. 
+    You may also wrap them in a seperate div.
