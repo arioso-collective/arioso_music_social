@@ -1,4 +1,4 @@
-import sqlite3, uuid, hashlib
+import sqlite3, uuid, hashlib, os
 
 conn = sqlite3.connect('arioso.db')
 cursor = conn.cursor()
@@ -18,20 +18,13 @@ def deleteUser(email):
     cursor.execute("DELETE FROM users WHERE id = ?", (email,))
     return
 
-def addPassword(userid):
-    userpassword = input()
-    encryptedPassword = encryptPassword(userpassword)
-    cursor.execute("INSERT INTO passwords (password, userid) VALUES (?, ?)", (encryptedPassword, userid))
-    return
-
 def encryptPassword(password):
-    sha256_hash = hashlib.sha256()
-    sha256_hash.update(password.encode('utf-8'))
-    encryptedPassword = sha256_hash.hexdigest()
+    salt = os.urandom(16)
+    pbkdf2_hash = hashlib.pbkdf2_hmac('sha256', password.encode(), salt, 100000)
+    #pbkdf2_hash.update(password.encode('utf-8'))
+    encryptedPassword = pbkdf2_hash.hexdigest()
 
     return encryptedPassword
-
-addPassword(3398)
 
 #cursor.execute("INSERT INTO users (id, username, email) VALUES (3398, 'aria', 'aria@arioso.com')")
 conn.commit()
