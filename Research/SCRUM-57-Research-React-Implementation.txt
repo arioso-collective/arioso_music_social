@@ -1,0 +1,15 @@
+React is a JavaScript library created by Facebook for building fast and interactive user interfaces. It promotes the concept of reusable components, which encapsulate their own state and structure, making complex UIs manageable.
+
+When it comes to website deployment, a typical React workflow is as follows:
+
+1. Develop the application using JSX and components.
+2. Use tools like Create React App to compile and bundle the code.
+3. Generate a production build, which optimizes and outputs static files (HTML, CSS, and JavaScript).
+4. Host these static files on a web server or deploy them using a CDN for fast global access.
+
+This approach leverages the Virtual DOM for efficient updates and ensures that the final build is optimized for performance and scalability.
+
+Notes:
+- React page consists of components
+- Uses Javascript or typescript
+- "App" react page is the root of the application, compnents are combined to make up entire react pages
