@@ -27,13 +27,15 @@ def encryptPassword(password):
     return encryptedPassword
 
 def addPassword(userid):
-    userpassword = input()
-    encryptedPassword = encryptPassword(userpassword)
-    cursor.execute ("INSERT INTO passwords (password, userid) VALUES (?, ?)", (encryptedPassword, userid))
+    cursor.execute("SELECT password from passwords WHERE userid = ?", (userid,))
+    userpassword = cursor.fetchone()
+
+    if userpassword is None:
+        userpassword = input()
+        encryptedPassword = encryptPassword(userpassword)
+        cursor.execute ("INSERT INTO passwords (password, userid) VALUES (?, ?)", (encryptedPassword, userid))
     
     return
-
-addPassword(3398)
 
 conn.commit()
 conn.close()
