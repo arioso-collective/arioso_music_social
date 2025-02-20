@@ -6,6 +6,7 @@ from intro_to_flask import app
 import sys 
 sys.dont_write_bytecode = True
 from flask import render_template, request, Flask,Blueprint
+from flask import render_template, request, redirect, url_for
 from flask_mail import Message, Mail
 from .contact_form import ContactForm
 from .about_python.about_route import about_blueprint
@@ -27,6 +28,8 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
 mail = Mail(app)
+
+comments = []
 
 @app.route('/')
 def home():
@@ -52,9 +55,21 @@ def contact():
   elif request.method == 'GET':
       return render_template('contact.html', form=form)
   
-@app.route('/comments')
-def comments():
-    return render_template('comments.html')
+@app.route('/comments', methods=['GET', 'POST'])
+def comments_page():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        text = request.form.get('comment')
+
+        if name and text:  # Basic validation
+            comments.append({
+                'author': name,
+                'text': text,
+            })
+
+        return redirect(url_for('comments_page'))  # Redirect to refresh page
+
+    return render_template('comments.html', comments=comments)
 
        
 app.register_blueprint(about_blueprint) 
