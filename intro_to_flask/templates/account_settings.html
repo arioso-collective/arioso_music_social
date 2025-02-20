@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block title %}Account Settings{% endblock %}
+
+{% block content %}
+<div class="settings-container">
+    <h2>Account Settings</h2>
+
+    <form action="" method="POST" enctype="multipart/form-data">
+
+        <!-- Username -->
+        <div class="form-group">
+            {{ form.username.label }}<br>
+            {{ form.username(class="form-control") }}
+            {% for error in form.username.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            {{ form.email.label }}<br>
+            {{ form.email(class="form-control") }}
+            {% for error in form.email.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+            {{ form.password.label }}<br>
+            {{ form.password(class="form-control") }}
+            {% for error in form.password.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+            {{ form.confirm_password.label }}<br>
+            {{ form.confirm_password(class="form-control") }}
+            {% for error in form.confirm_password.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <!-- Bio -->
+        <div class="form-group">
+            {{ form.bio.label }}<br>
+            {{ form.bio(class="form-control") }}
+            {% for error in form.bio.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <!-- Music Preferences -->
+        <div class="form-group">
+            {{ form.music_preferences.label }}<br>
+            {{ form.music_preferences(class="form-control") }}
+            {% for error in form.music_preferences.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <!-- Profile Picture -->
+        <div class="form-group">
+            {{ form.profile_picture.label }}<br>
+            {{ form.profile_picture(class="form-control") }}
+            {% for error in form.profile_picture.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <!-- Submit Button -->
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+</div>
+{% endblock %}
