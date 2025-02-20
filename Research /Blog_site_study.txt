@@ -1,0 +1,11 @@
+I have started using this youtube channel to figure out how exactly I will be integrating my code with sebastians Database 
+Currently it is an SQL which is what the youtube channel focuses on integrating SQL database and Flask backend
+
+
+youtube: https://www.youtube.com/@TechWithTim 
+
+Youtube flask blog site tutorials have been my main focus and resource right now
+We should come back as a team and try to clean up our site and coding formats with his.
+The formatting that he has seems to be more managable and easier to format for a nicer UI
+
+bitbucket: https://bitbucket.org/yqo71/flask-blog-tutorial/src/main/ 
