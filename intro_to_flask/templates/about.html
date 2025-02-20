@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h2>About {{about_name}}</h2>
+{% if about_aboutMe == " " %}
+  <p>This is an About page for {{about_name}}. This is the standard about page. </p>
+{% else %}
+  <p>This is an About page for {{about_name}}. {{about_name}} wants to shout "{{about_aboutMe}}" </p>
+{% endif %}
+
+<!-- Add links to special About pages here -->
+<nav>
+    <ul>
+      {% for name in team_names %}
+        <li><a href="{{ url_for('about', route_with_name=name) }}">About {{ name }}</a></li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endblock %}

@@ -1,2 +1,16 @@
 
 arioso.db
+
+.env
+
+__pycache__/
+
+.DS_Store
+
+.venv/
+
+venv/
+
+.project
+
+intro_to_flask/temp/
