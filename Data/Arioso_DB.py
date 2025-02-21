@@ -49,19 +49,21 @@ def addPassword(userid, password):
     
     return
 
-#def checkPasswordMatch(password, userid):
-   #cursor.execute("SELECT password from passwords WHERE userid = ?", (userid,))
-   #userpassword = cursor.fetchone()
+def checkPasswordMatch(password, userid):
+   cursor.execute("SELECT password, salt from passwords WHERE userid = ?", (userid,))
+   result = cursor.fetchone()
 
-   #encryptedPassword = encryptPassword(password, userid)
+   if result is None:
+    return False
 
-   #if userpassword == encryptedPassword:
-       #return True
-   #else:
-       #return False
+   userpassword, salt = result
+   print(salt)
+   encryptedPassword = encryptPassword(password, salt)
 
-#result = checkPasswordMatch("password", 1234)
-#print(result)
+   if userpassword == encryptedPassword:
+       return True
+   else:
+       return False
 
 conn.commit()
 conn.close()
