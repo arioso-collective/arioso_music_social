@@ -23,14 +23,14 @@ class DatabaseTesting(unittest.TestCase):
     def test_addUser(self):
         username = "aria"
         email = "aria@arioso.com"
-        addUser(username, email)
+        addUser(self.cursor, username, email)
 
         
         self.cursor.execute("SELECT username, email FROM users_new WHERE email = ?", (email,))
         result = self.cursor.fetchone()
         self.assertIsNotNone(result)
-        self.assertEqual(result[1], username)
-        self.assertEqual(result[2], email)
+        self.assertEqual(result[0], username)
+        self.assertEqual(result[1], email)
 
     def test_addPassword(self):
         testpassword = "password"
@@ -41,7 +41,14 @@ class DatabaseTesting(unittest.TestCase):
         result = self.cursor.fetchone()
         self.assertIsNotNone(result)
     
-    #def test_generateSalt():
+    def test_generateSalt(self):
+        testuserid = "000-000-000"
+        generateSalt(self.cursor, testuserid)
+
+        self.cursor.execute("SELECT salt from passwords WHERE userid =?", (testuserid,))
+        result = self.cursor.fetchone()
+        self.assertIsNotNone(result)
+
         
     def test_deleteUser(self):
         email = "aria@arioso.com"
@@ -51,14 +58,16 @@ class DatabaseTesting(unittest.TestCase):
         result = self.cursor.fetchone()
         self.assertIsNone(result)
     
-    #def test_encryptPassword():
+    #def test_encryptPassword(self):
+        #password = "password"
+        #salt = os.urandom(16)
+
+        #result = encryptPassword(password, salt)
+        #self.assertIsNone(result)
+        #self.assertNotEqual(result, password)
+
     
     #def test_checkPasswordMatch():
-
-    def test_dummy(self):
-        self.assertTrue(True)
-
-
 
     
 if __name__ == '__main__':
