@@ -4,13 +4,13 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1.5em;
   color: #3b124a;
-  background-color: #d6a9e4;
+  background-color: #b3a4ff;
 }
 
 /* Create dark grey header with a white logo */
 
 header {
-  background-color: #b160c5;
+  background-color: #794ece;
   height: 60px;
   width: 100%;
   opacity: .9;
@@ -45,7 +45,7 @@ header h1.logo:hover {
 
 div.jumbo {
   padding: 10px 0 30px 0;
-  background-color:#b160c5;
+  background-color:#794ece;
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
           border-radius: 6px;
@@ -86,6 +86,7 @@ h3 {
 .menu li a {
   color: #3b124a;
   text-decoration: none;
+  font-weight: bold;
 }
 
 /* Contact form */
@@ -166,4 +167,34 @@ form input#submit:hover{
   height: 50px;  /* Adjust height */
   width: auto;   /* Maintain aspect ratio */
   display: block;
+}
+
+textarea#comment {
+  width: 100%; /* Make it full-width */
+  max-width: 600px; /* Set a max width */
+  height: 120px; /* Adjust height */
+  background-color: #f1d8ff; /* Light purple background */
+  border: 2px solid #c1c1c1; /* Dark purple border */
+  border-radius: 8px; /* Rounded edges */
+  padding: 10px; /* Padding inside */
+  font-size: 1.2em; /* Text size */
+  color: #3b124a; /* Dark purple text */
+  resize: vertical; /* Allow vertical resizing */
+}
+
+/* Style the submit button */
+input#submit-comment {
+  display: block;
+  background-color: #8a2be2; /* Purple button */
+  color: white; /* White text */
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+input#submit-comment:hover {
+  background-color: #6a1bb9; /* Darker purple on hover */
 }
