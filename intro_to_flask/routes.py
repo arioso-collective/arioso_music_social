@@ -10,6 +10,7 @@ from flask import render_template, request, redirect, url_for
 from flask_mail import Message, Mail
 from .contact_form import ContactForm
 from .about_python.about_route import about_blueprint
+from better_profanity import profanity 
 
 
 #The mail_user_name and mail_app_password values are in the .env file
@@ -63,8 +64,9 @@ def comments_page():
 
         if name and text:  # Basic validation
             comments.append({
+               
                 'author': name,
-                'text': text,
+                'text': profanity.censor(text) ,
             })
 
         return redirect(url_for('comments_page'))  # Redirect to refresh page
