@@ -65,9 +65,9 @@ def custom_censor(text):
     for word in words:
         if profanity.contains_profanity(word):
             if len(word) > 2:
-                censored_word = word[0] + '*' * (len(word) - 2) + word[-1]  # Keep first and last letter
+                censored_word = word[0] + ' * ' * (len(word) - 2) + word[-1]  # Keep first and last letter
             else:
-                censored_word = '*' * len(word)  # Censor short words fully
+                censored_word = ' * ' * len(word)  # Censor short words fully
             censored_words.append(censored_word)
         else:
             censored_words.append(word)
