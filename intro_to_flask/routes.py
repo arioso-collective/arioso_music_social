@@ -1,5 +1,6 @@
 import os
 import openai
+import re
 import re #regular expressions module
 from markupsafe import escape #protects projects against injection attacks
 from intro_to_flask import app
@@ -11,6 +12,7 @@ from flask_mail import Message, Mail
 from .contact_form import ContactForm
 from .about_python.about_route import about_blueprint
 from better_profanity import profanity 
+
 
 
 #The mail_user_name and mail_app_password values are in the .env file
@@ -56,6 +58,22 @@ def contact():
   elif request.method == 'GET':
       return render_template('contact.html', form=form)
   
+def custom_censor(text):
+    words = text.split()
+    censored_words = []
+    
+    for word in words:
+        if profanity.contains_profanity(word):
+            if len(word) > 2:
+                censored_word = word[0] + '*' * (len(word) - 2) + word[-1]  # Keep first and last letter
+            else:
+                censored_word = '*' * len(word)  # Censor short words fully
+            censored_words.append(censored_word)
+        else:
+            censored_words.append(word)
+
+    return ' '.join(censored_words)
+  
 @app.route('/comments', methods=['GET', 'POST'])
 def comments_page():
     if request.method == 'POST':
@@ -63,19 +81,10 @@ def comments_page():
         text = request.form.get('comment')
 
         if name and text:  # Basic validation
-          censored_text = profanity.censor(text, replace_char="*")
-          for word in censored_text.split():
-
-
-            if len(word) > 2:
-
-              censored_word = word[0] + "*" * (len(word) - 2) + word[-1]
-
-              censored_text = censored_text.replace(word, censored_word)
-            comments.append({
-               
+          filtered_text = custom_censor(text)
+          comments.append({
                 'author': name,
-                'text': censored_text ,
+                'text': filtered_text ,
             })
 
         return redirect(url_for('comments_page'))  # Redirect to refresh page
