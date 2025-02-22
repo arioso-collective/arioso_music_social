@@ -8,16 +8,16 @@ def generateUserID():
     userid = str(new_userid)
     return userid
 
-def addUser(username, email):
+def addUser(cursor,username, email):
     userid = generateUserID()
     cursor.execute("INSERT OR IGNORE INTO users_new (id, username, email) VALUES (?, ?, ?)", (userid, username, email))
     return
 
-def deleteUser(email):
+def deleteUser(cursor,email):
     cursor.execute("DELETE FROM users_new WHERE email = ?", (email,))
     return
 
-def generateSalt(userid):
+def generateSalt(cursor,userid):
     cursor.execute("SELECT salt FROM passwords WHERE userid = ?", (userid,))
     usersalt = cursor.fetchone()
 
@@ -35,18 +35,18 @@ def encryptPassword(password, salt):
 
     return encryptedPassword
 
-def addPassword(userid, password):
+def addPassword(cursor,userid, password):
     cursor.execute("SELECT password from passwords WHERE userid = ?", (userid,))
     userpassword = cursor.fetchone()
 
     if userpassword is None:
-        salt = generateSalt(userid)
+        salt = generateSalt(cursor,userid)
         encryptedPassword = encryptPassword(password, salt)
         cursor.execute ("INSERT OR REPLACE INTO passwords (userid, password, salt) VALUES (?, ?, ?)", (userid, encryptedPassword, salt))
     
     return
 
-def checkPasswordMatch(password, userid):
+def checkPasswordMatch(cursor,password, userid):
    cursor.execute("SELECT password, salt from passwords WHERE userid = ?", (userid,))
    result = cursor.fetchone()
 
@@ -63,3 +63,4 @@ def checkPasswordMatch(password, userid):
 
 conn.commit()
 conn.close()
+

@@ -3,32 +3,63 @@ from Arioso_DB import generateUserID, addUser, addPassword, generateSalt, delete
 
 class DatabaseTesting(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        cls.conn = sqlite3.connect("arioso.db")
-        cls.cursor = cls.conn.cursor()
+    def setUp(self):
+        self.conn = sqlite3.connect("arioso.db")
+        self.cursor = self.conn.cursor()
 
-        cls.cursor.execute("CREATE TABLE IF NOT EXISTS users_new (id TEXT PRIMARY KEY, username TEXT NOT NULL, email TEXT NOT NULL UNIQUE)")
-        cls.cursor.execute("CREATE TABLE IF NOT EXISTS passwords (userid TEXT PRIMARY KEY, password TEXT, salt BLOB)")
-        cls.conn.commit()
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS users_new (id TEXT PRIMARY KEY, username TEXT NOT NULL, email TEXT NOT NULL UNIQUE)")
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS passwords (userid TEXT PRIMARY KEY, password TEXT, salt BLOB)")
+        self.conn.commit()
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.conn.close()
+    def tearDown(self):
+        self.conn.commit()
+        self.conn.close()
 
-    #def test_generateUserID(self):    
+    def test_generateUserID(self):
+        userid = generateUserID()
+        self.assertIsInstance(userid, str)
+        self.assertEqual(len(userid), 36)   
 
-    #def test_addUser(self):
+    def test_addUser(self):
+        username = "aria"
+        email = "aria@arioso.com"
+        addUser(username, email)
 
-    #def test_addPasswordTest(self):
-    
-    #def test_generateSaltTest():
         
-    #def test_deleteUserTest():
+        self.cursor.execute("SELECT username, email FROM users_new WHERE email = ?", (email,))
+        result = self.cursor.fetchone()
+        self.assertIsNotNone(result)
+        self.assertEqual(result[1], username)
+        self.assertEqual(result[2], email)
+
+    def test_addPassword(self):
+        testpassword = "password"
+        testuserid = "000-000-000"
+        addPassword(self.cursor,testuserid, testpassword)
+
+        self.cursor.execute("SELECT password from passwords WHERE userid = ?", (testuserid,))
+        result = self.cursor.fetchone()
+        self.assertIsNotNone(result)
     
-    #def test_encryptPasswordTest():
+    #def test_generateSalt():
+        
+    def test_deleteUser(self):
+        email = "aria@arioso.com"
+        deleteUser(self.cursor,email)
+
+        self.cursor.execute("SELECT id FROM users_new WHERE email = ?", (email,))
+        result = self.cursor.fetchone()
+        self.assertIsNone(result)
     
-    #def test_checkPasswordMatchTest():
+    #def test_encryptPassword():
+    
+    #def test_checkPasswordMatch():
+
+    def test_dummy(self):
+        self.assertTrue(True)
+
+
+
     
 if __name__ == '__main__':
     unittest.main()
