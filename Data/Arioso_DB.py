@@ -20,15 +20,12 @@ def deleteUser(email):
 def generateSalt(userid):
     cursor.execute("SELECT salt FROM passwords WHERE userid = ?", (userid,))
     usersalt = cursor.fetchone()
-    print(usersalt)
 
     if usersalt is None:
         salt = os.urandom(16)
-        print(salt)
         cursor.execute ("INSERT INTO passwords (userid, password, salt) VALUES (?, ?, ?)", (userid, "", salt))
     else:
         salt = usersalt[0]
-        print(salt)
 
     return salt
 
@@ -49,19 +46,20 @@ def addPassword(userid, password):
     
     return
 
-#def checkPasswordMatch(password, userid):
-   #cursor.execute("SELECT password from passwords WHERE userid = ?", (userid,))
-   #userpassword = cursor.fetchone()
+def checkPasswordMatch(password, userid):
+   cursor.execute("SELECT password, salt from passwords WHERE userid = ?", (userid,))
+   result = cursor.fetchone()
 
-   #encryptedPassword = encryptPassword(password, userid)
+   if result is None:
+    return False
 
-   #if userpassword == encryptedPassword:
-       #return True
-   #else:
-       #return False
+   userpassword, salt = result
+   encryptedPassword = encryptPassword(password, salt)
 
-#result = checkPasswordMatch("password", 1234)
-#print(result)
+   if userpassword == encryptedPassword:
+       return True
+   else:
+       return False
 
 conn.commit()
 conn.close()
