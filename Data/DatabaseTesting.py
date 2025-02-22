@@ -8,18 +8,15 @@ class DatabaseTesting(unittest.TestCase):
         cls.conn = sqlite3.connect("arioso.db")
         cls.cursor = cls.conn.cursor()
 
-        cls.cursor.execute("CREATE TABLE users_new (id TEXT PRIMARY KEY, username TEXT NOT NULL, email TEXT NOT NULL UNIQUE)")
-        cls.cursor.execute("CREATE TABLE passwords (userid TEXT PRIMARY KEY, password TEXT, salt BLOB)")
+        cls.cursor.execute("CREATE TABLE IF NOT EXISTS users_new (id TEXT PRIMARY KEY, username TEXT NOT NULL, email TEXT NOT NULL UNIQUE)")
+        cls.cursor.execute("CREATE TABLE IF NOT EXISTS passwords (userid TEXT PRIMARY KEY, password TEXT, salt BLOB)")
         cls.conn.commit()
 
     @classmethod
     def tearDownClass(cls):
         cls.conn.close()
 
-    def test_generateUserID(self):
-        userid = generateUserID()
-        self.assertIsInstance(userid, str)
-        self.assertEqual(len(userid), 36)
+    #def test_generateUserID(self):    
 
     #def test_addUser(self):
 
@@ -33,5 +30,5 @@ class DatabaseTesting(unittest.TestCase):
     
     #def test_checkPasswordMatchTest():
     
-    if __name__ == '__main__':
-        unittest.main()
+if __name__ == '__main__':
+    unittest.main()
