@@ -3,13 +3,14 @@ body {
   padding: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1.5em;
-  color: #444;
+  color: #3b124a;
+  background-color: #b3a4ff;
 }
 
 /* Create dark grey header with a white logo */
 
 header {
-  background-color: #2B2B2B;
+  background-color: #794ece;
   height: 60px;
   width: 100%;
   opacity: .9;
@@ -19,7 +20,7 @@ header {
 header h1.logo {
   margin: 0;
   font-size: 2.0em;
-  color: #fff;
+  color:#4b1690
   text-transform: uppercase;
   float: left;
 }
@@ -44,7 +45,7 @@ header h1.logo:hover {
 
 div.jumbo {
   padding: 10px 0 30px 0;
-  background-color: #eeeeee;
+  background-color:#794ece;
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
           border-radius: 6px;
@@ -55,6 +56,7 @@ h2 {
   margin-top: 40px;
   text-align: center;
   letter-spacing: -2px;
+  color:#3b124a;
 }
 
 h3 {
@@ -63,7 +65,7 @@ h3 {
   margin-top: 30px;
   text-align: center;
   letter-spacing: -1px;
-  color: #999;
+  color: #510068;
 }
 
 /* Display navigation links inline */
@@ -82,8 +84,9 @@ h3 {
 }
 
 .menu li a {
-  color: #999;
+  color: #3b124a;
   text-decoration: none;
+  font-weight: bold;
 }
 
 /* Contact form */
@@ -99,7 +102,7 @@ form input#name,
 form input#email,
 form input#subject {
   width: 400px;
-  background-color: #fafafa;
+  background-color: #f1d8ff;
   -webkit-border-radius: 3px;  
      -moz-border-radius: 3px;  
           border-radius: 3px;
@@ -112,7 +115,7 @@ form textarea#message,
 form textarea#prompt {
   width: 500px;
   height: 100px;
-  background-color: #fafafa;
+  background-color: #f1d8ff;
   -webkit-border-radius: 3px;  
      -moz-border-radius: 3px;  
           border-radius: 3px;
@@ -132,7 +135,7 @@ form input#submit {
   font-weight:bold; 
   text-align: center; 
   color: #000000; 
-  background-color: #f4f4f4;
+  background-color: #f1d8ff;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f4f4f4), color-stop(100%, #e5e5e5));
   background-image: -webkit-linear-gradient(top, #f4f4f4, #e5e5e5);
   background-image: -moz-linear-gradient(top, #f4f4f4, #e5e5e5);
@@ -144,7 +147,7 @@ form input#submit {
 form input#submit:hover{
   cursor: pointer;
   border:1px solid #c1c1c1; 
-  background-color: #dbdbdb;
+  background-color: #f1d8ff;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dbdbdb), color-stop(100%, #cccccc));
   background-image: -webkit-linear-gradient(top, #dbdbdb, #cccccc);
   background-image: -moz-linear-gradient(top, #dbdbdb, #cccccc);
@@ -155,7 +158,43 @@ form input#submit:hover{
 
 /* Message flashing */
 .flash {
-  background-color: #FBB0B0;
+  background-color: #4b1690;
   padding: 10px;
   width: 400px;
+}
+
+.logo img {
+  height: 50px;  /* Adjust height */
+  width: auto;   /* Maintain aspect ratio */
+  display: block;
+}
+
+textarea#comment {
+  width: 100%; /* Make it full-width */
+  max-width: 600px; /* Set a max width */
+  height: 120px; /* Adjust height */
+  background-color: #f1d8ff; /* Light purple background */
+  border: 2px solid #c1c1c1; /* Dark purple border */
+  border-radius: 8px; /* Rounded edges */
+  padding: 10px; /* Padding inside */
+  font-size: 1.2em; /* Text size */
+  color: #3b124a; /* Dark purple text */
+  resize: vertical; /* Allow vertical resizing */
+}
+
+/* Style the submit button */
+input#submit-comment {
+  display: block;
+  background-color: #8a2be2; /* Purple button */
+  color: white; /* White text */
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+input#submit-comment:hover {
+  background-color: #6a1bb9; /* Darker purple on hover */
 }
