@@ -63,10 +63,19 @@ def comments_page():
         text = request.form.get('comment')
 
         if name and text:  # Basic validation
+          censored_text = profanity.censor(text, replace_char="*")
+          for word in censored_text.split():
+
+
+            if len(word) > 2:
+
+              censored_word = word[0] + "*" * (len(word) - 2) + word[-1]
+
+              censored_text = censored_text.replace(word, censored_word)
             comments.append({
                
                 'author': name,
-                'text': profanity.censor(text) ,
+                'text': censored_text ,
             })
 
         return redirect(url_for('comments_page'))  # Redirect to refresh page
