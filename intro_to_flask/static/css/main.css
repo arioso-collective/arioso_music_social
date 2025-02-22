@@ -82,7 +82,7 @@ h3 {
 }
 
 .menu li a {
-  color: #999;
+  color: #3b124a;
   text-decoration: none;
 }
 
@@ -99,7 +99,7 @@ form input#name,
 form input#email,
 form input#subject {
   width: 400px;
-  background-color: #61009a;
+  background-color: #f1d8ff;
   -webkit-border-radius: 3px;  
      -moz-border-radius: 3px;  
           border-radius: 3px;
@@ -112,7 +112,7 @@ form textarea#message,
 form textarea#prompt {
   width: 500px;
   height: 100px;
-  background-color: #fafafa;
+  background-color: #f1d8ff;
   -webkit-border-radius: 3px;  
      -moz-border-radius: 3px;  
           border-radius: 3px;
@@ -132,7 +132,7 @@ form input#submit {
   font-weight:bold; 
   text-align: center; 
   color: #000000; 
-  background-color: #f4f4f4;
+  background-color: #f1d8ff;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f4f4f4), color-stop(100%, #e5e5e5));
   background-image: -webkit-linear-gradient(top, #f4f4f4, #e5e5e5);
   background-image: -moz-linear-gradient(top, #f4f4f4, #e5e5e5);
@@ -144,7 +144,7 @@ form input#submit {
 form input#submit:hover{
   cursor: pointer;
   border:1px solid #c1c1c1; 
-  background-color: #dbdbdb;
+  background-color: #f1d8ff;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dbdbdb), color-stop(100%, #cccccc));
   background-image: -webkit-linear-gradient(top, #dbdbdb, #cccccc);
   background-image: -moz-linear-gradient(top, #dbdbdb, #cccccc);
