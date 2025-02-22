@@ -161,3 +161,9 @@ form input#submit:hover{
   padding: 10px;
   width: 400px;
 }
+
+.logo img {
+  height: 50px;  /* Adjust height */
+  width: auto;   /* Maintain aspect ratio */
+  display: block;
+}
