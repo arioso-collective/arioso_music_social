@@ -70,8 +70,22 @@
 
 ## Sprint 1 (2/10/25 - 2/21/25)
 ## Contributions
-  - **Juluissa:** " "
-<br />
+  - **Juluissa:** "Researched and started creating a comment form to interact with the database. Basis for how site will gather information"    
+      - `Jira Task SCRUM-45: Create a comment form using flask` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-45
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-45-create-a-comment-form 
+      - `Jira Task SCRUM-46: Research blogging style webpage code`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-46
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-46-research-blogging-style-webpage
+      - `Jira Task SCRUM-47: Test cases for adding a new comment (valid and invalid data)`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-47
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-47-test-cases-for-adding-a-new-com
+      - `Jira Task SCRUM-48: Display comments with their respective authors`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-48
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-48-display-comments-with-their-res
+      - `Jira Task SCRUM-49: Making webpage more appealing to user`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-49
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-49-making-webpage-more-appealing-to-us
   - **Aaron:** " "
 <br />
   - **Cameron:** " "
