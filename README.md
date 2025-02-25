@@ -7,6 +7,7 @@
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
+* [Sprint 1](#sprint-1-(2/10/25-2/21/25))
 
 <!--
 * [Screenshots](#screenshots)
@@ -67,6 +68,35 @@
 
 ---
 
+## Sprint 1 (2/10/25 - 2/21/25)
+## Contributions
+  - **Juluissa:** " "
+<br />
+  - **Aaron:** " "
+<br />
+  - **Cameron:** " "
+<br />
+  - **Sebastian:** " Researched and set up initial database structure while providing functions to access and modify the database file."    
+      - `Jira Task SCRUM-15: Database Schema Design & Modification Task: Design and modify the database schema to include an encrypted password field.` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-15
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/feature%2FSCRUM-15-database-schema-design-modifica  
+      - `Jira Task SCRUM-16: Refactor Password Encryption Logic`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-16
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/feature%2FSCRUM-16-password-decryption-logic-imple
+      - `Jira Task SCRUM-18: Unit Testing Password Encryption and Validation`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-18
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-18-unit-testing-password-encryptio
+      - `Jira Task SCRUM-54: Database Connection`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-54
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/feature%2FSCRUM-54-database-connection
+      - `Jira Task SCRUM-56: Research SQLite Database Schemas`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-56
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-56-research-sqlite-database-schema
+      - `Jira Task SCRUM-58: Check Password Logic`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-58
+          - Jira Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/feature%2FSCRUM-58-check-password-logic
+<br />
+    
 ## Contact
 Created by Juluissa Elias, Aaron Reed, Cameron Salazar, and Sebastian Zeidler.  
 
