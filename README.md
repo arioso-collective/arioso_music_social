@@ -86,7 +86,13 @@
       - `Jira Task SCRUM-49: Making webpage more appealing to user`
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-49
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-49-making-webpage-more-appealing-to-us
-  - **Aaron:** " "
+  - **Aaron:** "Started building out a profile in React and building a naviagation bar in the header."
+      - `Jira Task SCRUM-57: Research React Implementation to Build Single Page using Components` 
+          - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-57
+            - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/feature%2FSCRUM-57-research-react-implementation
+      - `Jira Task SCRUM-33: Add a gallery of pre-created icons that users can select from`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-33
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-33-add-a-gallery-of-pre-created-ic
 <br />
   - **Cameron:** "Started an account settings form to let users personalize their profile and keep their information up to date."
        - `Jira Task SCRUM-23: Design and implement the account settings UI` 
