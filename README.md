@@ -95,6 +95,9 @@
       - `Jira Task SCRUM-26: Display confirmation messages when changes are successfully saved`
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-26
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-26-display-confirmation-messages-w
+      - `Jira Task SCRUM-24: Create backend routes to handle username and email updates with validation`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-24
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-24-create-backend-routes
 <br />
   - **Sebastian:** " Researched and set up initial database structure while providing functions to access and modify the database file."    
       - `Jira Task SCRUM-15: Database Schema Design & Modification Task: Design and modify the database schema to include an encrypted password field.` 
