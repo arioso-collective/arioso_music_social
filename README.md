@@ -88,7 +88,13 @@
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-49-making-webpage-more-appealing-to-us
   - **Aaron:** " "
 <br />
-  - **Cameron:** " "
+  - **Cameron:** "Started an account settings form to let users personalize their profile and keep their information up to date."
+       - `Jira Task SCRUM-23: Design and implement the account settings UI` 
+          - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-23
+            - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-23-design-and-implement-the-accoun
+      - `Jira Task SCRUM-26: Display confirmation messages when changes are successfully saved`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-26
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-26-display-confirmation-messages-w
 <br />
   - **Sebastian:** " Researched and set up initial database structure while providing functions to access and modify the database file."    
       - `Jira Task SCRUM-15: Database Schema Design & Modification Task: Design and modify the database schema to include an encrypted password field.` 
