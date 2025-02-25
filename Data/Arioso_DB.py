@@ -9,15 +9,33 @@ def generateUserID():
     return userid
 
 def addUser(cursor,username, email):
+    conn = sqlite3.connect('arioso.db')
+    cursor = conn.cursor()
     userid = generateUserID()
     cursor.execute("INSERT OR IGNORE INTO users_new (id, username, email) VALUES (?, ?, ?)", (userid, username, email))
+    conn.commit()
+    conn.close()
+    return
+
+def addComment(username, comment):
+    conn = sqlite3.connect('arioso.db')
+    cursor = conn.cursor()
+    cursor.execute("INSERT OR IGNORE INTO comments (username, comment) VALUES (?, ?)", (username, comment))
+    conn.commit()
+    conn.close()
     return
 
 def deleteUser(cursor,email):
+    conn = sqlite3.connect('arioso.db')
+    cursor = conn.cursor()
     cursor.execute("DELETE FROM users_new WHERE email = ?", (email,))
+    conn.commit()
+    conn.close()
     return
 
 def generateSalt(cursor,userid):
+    conn = sqlite3.connect('arioso.db')
+    cursor = conn.cursor()
     cursor.execute("SELECT salt FROM passwords WHERE userid = ?", (userid,))
     usersalt = cursor.fetchone()
 
@@ -27,6 +45,8 @@ def generateSalt(cursor,userid):
     else:
         salt = usersalt[0]
 
+    conn.commit()
+    conn.close()
     return salt
 
 def encryptPassword(password, salt):
@@ -36,6 +56,8 @@ def encryptPassword(password, salt):
     return encryptedPassword
 
 def addPassword(cursor,userid, password):
+    conn = sqlite3.connect('arioso.db')
+    cursor = conn.cursor()
     cursor.execute("SELECT password from passwords WHERE userid = ?", (userid,))
     userpassword = cursor.fetchone()
 
@@ -44,9 +66,13 @@ def addPassword(cursor,userid, password):
         encryptedPassword = encryptPassword(password, salt)
         cursor.execute ("INSERT OR REPLACE INTO passwords (userid, password, salt) VALUES (?, ?, ?)", (userid, encryptedPassword, salt))
     
+    conn.commit()
+    conn.close()
     return
 
 def checkPasswordMatch(cursor,password, userid):
+   conn = sqlite3.connect('arioso.db')
+   cursor = conn.cursor()
    cursor.execute("SELECT password, salt from passwords WHERE userid = ?", (userid,))
    result = cursor.fetchone()
 
@@ -57,10 +83,14 @@ def checkPasswordMatch(cursor,password, userid):
    encryptedPassword = encryptPassword(password, salt)
 
    if userpassword == encryptedPassword:
+       conn.commit()
+       conn.close()
        return True
    else:
+       conn.commit()
+       conn.close()
        return False
 
-conn.commit()
-conn.close()
+#conn.commit()
+#conn.close()
 

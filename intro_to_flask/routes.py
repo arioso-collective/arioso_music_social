@@ -12,6 +12,7 @@ from flask_mail import Message, Mail
 from .contact_form import ContactForm
 from .about_python.about_route import about_blueprint
 from better_profanity import profanity 
+from Data.Arioso_DB import addComment
 
 
 
@@ -86,6 +87,7 @@ def comments_page():
                 'author': name,
                 'text': filtered_text ,
             })
+          addComment(name, filtered_text)
 
         return redirect(url_for('comments_page'))  # Redirect to refresh page
 
