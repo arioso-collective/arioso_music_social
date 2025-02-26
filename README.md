@@ -127,8 +127,18 @@
           - Jira Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/feature%2FSCRUM-58-check-password-logic
 <br />
 
+# Sprint Progress Chart
+
+This chart represents the sprint progress from February 10th, 2025, to February 21st, 2025.
+
+![Sprint Progress](https://bitbucket.org/cs3398-enceladus-s25/arioso/raw/70d0cbaee3cfbcc296ac7af8ae733e75052bf5ad/burn_up_1.png)
+
+
 ## Next Steps
 - **Juluissa:**
+    - Research Database to move to backend team
+    - Reformat files to implement react
+    - Focus more on connecting UI to database
 - **Aaron:** 
 - **Cameron:**
 - **Sebastian:**
