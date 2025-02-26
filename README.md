@@ -141,6 +141,9 @@ This chart represents the sprint progress from February 10th, 2025, to February 
     - Focus more on connecting UI to database
 - **Aaron:** 
 - **Cameron:**
+    - Research React and Javascript for frontend
+    - Work on UI designs for website pages(Dashboard, Profile, etc.)
+    - Make sure React and Flask work together
 - **Sebastian:**
     - Implement and connect the a new MongoDB Database
     - Reformat database schema and structure to better reflect accurate data types
