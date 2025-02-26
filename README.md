@@ -8,6 +8,7 @@
 * [Technologies Used](#technologies-used)
 * [Features](#features)
 * [Sprint 1](#sprint-1-(2/10/25-2/21/25))
+* [Next Steps](#next_steps)
 
 <!--
 * [Screenshots](#screenshots)
@@ -105,7 +106,7 @@
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-24
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-24-create-backend-routes
 <br />
-  - **Sebastian:** " Researched and set up initial database structure while providing functions to access and modify the database file."    
+  - **Sebastian:** "Researched and set up initial database structure while providing functions to access and modify the database file."    
       - `Jira Task SCRUM-15: Database Schema Design & Modification Task: Design and modify the database schema to include an encrypted password field.` 
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-15
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/feature%2FSCRUM-15-database-schema-design-modifica  
@@ -125,7 +126,17 @@
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-58
           - Jira Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/feature%2FSCRUM-58-check-password-logic
 <br />
-    
+
+## Next Steps
+- **Juluissa:**
+- **Aaron:** 
+- **Cameron:**
+- **Sebastian:**
+    - Implement and connect the a new MongoDB Database
+    - Reformat database schema and structure to better reflect accurate data types
+    - Research MongoDB Databases
+    - Create Login Page Logic and Functionality with Database
+    - Research Firebase Deployment
 ## Contact
 Created by Juluissa Elias, Aaron Reed, Cameron Salazar, and Sebastian Zeidler.  
 
