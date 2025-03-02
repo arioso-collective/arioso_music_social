@@ -1,0 +1,13 @@
+1. Research MongoDB Database and MongoDB Atlas
+2. I am researching MongoDb and MongoDB Atlas to use a cloud database for our project, as it more horizontally scalable. Additionally, a No SQL database will better fit our needs as we grow and add more functionality to our application.
+3. I expect to learn the basics of MongoDB, and how to create a MongoDB Cluster and Database, and connect this to our project.
+4. Once I have determined how to set up our database, I will use this information to create new collections for the different types of data we intend on storing. From here, this will be used to create a Flask backend API to make changes to our database.
+5. I need this research to perform all tasks for the Dynamic Database User Story, and the database must be created before we can begin developing an API for it.
+
+Resources/References Used: https://www.mongodb.com/resources/products/fundamentals/get-started
+https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/
+https://www.mongodb.com/docs/mongodb-shell/connect/#std-label-mdb-shell-connect
+https://www.youtube.com/watch?v=bBA9rUdqmgY&t=373s&ab_channel=MongoDB
+
+Notes: It was very simple to set up a MongoDB Atlas cluster and start the connection.
+
