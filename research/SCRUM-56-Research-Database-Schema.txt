@@ -1,0 +1,24 @@
+1. Research Database Schema and Relationships
+2. I am researching Database Schema and Relationships to better organize our project's database file and to start creating relationships between the user accounts and their data on the Arioso webpage (such as Likes, Comments, Posts, etc).
+3. I expect to learn the different types of relationships present in databases and between tables within databases. Additionally, I intend to learn the differences between primary and foreign ids to create tables with relationships to one another.
+4. Once I have determined the different types of relationships present in databases, I will use this information to rewrite the Database file to include new organizational tables and create new Databases to securely store different types of user data.
+Additionally, I will eventually use this information to write Python methods for things like "Add Post", "Add Comment", "Query Post", etc for the different types of actions that can be done to our Database.
+5. The biggest task that this research is for is the Database Connection task. After this, tasks for creating new Database methods will use knowledge from this research.
+
+Resources/References Studied:
+https://www.ibm.com/think/topics/database-schema
+https://www.geeksforgeeks.org/difference-between-star-schema-and-snowflake-schema/#
+https://learn.microsoft.com/en-us/sql/relational-databases/tables/primary-and-foreign-key-constraints?view=sql-server-ver16
+*https://www.geeksforgeeks.org/how-to-design-database-for-social-media-platform/#
+https://www.quackit.com/sqlite/tutorial/create_a_relationship.cfm
+
+Research Notes:
+From GeeksForGeeks Link 1: "Snowflake Schema focuses on data normalization and storage efficiency."
+    We may consider using the Snowflake schema for our data to improve storage efficiency. I also think that the Snowflake schema would
+    work well for what we are doing, since we would like to be able to attach different types of information to a specific user. For instance,
+    a user may have a primary ID that relates it to other tables that include that users Likes, Comments, Followed Accounts, Followers, etc.
+From GeeksForGeeksLink 2:
+    This article is a really good reference for what we are trying to create, and I will take inspiration from their layout when creating our Database.
+    They have lots of good ideas for tables that can be used and what keys are best to be primary versus foreign for each table. In particular,
+    I like their use of a primary and unique key for things like posts and comments, which can be used to more easily tie information to the user,
+    as well as help with moderation should we choose to add something like that in the future.
