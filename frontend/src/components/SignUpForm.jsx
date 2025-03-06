@@ -6,7 +6,7 @@ const SignUpForm = () => {
     name: "",
     email: "",
     password: "",
-    genre: "",
+    confirmPassword: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -21,7 +21,8 @@ const SignUpForm = () => {
     if (!formData.email.includes("@")) newErrors.email = "Invalid email";
     if (formData.password.length < 6)
       newErrors.password = "Password must be at least 6 characters";
-    if (!formData.genre) newErrors.genre = "Please select a genre";
+    if (formData.confirmPassword != formData.password)
+        newErrors.confirmPassword = "Password must match";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -65,14 +66,14 @@ const SignUpForm = () => {
         />
         {errors.password && <p className="error">{errors.password}</p>}
 
-        <select name="genre" value={formData.genre} onChange={handleChange}>
-          <option value="">Select a Genre</option>
-          <option value="rock">Rock</option>
-          <option value="pop">Pop</option>
-          <option value="hiphop">Hip-Hop</option>
-          <option value="jazz">Jazz</option>
-        </select>
-        {errors.genre && <p className="error">{errors.genre}</p>}
+        <input
+          type="confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+        {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
 
         <button type="submit">Sign Up</button>
       </form>
