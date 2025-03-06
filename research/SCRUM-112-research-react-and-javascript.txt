@@ -1,0 +1,98 @@
+React Form Handling and Form Validation
+
+Layout for form creation:
+    <form>
+        <FormInput.jsx file/>
+        <FormInput.jsx file placeholder = "Username"/>
+    </form>
+
+How to handle form with multiple inputs:
+    In App.jsx, create a new object.
+    const [values, setValues] = useState({
+        username:"",
+        email:"",
+        password:"";
+        confirmPassword:"",
+    })
+    Can use array
+    const inputs = [
+      {
+        id:1,
+        name:"username",
+        type:"text",
+        placeholder:"Username",
+        label:"Username"
+      },
+      {
+        id:2,
+        name:"email",
+        type:"text",
+        placeholder:"Email",
+        label:"Email"
+      },
+      {
+        id:3,
+        name:"password",
+        type:"password",
+        placeholder:"Password",
+        label:"Password"
+      },
+      //confirmPassword as well with id:4
+    ]
+    
+    Can make an input.map to call component. key={input.id} {...input} values={values[input.name]}
+
+Form Handling:
+    React uses controlled components to handle form inputs. Form data is controlled by React state. Controlled components is when the form's elements value is controlled by React state. 
+
+Form Validation:
+    You can validate forms by using manual validation(basic) or using external libraries(Yup + Formik or react-hook-form).
+
+    In FormInput.jsx, in <div> -> <span>{errorMessage}</span>. Add to const values -> const { label, id, errorMessage, ...}
+    const inputs = [
+      {
+        id:1,
+        name:"username",
+        type:"text",
+        placeholder:"Username",
+        errorMessage:"Username should be 3-8 characters long",    **New line**
+        label:"Username"
+      },
+    ]
+
+    Some css for error message, in formInput.css:
+    span{
+        font-size: 12px;
+        padding: 3px;
+        color: red;
+        display:none;
+    }
+    input:invalid ~ span{
+        display: block;   //Makes sure error messages only appear when user enters invalid information
+    }
+
+    Invalid Funtionality:
+    const inputs = [
+      {
+        id:1,
+        name:"username",
+        type:"text",
+        placeholder:"Username",
+        errorMessage:"Username should be 3-8 characters long",
+        label:"Username"
+        pattern: "^[A-Za-z0-9]{3,8}$,"  **New Line** username can include capital letters and lowercase letters A-Za-z and/or 0-9
+        required:true,   **New Line**
+      },
+    ]
+
+State Management:
+    State management can be handled using useState(local state), useReducer(complex state logic), context API(global state), third-party libraries(Redux, Zustand, Recoil)
+
+    Try using Atomic State. State is stored in what is called atoms. Atoms hold one piece of state. Anywhere in the app and any component, an atom can be used. That atom will look the same anywhere it is accessed. Jotai library can be useful for atomic state. "npm i jotai"
+
+    Initialize an atom in App.jsx -> const countAtom = atom(0 or whatever)
+    In function App() -> const [count, setCount] = useAtom(countAtom); -> This can now be used globally
+
+Resources:
+    https://www.youtube.com/watch?v=tIdNeoHniEY
+    https://www.youtube.com/watch?v=HaRFUEuLIk4
