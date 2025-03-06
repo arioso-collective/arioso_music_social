@@ -1,4 +1,17 @@
-React Form Handling and Form Validation
+React Form Handling and Form Validation and State Management
+
+This research will help our project for when users sign up or log in. With form handling and validation we will help us process
+info that is entered by the user. (Username, password, etc.) The validation will also help us with making sure users are following certain
+constraints such as a password has to have at least 8 characters. It will also help with telling the user if a username already exists or 
+an email is already in use attached to an account. State management will help us with certain components that we want on multiple pages.
+For example, we would like to have a navbar and a footer bar that has music functionality in it to be present when the user traverses
+to different tabs on the website. I believe right now there is not a certain task in Jira that directly relates to state management, but it
+is information that will be used for our project.
+
+The layouts below are a foundation that will be used for the sign-up page(SCRUM-107-111) and log-in page(SCRUM-59-62). The sign-up page will need handling and validation
+to make sure the user info is within the constraints and doesn't exist yet. The log-in page will need these to identify the user info
+entered exists and is part of an account. It will also use validation if the user enters a username/email/password wrong so the user will
+get an error message.
 
 Layout for form creation:
     <form>
@@ -6,44 +19,45 @@ Layout for form creation:
         <FormInput.jsx file placeholder = "Username"/>
     </form>
 
-How to handle form with multiple inputs:
-    In App.jsx, create a new object.
-    const [values, setValues] = useState({
-        username:"",
-        email:"",
-        password:"";
-        confirmPassword:"",
-    })
-    Can use array
-    const inputs = [
-      {
-        id:1,
-        name:"username",
-        type:"text",
-        placeholder:"Username",
-        label:"Username"
-      },
-      {
-        id:2,
-        name:"email",
-        type:"text",
-        placeholder:"Email",
-        label:"Email"
-      },
-      {
-        id:3,
-        name:"password",
-        type:"password",
-        placeholder:"Password",
-        label:"Password"
-      },
-      //confirmPassword as well with id:4
-    ]
-    
-    Can make an input.map to call component. key={input.id} {...input} values={values[input.name]}
-
 Form Handling:
     React uses controlled components to handle form inputs. Form data is controlled by React state. Controlled components is when the form's elements value is controlled by React state. 
+    
+    How to handle form with multiple inputs:
+        In App.jsx, create a new object.
+        const [values, setValues] = useState({
+            username:"",
+            email:"",
+            password:"";
+            confirmPassword:"",
+        })
+        Can use array
+        const inputs = [
+          {
+            id:1,
+            name:"username",
+            type:"text",
+            placeholder:"Username",
+            label:"Username"
+          },
+          {
+            id:2,
+            name:"email",
+            type:"text",
+            placeholder:"Email",
+            label:"Email"
+          },
+          {
+            id:3,
+            name:"password",
+            type:"password",
+            placeholder:"Password",
+            label:"Password"
+          },
+          //confirmPassword as well with id:4
+        ]
+        
+        Can make an input.map to call component. key={input.id} {...input} values={values[input.name]}
+
 
 Form Validation:
     You can validate forms by using manual validation(basic) or using external libraries(Yup + Formik or react-hook-form).
