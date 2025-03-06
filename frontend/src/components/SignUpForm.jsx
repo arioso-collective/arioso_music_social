@@ -70,7 +70,7 @@ const SignUpForm = () => {
           type="confirmPassword"
           name="confirmPassword"
           placeholder="Confirm Password"
-          value={formData.password}
+          value={formData.confirmPassword}
           onChange={handleChange}
         />
         {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
