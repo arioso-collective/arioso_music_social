@@ -1,0 +1,12 @@
+.profileContainer {
+    width: 50vw;  /* Make the page take up the full viewport width */
+    min-height: 100vh;  /* Ensure it takes up the full height of the screen */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Keeps content centered */
+    background-color: #f5f5f5; /* Light background for a cleaner look */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+  

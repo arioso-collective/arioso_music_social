@@ -1,0 +1,9 @@
+.statsContainer {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    max-width: 1200px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
