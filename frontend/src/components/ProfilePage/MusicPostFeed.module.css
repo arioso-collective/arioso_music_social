@@ -1,0 +1,6 @@
+.feedContainer {
+    width: 100%;
+    max-width: 1200px; /* Makes posts wider */
+    margin: 0 auto;
+  }
+  
