@@ -1,5 +1,5 @@
 .profileContainer {
-    width: 50vw;  /* Make the page take up the full viewport width */
+    width: 100vw;  /* Make the page take up the full viewport width */
     min-height: 100vh;  /* Ensure it takes up the full height of the screen */
     display: flex;
     flex-direction: column;

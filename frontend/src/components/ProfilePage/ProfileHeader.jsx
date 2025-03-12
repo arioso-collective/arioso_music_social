@@ -1,6 +1,11 @@
 import React from "react";
 import styles from "./ProfileHeader.module.css";
 
+// TODO: Add profile picture and name from the database
+// Any other information will need to be fetched from the database
+// Name, Followers, Following, Posts, Bio, (Location?), (Playlists?: Sprint 3?)
+// Profile picture should be a circular image
+
 const ProfileHeader = () => {
   return (
     <div className={styles.headerContainer}>
