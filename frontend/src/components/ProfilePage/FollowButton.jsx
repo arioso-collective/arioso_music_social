@@ -14,7 +14,8 @@ const FollowButton = ({ initialIsFollowing = false, onFollowChange }) => {
   return (
     <button
       onClick={handleClick}
-      className={`${styles.followButton} ${isFollowing ? styles.following : ''}`}
+      className={`${styles.followButton} ${isFollowing ? styles.following : styles.notFollowing}`}
+      style={{ backgroundColor: isFollowing ? 'purple' : 'gray', color: 'white' }}
     >
       {isFollowing ? 'Following' : 'Follow'}
     </button>
