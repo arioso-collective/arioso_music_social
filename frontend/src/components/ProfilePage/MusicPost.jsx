@@ -8,7 +8,7 @@ const MusicPost = ({ text, song }) => {
       <div className={styles.songEmbed}>🎶 {song}
         <div className={styles.audioPlayer}>
           <audio
-            src="https://prosearch.tribeofnoise.com/artists/show/84070/43981"
+            src={song}
             preload="metadata"
             className={styles.audioElement}
             controls
