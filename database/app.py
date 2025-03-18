@@ -3,7 +3,7 @@ from pymongo.errors import ServerSelectionTimeoutError
 from urllib.parse import quote_plus
 
 username = "xkx6"
-password = "arioso"
+password = "@ri0s0"
 encoded_username = quote_plus(username)
 encoded_password = quote_plus(password)
 
