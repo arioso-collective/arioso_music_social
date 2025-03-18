@@ -18,8 +18,7 @@ form {
   flex-direction: column;
 }
 
-input,
-select {
+input {
   padding: 10px;
   margin: 8px 0;
   border: 1px solid #ccc;
