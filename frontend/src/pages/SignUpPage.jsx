@@ -1,4 +1,4 @@
-import SignUpForm from "../components/SignUpForm.jsx";
+import SignUpForm from "../components/SignUpPage/SignUpForm.jsx";
 import "../styles/global.css"; // Import global styles
 
 const SignUpPage = () => {
