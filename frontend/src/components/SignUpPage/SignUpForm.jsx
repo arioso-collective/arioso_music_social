@@ -1,6 +1,24 @@
 import { useState } from "react";
 import "./SignupForm.css";
 
+// Mock API function to simulate username/email validation
+const mockCheckAvailability = (username, email) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const takenUsernames = ["user123", "musiclover", "rockstar"];
+      const takenEmails = ["test@example.com", "hello@music.com"];
+
+      if (takenUsernames.includes(username)) {
+        resolve({ available: false, message: "Username is already taken" });
+      } else if (takenEmails.includes(email)) {
+        resolve({ available: false, message: "Email is already registered" });
+      } else {
+        resolve({ available: true });
+      }
+    }, 1500); // Simulating a delay of 1.5 seconds
+  });
+};
+
 const SignupForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -11,13 +29,16 @@ const SignupForm = () => {
 
   const [errors, setErrors] = useState({});
   const [usernameAvailable, setUsernameAvailable] = useState(null);
+  const [formStatus, setFormStatus] = useState({ success: null, message: "" });
+  const [loading, setLoading] = useState(false); // Loading state for API call
 
-  const handleChange = async (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
-    if (name === "name") {
-      checkUsernameAvailability(value);
+    if (name === "name" || name === "email") {
+      setUsernameAvailable(null);
+      setFormStatus({ success: null, message: "" });
     }
   };
 
@@ -31,30 +52,12 @@ const SignupForm = () => {
     return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
   };
 
-  // Check username availability (mock API call)
-  const checkUsernameAvailability = async (username) => {
-    if (username.length < 3) {
-      setUsernameAvailable(null);
-      return;
-    }
-
-    try {
-      const response = await fetch(`https://api.arioso.com/check-username?name=${username}`);
-      const data = await response.json();
-      setUsernameAvailable(data.available);
-    } catch (error) {
-      console.error("Error checking username:", error);
-    }
-  };
-
   // Validate form fields
   const validateForm = () => {
     let newErrors = {};
 
     if (!formData.name) {
       newErrors.name = "Username is required";
-    } else if (usernameAvailable === false) {
-      newErrors.name = "Username is already taken";
     }
 
     if (!validateEmail(formData.email)) {
@@ -74,10 +77,23 @@ const SignupForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      console.log("User signed up:", formData);
+    if (!validateForm()) return;
+
+    setLoading(true);
+    setFormStatus({ success: null, message: "" });
+
+    // Simulating an API call for username/email availability
+    const response = await mockCheckAvailability(formData.name, formData.email);
+
+    setLoading(false);
+
+    if (!response.available) {
+      setFormStatus({ success: false, message: response.message });
+    } else {
+      setFormStatus({ success: true, message: "🎉 Account successfully created!" });
+      setFormData({ name: "", email: "", password: "", confirmPassword: "" });
     }
   };
 
@@ -91,10 +107,9 @@ const SignupForm = () => {
           placeholder="Username"
           value={formData.name}
           onChange={handleChange}
+          disabled={loading}
         />
         {errors.name && <p className="error">{errors.name}</p>}
-        {usernameAvailable === false && <p className="error">Username is taken</p>}
-        {usernameAvailable === true && <p className="success">Username is available ✅</p>}
 
         <input
           type="email"
@@ -102,6 +117,7 @@ const SignupForm = () => {
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
+          disabled={loading}
         />
         {errors.email && <p className="error">{errors.email}</p>}
 
@@ -111,6 +127,7 @@ const SignupForm = () => {
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
+          disabled={loading}
         />
         {errors.password && <p className="error">{errors.password}</p>}
 
@@ -120,11 +137,23 @@ const SignupForm = () => {
           placeholder="Confirm Password"
           value={formData.confirmPassword}
           onChange={handleChange}
+          disabled={loading}
         />
         {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
 
-        <button type="submit">Sign Up</button>
+        {loading ? (
+          <button type="submit" disabled className="loading-btn">
+            Checking...
+          </button>
+        ) : (
+          <button type="submit">Sign Up</button>
+        )}
       </form>
+
+      {formStatus.message && (
+        <p className={formStatus.success ? "success" : "error"}>{formStatus.message}</p>
+      )}
+
       <p>
         Already have an account? <a href="/login">Log in</a>
       </p>
