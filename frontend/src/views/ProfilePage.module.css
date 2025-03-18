@@ -40,4 +40,27 @@
   align-items: center;
   gap: 1rem; /* Add consistent spacing between main section components */
 }
+
+.buttonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.editButton {
+  padding: 8px 20px;
+  background-color: #6a34e8;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.editButton:hover {
+  background-color: #5826c9;
+}
   
