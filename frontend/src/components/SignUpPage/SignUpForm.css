@@ -35,6 +35,15 @@ button {
   margin-top: 10px;
 }
 
+button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+.loading-btn {
+  background-color: gray;
+}
+
 button:hover {
   background-color: #0056b3;
 }
