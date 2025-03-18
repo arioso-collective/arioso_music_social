@@ -6,7 +6,7 @@ const SignupForm = () => {
     name: "",
     email: "",
     password: "",
-    genre: "",
+    confirmPassword: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -66,8 +66,8 @@ const SignupForm = () => {
         "Password must be at least 8 characters long and include a number and special character";
     }
 
-    if (!formData.genre) {
-      newErrors.genre = "Please select a genre";
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
     }
 
     setErrors(newErrors);
@@ -114,14 +114,14 @@ const SignupForm = () => {
         />
         {errors.password && <p className="error">{errors.password}</p>}
 
-        <select name="genre" value={formData.genre} onChange={handleChange}>
-          <option value="">Select a Genre</option>
-          <option value="rock">Rock</option>
-          <option value="pop">Pop</option>
-          <option value="hiphop">Hip-Hop</option>
-          <option value="jazz">Jazz</option>
-        </select>
-        {errors.genre && <p className="error">{errors.genre}</p>}
+        <input
+          type="password"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+        />
+        {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
 
         <button type="submit">Sign Up</button>
       </form>
