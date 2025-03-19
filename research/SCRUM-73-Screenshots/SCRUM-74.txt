@@ -1,0 +1,5 @@
+I've added screenshots of the different "schemas" of the collections in our cloud database.
+MongoDB does not use strict schemas, which is why it is so flexible, but the following validation actions
+act as a way to prevent the user from entering information for fields that is invalid. These are just 
+the collections that we currently need, and the backend team will continue to add more collections and
+fields as needed by the frontend team.
