@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./SignUpForm.css";
 
+
 // Mock API function to simulate username/email validation
 const mockCheckAvailability = (username, email) => {
   return new Promise((resolve) => {
@@ -15,11 +16,11 @@ const mockCheckAvailability = (username, email) => {
       } else {
         resolve({ available: true });
       }
-    }, 1500); // Simulating a delay of 1.5 seconds
+    }, 1500);
   });
 };
 
-const SignupForm = () => {
+const SignUpForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,17 +29,33 @@ const SignupForm = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [usernameAvailable, setUsernameAvailable] = useState(null);
+  const [passwordStrength, setPasswordStrength] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formStatus, setFormStatus] = useState({ success: null, message: "" });
-  const [loading, setLoading] = useState(false); // Loading state for API call
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
+    if (name === "password") {
+      checkPasswordStrength(value);
+    }
+
     if (name === "name" || name === "email") {
-      setUsernameAvailable(null);
       setFormStatus({ success: null, message: "" });
+    }
+  };
+
+  // Password strength checker
+  const checkPasswordStrength = (password) => {
+    if (password.length < 6) {
+      setPasswordStrength("Weak");
+    } else if (password.length < 10) {
+      setPasswordStrength("Medium");
+    } else {
+      setPasswordStrength("Strong");
     }
   };
 
@@ -100,16 +117,16 @@ const SignupForm = () => {
   return (
     <div className="signup-container">
       <h2>Sign Up for Arioso</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autoComplete="on">
         <input
           type="text"
           name="name"
           placeholder="Username"
           value={formData.name}
           onChange={handleChange}
-          disabled={loading}
+          autoComplete="username"
+          required
         />
-        {errors.name && <p className="error">{errors.name}</p>}
 
         <input
           type="email"
@@ -117,28 +134,51 @@ const SignupForm = () => {
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
-          disabled={loading}
+          autoComplete="email"
+          required
         />
         {errors.email && <p className="error">{errors.email}</p>}
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          disabled={loading}
-        />
+        <div className="password-container">
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            autoComplete="new-password"
+            required
+          />
+          <span
+            className="toggle-password"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "👁️" : "🙈"}
+          </span>
+        </div>
         {errors.password && <p className="error">{errors.password}</p>}
 
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          disabled={loading}
-        />
+        <div className={`password-strength ${passwordStrength.toLowerCase()}`}>
+          {passwordStrength && <p>Password Strength: {passwordStrength}</p>}
+        </div>
+
+        <div className="password-container">
+          <input
+            type={showConfirmPassword ? "text" : "password"}
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            autoComplete="new-password"
+            required
+          />
+          <span
+            className="toggle-password"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          >
+            {showConfirmPassword ? "👁️" : "🙈"}
+          </span>
+        </div>
         {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
 
         {loading ? (
@@ -161,4 +201,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default SignUpForm;
