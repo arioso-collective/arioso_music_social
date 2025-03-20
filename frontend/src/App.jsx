@@ -5,51 +5,54 @@ import EditProfilePage from "./views/EditProfilePage";
 import HomePage from "./views/HomePage";
 import Navbar from "./components/Navbar/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { ProfileProvider } from "./context/ProfileContext";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Public routes */}
-        <Route path="/" element={<SignUpPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
+    <ProfileProvider>
+      <Router>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/" element={<SignUpPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
 
-        {/* Protected routes */}
-        <Route
-          path="/home"
-          element={
-            <ProtectedRoute>
-              <>
-                <Navbar />
-                <HomePage />
-              </>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <>
-                <Navbar />
-                <ProfilePage />
-              </>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/profile/edit"
-          element={
-            <ProtectedRoute>
-              <>
-                <Navbar />
-                <EditProfilePage />
-              </>
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </Router>
+          {/* Protected routes */}
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Navbar />
+                  <HomePage />
+                </>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Navbar />
+                  <ProfilePage />
+                </>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile/edit"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Navbar />
+                  <EditProfilePage />
+                </>
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Router>
+    </ProfileProvider>
   );
 }
 
