@@ -18,11 +18,38 @@ form {
   flex-direction: column;
 }
 
+.input-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 input {
   padding: 10px;
   margin: 8px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container input {
+  width: calc(100% - 40px);
+  padding-right: 40px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
 }
 
 button {
@@ -35,15 +62,6 @@ button {
   margin-top: 10px;
 }
 
-button:disabled {
-  background-color: gray;
-  cursor: not-allowed;
-}
-
-.loading-btn {
-  background-color: gray;
-}
-
 button:hover {
   background-color: #0056b3;
 }
@@ -54,10 +72,22 @@ button:hover {
   margin-bottom: 8px;
 }
 
-.success {
+.password-strength {
+  font-size: 14px;
+  padding: 5px;
+  margin-top: -5px;
+}
+
+.password-strength.weak {
+  color: red;
+}
+
+.password-strength.medium {
+  color: orange;
+}
+
+.password-strength.strong {
   color: green;
-  font-size: 12px;
-  margin-bottom: 8px;
 }
 
 p {
@@ -72,5 +102,4 @@ a {
 a:hover {
   text-decoration: underline;
 }
-
   
