@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './EditProfilePage.module.css';
+import { useProfile } from '../context/ProfileContext';
 
 const EditProfilePage = () => {
   const navigate = useNavigate();
+  const { profile, updateProfile } = useProfile();
   const [formData, setFormData] = useState({
-    name: 'John Doe',
-    username: '@johndoe',
-    bio: '🎵 Music lover & playlist curator'
+    name: profile.name,
+    username: profile.username,
+    bio: profile.bio
   });
 
   const handleChange = (e) => {
@@ -20,9 +22,8 @@ const EditProfilePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: Handle form submission with backend
-    console.log('Form submitted:', formData);
-    navigate('/profile'); // Redirect back to profile page
+    updateProfile(formData);
+    navigate('/profile');
   };
 
   return (
