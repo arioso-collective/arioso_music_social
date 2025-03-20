@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./ProfileHeader.module.css";
+import { useProfile } from "../../context/ProfileContext";
 
 // TODO: Add profile picture and name from the database
 // Any other information will need to be fetched from the database
@@ -7,6 +8,8 @@ import styles from "./ProfileHeader.module.css";
 // Profile picture should be a circular image
 
 const ProfileHeader = () => {
+  const { profile } = useProfile();
+
   return (
     <div className={styles.headerContainer}>
       <div className={styles.coverPhoto}></div>
@@ -17,9 +20,9 @@ const ProfileHeader = () => {
           className={styles.profilePic}
         />
         <div className={styles.profileText}>
-          <h2>John Doe</h2>
-          <p>@johndoe</p>
-          <p>🎵 Music lover & playlist curator</p>
+          <h2>{profile.name}</h2>
+          <p>{profile.username}</p>
+          <p>{profile.bio}</p>
         </div>
       </div>
     </div>
