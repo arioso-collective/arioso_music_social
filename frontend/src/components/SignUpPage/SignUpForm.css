@@ -18,12 +18,19 @@ form {
   flex-direction: column;
 }
 
+.input-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 input {
   padding: 10px;
   margin: 8px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .password-container {
@@ -38,7 +45,7 @@ input {
 
 .toggle-password {
   position: absolute;
-  right: 10px;
+  right: 30px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
