@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./SignupForm.css";
+import "./SignUpForm.css";
 
 // Mock API function to simulate username/email validation
 const mockCheckAvailability = (username, email) => {
