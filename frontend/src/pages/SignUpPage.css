@@ -1,0 +1,32 @@
+.signup-page {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10%;
+    background-image: url("../assets/background.jpg"); /* Background only affects this page */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  
+  .left-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .right-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .logo {
+    max-width: 80%;
+    height: auto;
+  }
+  
