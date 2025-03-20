@@ -6,9 +6,11 @@ import MusicPostFeed from "../components/ProfilePage/MusicPostFeed";
 import FavoritesSidebar from "../components/ProfilePage/FavoritesSidebar";
 import styles from "./ProfilePage.module.css";
 import FollowButton from "../components/ProfilePage/FollowButton";
+import { useProfile } from "../context/ProfileContext";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
+  const { profile } = useProfile();
   // TODO: Replace with actual auth check
   const isCurrentUser = true;
 

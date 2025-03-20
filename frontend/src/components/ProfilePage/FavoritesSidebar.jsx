@@ -1,30 +1,16 @@
 import React from 'react';
 import styles from './FavoritesSidebar.module.css';
+import { useProfile } from "../../context/ProfileContext";
 
 const FavoritesSidebar = () => {
-  // Hardcoded data for now
-  const favoriteGenres = [
-    'Alternative Rock',
-    'Indie Pop',
-    'Jazz Fusion',
-    'Electronic',
-    'Classical'
-  ];
-
-  const favoriteArtists = [
-    'The National',
-    'Radiohead',
-    'Bon Iver',
-    'Arcade Fire',
-    'Florence + The Machine'
-  ];
+  const { profile } = useProfile();
 
   return (
     <aside className={styles.sidebar}>
       <div className={styles.section}>
         <h3 className={styles.sectionTitle}>Favorite Genres</h3>
         <div className={styles.itemsContainer}>
-          {favoriteGenres.map((genre, index) => (
+          {profile.favoriteGenres.map((genre, index) => (
             <div key={index} className={styles.item}>
               {genre}
             </div>
@@ -35,7 +21,7 @@ const FavoritesSidebar = () => {
       <div className={styles.section}>
         <h3 className={styles.sectionTitle}>Favorite Artists</h3>
         <div className={styles.itemsContainer}>
-          {favoriteArtists.map((artist, index) => (
+          {profile.favoriteArtists.map((artist, index) => (
             <div key={index} className={styles.item}>
               {artist}
             </div>

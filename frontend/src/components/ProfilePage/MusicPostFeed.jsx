@@ -1,6 +1,7 @@
 import React from "react";
 import MusicPost from "./MusicPost";
 import styles from "./MusicPostFeed.module.css";
+import { useProfile } from "../../context/ProfileContext";
 
 // TODO: Add posts from the database
 // Posts will need to be stored in the database and fetched from there
@@ -11,9 +12,11 @@ const posts = [
 ];
 
 const MusicPostFeed = () => {
+  const { profile } = useProfile();
+
   return (
     <div className={styles.feedContainer}>
-      {posts.map((post) => (
+      {profile.posts.map((post) => (
         <MusicPost key={post.id} text={post.text} song={post.song} />
       ))}
     </div>
