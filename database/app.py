@@ -39,7 +39,7 @@ def create_user():
         "name": data['name'],
         "email": data['email'],
         "username": data['username'],
-        "password": hash_password(data['password'])
+        "password": data['password']
     }
     result = users_collection.insert_one(user)
     user['_id'] = str(result.inserted_id)
