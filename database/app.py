@@ -4,6 +4,7 @@ from flask import Flask, request, jsonify, render_template, url_for, redirect
 from bson.objectid import ObjectId
 from flask_cors import CORS
 from urllib.parse import quote_plus
+from password_util import hash_password
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -38,7 +39,7 @@ def create_user():
         "name": data['name'],
         "email": data['email'],
         "username": data['username'],
-        "password": data['password']
+        "password": hash_password(data['password'])
     }
     result = users_collection.insert_one(user)
     user['_id'] = str(result.inserted_id)
