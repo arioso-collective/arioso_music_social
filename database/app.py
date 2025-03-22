@@ -2,6 +2,7 @@ from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError
 from flask import Flask, request, jsonify, render_template, url_for, redirect
 from bson.objectid import ObjectId
+from bson.binary import Binary
 from flask_cors import CORS
 from urllib.parse import quote_plus
 from password_util import hash_password
@@ -35,11 +36,19 @@ def create_user():
     if 'name' not in data or 'email' not in data or 'username' not in data or 'password' not in data:
         return jsonify({"error": "All fields are required"}), 400
     
+    existing_user = users_collection.find_one({"username": data['username']})
+    if existing_user:
+        return jsonify({"error": "Username already exists"}), 400
+    
+    existing_email = users_collection.find_one({"email": data['email']})
+    if existing_email:
+        return jsonify({"error": "Email already exists"}), 400
+    
     user = {
         "name": data['name'],
         "email": data['email'],
         "username": data['username'],
-        "password": data['password']
+        "password": Binary(hash_password(data['password']))
     }
     result = users_collection.insert_one(user)
     user['_id'] = str(result.inserted_id)
