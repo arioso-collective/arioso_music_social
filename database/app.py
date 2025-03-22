@@ -28,7 +28,7 @@ comments_collection = db['comments']
 #except ServerSelectionTimeoutError as e:
     #print("Could not connect to the MongoDB server...", e)
 
-@app.route('/signup', methods=['POST'])
+@app.route('/api/create_user', methods=['POST'])
 def create_user():
     data = request.get_json()
     if 'name' not in data or 'email' not in data or 'username' not in data or 'password' not in data:
@@ -42,16 +42,16 @@ def create_user():
     }
     result = users_collection.insert_one(user)
     user['_id'] = str(result.inserted_id)
-    return redirect(url_for('home'))
+    return redirect(url_for('signup'))
 
-@app.route('/read', methods=['GET'])
+@app.route('/api/get_users', methods=['GET'])
 def get_users():
     users = list(users_collection.find())
     for user in users:
         user['_id'] = str(user['_id'])
     return jsonify(users), 200
 
-@app.route('/profile/<username>', methods=['GET'])
+@app.route('/api/get_user', methods=['GET'])
 def get_user(username):
     user = users_collection.find_one({'_id': ObjectId(username)})
     if user:
