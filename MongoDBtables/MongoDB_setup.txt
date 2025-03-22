@@ -1,6 +1,0 @@
-Troubleshooting for setup
-
-
-- When a user is added they must be added as an admin in order to make sure ip address updates
-- Have to be sure to update IP address when opening MongoDB
-
