@@ -60,12 +60,35 @@ def create_user():
 
 @app.route('/api/get_users', methods=['GET'])
 def get_users():
-    users = list(users_collection.find())
-    for user in users:
-        user['_id'] = str(user['_id'])
-    return jsonify(users), 200
+    username = request.args.get('username')
+    user_id = request.args.get('_id')  
 
-@app.route('/api/get_user', methods=['GET'])
+    if username:
+        user = users_collection.find_one({'username': username})
+        if user:
+            user['_id'] = str(user['_id'])
+            return jsonify(user), 200
+        else:
+            return jsonify({"error": "User not found"}), 404
+    elif user_id:
+        try:
+            user = users_collection.find_one({'_id': ObjectId(user_id)})
+            if user:
+                user['_id'] = str(user['_id'])
+                return jsonify(user), 200
+            else:
+                return jsonify({"error": "User not found"}), 404
+        except Exception as e:
+            return jsonify({"error": f"Invalid ObjectId format: {str(e)}"}), 400
+    else:
+        users = list(users_collection.find())
+        for user in users:
+            user['_id'] = str(user['_id'])
+        if not users:
+            return jsonify({"error": "No users found"}), 404
+        return jsonify(users), 200
+
+@app.route('/api/get_user/<username>', methods=['GET'])
 def get_user(username):
     user = users_collection.find_one({'username': username})
     if user:
