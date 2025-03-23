@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignUpPage from "./pages/SignUpPage";
+import LogInPage from "./pages/LogInPage";
 import ProfilePage from "./views/ProfilePage";
 import EditProfilePage from "./views/EditProfilePage";
 import HomePage from "./views/HomePage";
@@ -13,7 +14,7 @@ function App() {
       <Router>
         <Routes>
           {/* Public routes */}
-          <Route path="/" element={<SignUpPage />} />
+          <Route path="/" element={<LogInPage />} /> {/* Landing Page */}
           <Route path="/signup" element={<SignUpPage />} />
 
           {/* Protected routes */}
