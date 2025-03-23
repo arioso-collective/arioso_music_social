@@ -2,17 +2,43 @@ import { useState } from "react";
 import "./LogInForm.css";
 
 const LogInForm = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({});
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    // Validate form after each input change
+    validateForm({ ...formData, [name]: value });
+  };
+
+  // Email validation regex
+  const validateEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  // Form validation function
+  const validateForm = (data) => {
+    let newErrors = {};
+
+    if (!validateEmail(data.email)) {
+      newErrors.email = "Invalid email format";
+    }
+
+    if (!data.password) {
+      newErrors.password = "Password cannot be empty";
+    }
+
+    setErrors(newErrors);
+    setIsButtonDisabled(Object.keys(newErrors).length > 0); // Disable button if there are errors
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isButtonDisabled) return; // Prevent submission if validation fails
+
     console.log("Logging in with:", formData);
   };
 
@@ -29,6 +55,7 @@ const LogInForm = () => {
           onChange={handleChange}
           required
         />
+        {errors.email && <p className="error">{errors.email}</p>}
 
         <label>Password</label>
         <input
@@ -39,8 +66,11 @@ const LogInForm = () => {
           onChange={handleChange}
           required
         />
+        {errors.password && <p className="error">{errors.password}</p>}
 
-        <button type="submit">Log In</button>
+        <button type="submit" disabled={isButtonDisabled}>
+          Log In
+        </button>
       </form>
 
       <div className="login-links">
