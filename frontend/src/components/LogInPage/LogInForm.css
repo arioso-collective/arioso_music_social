@@ -75,4 +75,29 @@
     background-color: gray;
     cursor: not-allowed;
   }
+
+  .loading-btn {
+    background-color: gray;
+    cursor: not-allowed;
+  }
+
+  .password-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  .password-container input {
+    width: 100%;
+    padding-right: 40px;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-10%);
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
   
