@@ -96,5 +96,13 @@ def get_user(username):
         return jsonify(user), 200
     return jsonify({"error": "User not found"}), 404
 
+@app.route('/api/create_post/<username>', methods=['POST'])
+def create_post(username):
+    data = request.get_json()
+
+    user = users_collection.find_one({'username': username})
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+    
 if __name__ == "__main__":
     app.run(debug=True)
