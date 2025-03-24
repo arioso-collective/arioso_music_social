@@ -115,6 +115,28 @@ def update_post(post_id):
 
     return jsonify({"message": "Post updated successfully"}), 200
 
+@app.route('/api/update_comment/<comment_id>', methods=['PUT'])
+def update_comment(comment_id):
+    data = request.get_json()
+    update_fields = {}
+
+    if 'text' in data:
+        update_fields['text'] = data['text']
+    
+    if not update_fields:
+        return jsonify({"error": "No fields to update"}), 400
+
+    result = comments_collection.update_one(
+        {'_id': ObjectId(comment_id)},
+        {'$set': update_fields}
+    )
+
+    if result.matched_count == 0:
+        return jsonify({"error": "Comment not found"}), 404
+
+    return jsonify({"message": "Comment updated successfully"}), 200
+
+
 
 
     
