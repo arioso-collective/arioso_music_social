@@ -59,13 +59,19 @@
     text-decoration: underline;
   }
 
-  .error{
+  .success {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .error {
     color: red;
-    font-size: 12px;
-    margin-top: 5px;
+    font-size: 14px;
+    margin-top: 10px;
   }
 
-  button:disabled{
+  button:disabled {
     background-color: gray;
     cursor: not-allowed;
   }
