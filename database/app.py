@@ -92,6 +92,30 @@ def get_user(username):
         return jsonify(user), 200
     return jsonify({"error": "User not found"}), 404
 
+@app.route('/api/update_post/<post_id>', methods=['PUT'])
+def update_post(post_id):
+    data = request.get_json()
+    update_fields = {}
+
+    if 'title' in data:
+        update_fields['title'] = data['title']
+    if 'content' in data:
+        update_fields['content'] = data['content']
+    
+    if not update_fields:
+        return jsonify({"error": "No fields to update"}), 400
+
+    result = posts_collection.update_one(
+        {'_id': ObjectId(post_id)},
+        {'$set': update_fields}
+    )
+
+    if result.matched_count == 0:
+        return jsonify({"error": "Post not found"}), 404
+
+    return jsonify({"message": "Post updated successfully"}), 200
+
+
 
 
 
