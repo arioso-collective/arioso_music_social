@@ -136,6 +136,38 @@ def update_comment(comment_id):
 
     return jsonify({"message": "Comment updated successfully"}), 200
 
+@app.route('/api/update_user/<user_id>', methods=['PUT'])
+def update_user(user_id):
+    data = request.get_json()
+    update_fields = {}
+
+    if 'name' in data:
+        update_fields['name'] = data['name']
+    if 'email' in data:
+        existing_email = users_collection.find_one({'email': data['email'], '_id': {'$ne': ObjectId(user_id)}})
+        if existing_email:
+            return jsonify({"error": "Email already in use"}), 400
+        update_fields['email'] = data['email']
+    if 'username' in data:
+        existing_user = users_collection.find_one({'username': data['username'], '_id': {'$ne': ObjectId(user_id)}})
+        if existing_user:
+            return jsonify({"error": "Username already in use"}), 400
+        update_fields['username'] = data['username']
+    if 'password' in data:
+        update_fields['password'] = Binary(hash_password(data['password']))
+
+    if not update_fields:
+        return jsonify({"error": "No valid fields provided for update"}), 400
+
+    result = users_collection.update_one(
+        {'_id': ObjectId(user_id)},
+        {'$set': update_fields}
+    )
+
+    if result.matched_count == 0:
+        return jsonify({"error": "User not found"}), 404
+
+    return jsonify({"message": "User updated successfully"}), 200
 
 
 
