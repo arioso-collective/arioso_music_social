@@ -124,5 +124,13 @@ def create_post(username):
     except PyMongoError as e:
         return jsonify({"error": f"Error occurred: {str(e)}"}), 500
     
+@app.route('/api/get_post/<url>', methods=['GET'])
+def get_post(url):
+    post = posts_collection.find_one({'url': url})
+    if post:
+        post['_id'] = str(post['_id'])
+        return jsonify(post), 200
+    return jsonify({"error": "Post not found"}), 404
+    
 if __name__ == "__main__":
     app.run(debug=True)
