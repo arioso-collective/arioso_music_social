@@ -55,32 +55,6 @@ def create_user():
     except PyMongoError as e:
         return jsonify({"error": f"Database error occurred: {str(e)}"}), 500
 
-@app.route('/api/unlike_post/<post_id>', methods=['POST'])
-def unlike_post(post_id):
-    data = request.get_json()
-    user_id = data.get('user_id')
-
-    if not user_id:
-        return jsonify({"error": "User ID is required"}), 400
-
-    post = posts_collection.find_one({"_id": ObjectId(post_id)})
-
-    if not post:
-        return jsonify({"error": "Post not found"}), 404
-
-    if 'likedBy' not in post or user_id not in post['likedBy']:
-        return jsonify({"error": "User has not liked this post"}), 400
-
-    result = posts_collection.update_one(
-        {"_id": ObjectId(post_id)},
-        {
-            "$inc": {"likes": -1},
-            "$pull": {"likedBy": user_id}
-        }
-    )
-
-    return jsonify({"message": "Post unliked successfully"}), 200
-
 
 @app.route('/api/get_users', methods=['GET'])
 def get_users():
@@ -359,29 +333,43 @@ def like_post(post_id):
 @app.route('/api/delete_post/<post_id>', methods=['DELETE'])
 def delete_post(post_id):
     result = posts_collection.delete_one({'_id': ObjectId(post_id)})
-
     if result.deleted_count == 0:
         return jsonify({"error": "Post not found"}), 404
-
     return jsonify({"message": "Post deleted successfully"}), 200
 
 @app.route('/api/delete_comment/<comment_id>', methods=['DELETE'])
 def delete_comment(comment_id):
     result = comments_collection.delete_one({'_id': ObjectId(comment_id)})
-
     if result.deleted_count == 0:
         return jsonify({"error": "Comment not found"}), 404
-
     return jsonify({"message": "Comment deleted successfully"}), 200
 
 @app.route('/api/delete_user/<user_id>', methods=['DELETE'])
 def delete_user(user_id):
     result = users_collection.delete_one({'_id': ObjectId(user_id)})
-
     if result.deleted_count == 0:
         return jsonify({"error": "User not found"}), 404
-
     return jsonify({"message": "User deleted successfully"}), 200
+
+@app.route('/api/unlike_post/<post_id>', methods=['POST'])
+def unlike_post(post_id):
+    data = request.get_json()
+    user_id = data.get('user_id')
+    if not user_id:
+        return jsonify({"error": "User ID is required"}), 400
+    post = posts_collection.find_one({"_id": ObjectId(post_id)})
+    if not post:
+        return jsonify({"error": "Post not found"}), 404
+    if 'likedBy' not in post or user_id not in post['likedBy']:
+        return jsonify({"error": "User has not liked this post"}), 400
+    result = posts_collection.update_one(
+        {"_id": ObjectId(post_id)},
+        {
+            "$inc": {"likes": -1},
+            "$pull": {"likedBy": user_id}
+        }
+    )
+    return jsonify({"message": "Post unliked successfully"}), 200
 
     
 
