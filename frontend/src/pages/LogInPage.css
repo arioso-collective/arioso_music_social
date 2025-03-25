@@ -8,4 +8,27 @@
     background-position: center;
     background-attachment: fixed;
   }
+
+  /* Left side: Logo section */
+.left-section {
+  flex: 0.7; /* Reduce space taken by logo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 5%;
+}
+
+/* Right side: Login form section */
+.right-section {
+  flex: 1; /* Login form takes more space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Logo styling */
+.logo {
+  max-width: 100%; /* Reduce logo size */
+  height: auto;
+}
   
