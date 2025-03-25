@@ -329,6 +329,18 @@ def like_post(post_id):
 
     return jsonify({"message": "Post liked successfully"}), 200
 
+@app.route('/api/delete_post/<post_id>', methods=['DELETE'])
+def delete_post(post_id):
+    result = posts_collection.delete_one({'_id': ObjectId(post_id)})
+
+    if result.deleted_count == 0:
+        return jsonify({"error": "Post not found"}), 404
+
+    return jsonify({"message": "Post deleted successfully"}), 200
+
+
+
+
 
     
 
