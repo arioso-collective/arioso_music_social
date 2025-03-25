@@ -160,51 +160,40 @@ def get_user(username):
 def update_post(post_id):
     data = request.get_json()
     update_fields = {}
-
     if 'title' in data:
         update_fields['title'] = data['title']
     if 'content' in data:
         update_fields['content'] = data['content']
-    
     if not update_fields:
         return jsonify({"error": "No fields to update"}), 400
-
     result = posts_collection.update_one(
         {'_id': ObjectId(post_id)},
         {'$set': update_fields}
     )
-
     if result.matched_count == 0:
         return jsonify({"error": "Post not found"}), 404
-
     return jsonify({"message": "Post updated successfully"}), 200
 
 @app.route('/api/update_comment/<comment_id>', methods=['PUT'])
 def update_comment(comment_id):
     data = request.get_json()
     update_fields = {}
-
     if 'text' in data:
         update_fields['text'] = data['text']
-    
     if not update_fields:
         return jsonify({"error": "No fields to update"}), 400
-
     result = comments_collection.update_one(
         {'_id': ObjectId(comment_id)},
         {'$set': update_fields}
     )
-
     if result.matched_count == 0:
         return jsonify({"error": "Comment not found"}), 404
-
     return jsonify({"message": "Comment updated successfully"}), 200
 
 @app.route('/api/update_user/<user_id>', methods=['PUT'])
 def update_user(user_id):
     data = request.get_json()
     update_fields = {}
-
     if 'name' in data:
         update_fields['name'] = data['name']
     if 'email' in data:
@@ -219,36 +208,27 @@ def update_user(user_id):
         update_fields['username'] = data['username']
     if 'password' in data:
         update_fields['password'] = Binary(hash_password(data['password']))
-
     if not update_fields:
         return jsonify({"error": "No valid fields provided for update"}), 400
-
     result = users_collection.update_one(
         {'_id': ObjectId(user_id)},
         {'$set': update_fields}
     )
-
     if result.matched_count == 0:
         return jsonify({"error": "User not found"}), 404
-
     return jsonify({"message": "User updated successfully"}), 200
     
 @app.route('/api/like_post/<post_id>', methods=['POST'])
 def like_post(post_id):
     data = request.get_json()
     user_id = data.get('user_id')
-
     if not user_id:
         return jsonify({"error": "User ID is required"}), 400
-
     post = posts_collection.find_one({"_id": ObjectId(post_id)})
-
     if not post:
         return jsonify({"error": "Post not found"}), 404
-
     if 'liked_by' in post and user_id in post['liked_by']:
         return jsonify({"error": "User already liked this post"}), 400
-
     result = posts_collection.update_one(
         {"_id": ObjectId(post_id)},
         {
@@ -256,7 +236,6 @@ def like_post(post_id):
             "$addToSet": {"liked_by": user_id}
         }
     )
-
     return jsonify({"message": "Post liked successfully"}), 200
 
 
