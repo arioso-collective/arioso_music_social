@@ -37,15 +37,12 @@ def create_user():
         data = request.get_json()
         if 'name' not in data or 'email' not in data or 'username' not in data or 'password' not in data:
             return jsonify({"error": "All fields are required"}), 400
-    
         existing_user = users_collection.find_one({"username": data['username']})
         if existing_user:
             return jsonify({"error": "Username already exists"}), 400
-    
         existing_email = users_collection.find_one({"email": data['email']})
         if existing_email:
             return jsonify({"error": "Email already exists"}), 400
-    
         user = {
             "name": data['name'],
             "email": data['email'],
@@ -62,7 +59,6 @@ def create_user():
 def get_users():
     username = request.args.get('username')
     user_id = request.args.get('_id')  
-
     if username:
         user = users_collection.find_one({'username': username})
         if user:
@@ -100,11 +96,9 @@ def get_user(username):
 def create_post(username):
     try:
         data = request.get_json()
-
         user = users_collection.find_one({'username': username})
         if not user:
             return jsonify({"error": "User not found"}), 404
-   
         post_data = {
             "username": username,
             "userID": str(user['_id']),
@@ -114,13 +108,11 @@ def create_post(username):
             "url": data.get('url'),
             "musicID": data.get('musicID')
         }
-
         result = posts_collection.insert_one(post_data)
         return jsonify({
             "message": "Post created successfully.",
             "post_id": str(result.inserted_id)
         }), 201
-    
     except PyMongoError as e:
         return jsonify({"error": f"Error occurred: {str(e)}"}), 500
     
@@ -131,6 +123,29 @@ def get_post(url):
         post['_id'] = str(post['_id'])
         return jsonify(post), 200
     return jsonify({"error": "Post not found"}), 404
+
+@app.route('/api/create_comment/<url>', methods=['POST'])
+def create_comment(url):
+    try:
+        data = request.get_json()
+        post = posts_collection.find_one({'url': url})
+        if not url:
+            return jsonify({"error": "Post not found"}), 404
+        userID = str(post['userID'])
+        comment_data = {
+            "url": url,
+            "postID": str(post['_id']),
+            "userID": userID,
+            "comment": data.get('comment'),
+            "createdAt": datetime.now(),
+        }
+        result = comments_collection.insert_one(comment_data)
+        return jsonify({
+            "message": "Comment created successfully.",
+            "comment_id": str(result.inserted_id)
+        }), 201
+    except PyMongoError as e:
+        return jsonify({"error": f"Error occurred: {str(e)}"}), 500
 
 @app.route('/api/get_comment/<url>', methods=['GET'])
 def get_comment(url):
