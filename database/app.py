@@ -347,6 +347,14 @@ def delete_comment(comment_id):
 
     return jsonify({"message": "Comment deleted successfully"}), 200
 
+@app.route('/api/delete_user/<user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    result = users_collection.delete_one({'_id': ObjectId(user_id)})
+
+    if result.deleted_count == 0:
+        return jsonify({"error": "User not found"}), 404
+
+    return jsonify({"message": "User deleted successfully"}), 200
 
     
 
