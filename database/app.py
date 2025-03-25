@@ -98,24 +98,31 @@ def get_user(username):
 
 @app.route('/api/create_post/<username>', methods=['POST'])
 def create_post(username):
-    data = request.get_json()
+    try:
+        data = request.get_json()
 
-    user = users_collection.find_one({'username': username})
-    if not user:
-        return jsonify({"error": "User not found"}), 404
+        user = users_collection.find_one({'username': username})
+        if not user:
+            return jsonify({"error": "User not found"}), 404
    
-    post_data = {
-        "username": username,
-        "userID": str(user['_id']),
-        "caption": data.get('caption'),
-        "createdAt": datetime.now(),
-        "likes": 0,
-        "url": data.get('url'),
-        "musicID": data.get('musicID')
-    }
+        post_data = {
+            "username": username,
+            "userID": str(user['_id']),
+            "caption": data.get('caption'),
+            "createdAt": datetime.now(),
+            "likes": 0,
+            "url": data.get('url'),
+            "musicID": data.get('musicID')
+        }
 
-    result = posts_collection.insert_one(post_data)
-
+        result = posts_collection.insert_one(post_data)
+        return jsonify({
+            "message": "Post created successfully.",
+            "post_id": str(result.inserted_id)
+        }), 201
+    
+    except PyMongoError as e:
+        return jsonify({"error": f"Error occurred: {str(e)}"}), 500
     
 if __name__ == "__main__":
     app.run(debug=True)
