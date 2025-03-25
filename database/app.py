@@ -1,11 +1,11 @@
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError, PyMongoError, DuplicateKeyError
 from flask import Flask, request, jsonify, render_template, url_for, redirect
-from bson.objectid import ObjectId
-from bson.binary import Binary
+from bson import ObjectId, Binary
 from flask_cors import CORS
 from urllib.parse import quote_plus
 from password_util import hash_password
+from datetime import datetime
 from dotenv import load_dotenv
 import os
 
@@ -96,5 +96,41 @@ def get_user(username):
         return jsonify(user), 200
     return jsonify({"error": "User not found"}), 404
 
+@app.route('/api/create_post/<username>', methods=['POST'])
+def create_post(username):
+    try:
+        data = request.get_json()
+
+        user = users_collection.find_one({'username': username})
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+   
+        post_data = {
+            "username": username,
+            "userID": str(user['_id']),
+            "caption": data.get('caption'),
+            "createdAt": datetime.now(),
+            "likes": 0,
+            "url": data.get('url'),
+            "musicID": data.get('musicID')
+        }
+
+        result = posts_collection.insert_one(post_data)
+        return jsonify({
+            "message": "Post created successfully.",
+            "post_id": str(result.inserted_id)
+        }), 201
+    
+    except PyMongoError as e:
+        return jsonify({"error": f"Error occurred: {str(e)}"}), 500
+    
+@app.route('/api/get_post/<url>', methods=['GET'])
+def get_post(url):
+    post = posts_collection.find_one({'url': url})
+    if post:
+        post['_id'] = str(post['_id'])
+        return jsonify(post), 200
+    return jsonify({"error": "Post not found"}), 404
+    
 if __name__ == "__main__":
     app.run(debug=True)
