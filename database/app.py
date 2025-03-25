@@ -55,33 +55,6 @@ def create_user():
     except PyMongoError as e:
         return jsonify({"error": f"Database error occurred: {str(e)}"}), 500
 
-@app.route('/api/like_post/<post_id>', methods=['POST'])
-def like_post(post_id):
-    data = request.get_json()
-    user_id = data.get('user_id')
-
-    if not user_id:
-        return jsonify({"error": "User ID is required"}), 400
-
-    post = posts_collection.find_one({"_id": ObjectId(post_id)})
-
-    if not post:
-        return jsonify({"error": "Post not found"}), 404
-
-    if 'liked_by' in post and user_id in post['liked_by']:
-        return jsonify({"error": "User already liked this post"}), 400
-
-    result = posts_collection.update_one(
-        {"_id": ObjectId(post_id)},
-        {
-            "$inc": {"likes": 1},
-            "$addToSet": {"liked_by": user_id}
-        }
-    )
-
-    return jsonify({"message": "Post liked successfully"}), 200
-
-
 @app.route('/api/get_users', methods=['GET'])
 def get_users():
     username = request.args.get('username')
@@ -225,6 +198,47 @@ def update_post(post_id):
         return jsonify({"error": "Post not found"}), 404
     return jsonify({"message": "Post updated successfully"}), 200
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @app.route('/api/update_comment/<comment_id>', methods=['PUT'])
 def update_comment(comment_id):
     data = request.get_json()
@@ -289,6 +303,31 @@ def like_post(post_id):
     )
     return jsonify({"message": "Post liked successfully"}), 200
     
+@app.route('/api/like_post/<post_id>', methods=['POST'])
+def like_post(post_id):
+    data = request.get_json()
+    user_id = data.get('user_id')
+
+    if not user_id:
+        return jsonify({"error": "User ID is required"}), 400
+
+    post = posts_collection.find_one({"_id": ObjectId(post_id)})
+
+    if not post:
+        return jsonify({"error": "Post not found"}), 404
+
+    if 'liked_by' in post and user_id in post['liked_by']:
+        return jsonify({"error": "User already liked this post"}), 400
+
+    result = posts_collection.update_one(
+        {"_id": ObjectId(post_id)},
+        {
+            "$inc": {"likes": 1},
+            "$addToSet": {"liked_by": user_id}
+        }
+    )
+
+    return jsonify({"message": "Post liked successfully"}), 200
 
 
     
