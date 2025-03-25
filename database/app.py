@@ -338,8 +338,14 @@ def delete_post(post_id):
 
     return jsonify({"message": "Post deleted successfully"}), 200
 
+@app.route('/api/delete_comment/<comment_id>', methods=['DELETE'])
+def delete_comment(comment_id):
+    result = comments_collection.delete_one({'_id': ObjectId(comment_id)})
 
+    if result.deleted_count == 0:
+        return jsonify({"error": "Comment not found"}), 404
 
+    return jsonify({"message": "Comment deleted successfully"}), 200
 
 
     
