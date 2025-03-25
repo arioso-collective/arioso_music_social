@@ -92,68 +92,154 @@ def get_user(username):
         return jsonify(user), 200
     return jsonify({"error": "User not found"}), 404
 
-@app.route('/api/create_post/<username>', methods=['POST'])
-def create_post(username):
-    try:
-        data = request.get_json()
-        user = users_collection.find_one({'username': username})
-        if not user:
-            return jsonify({"error": "User not found"}), 404
-        post_data = {
-            "username": username,
-            "userID": str(user['_id']),
-            "caption": data.get('caption'),
-            "createdAt": datetime.now(),
-            "likes": 0,
-            "url": data.get('url'),
-            "musicID": data.get('musicID')
-        }
-        result = posts_collection.insert_one(post_data)
-        return jsonify({
-            "message": "Post created successfully.",
-            "post_id": str(result.inserted_id)
-        }), 201
-    except PyMongoError as e:
-        return jsonify({"error": f"Error occurred: {str(e)}"}), 500
-    
-@app.route('/api/get_post/<url>', methods=['GET'])
-def get_post(url):
-    post = posts_collection.find_one({'url': url})
-    if post:
-        post['_id'] = str(post['_id'])
-        return jsonify(post), 200
-    return jsonify({"error": "Post not found"}), 404
 
-@app.route('/api/create_comment/<url>', methods=['POST'])
-def create_comment(url):
-    try:
-        data = request.get_json()
-        post = posts_collection.find_one({'url': url})
-        if not url:
-            return jsonify({"error": "Post not found"}), 404
-        userID = str(post['userID'])
-        comment_data = {
-            "url": url,
-            "postID": str(post['_id']),
-            "userID": userID,
-            "comment": data.get('comment'),
-            "createdAt": datetime.now(),
-        }
-        result = comments_collection.insert_one(comment_data)
-        return jsonify({
-            "message": "Comment created successfully.",
-            "comment_id": str(result.inserted_id)
-        }), 201
-    except PyMongoError as e:
-        return jsonify({"error": f"Error occurred: {str(e)}"}), 500
 
-@app.route('/api/get_comment/<url>', methods=['GET'])
-def get_comment(url):
-    comment = comments_collection.find_one({'url': url})
-    if comment:
-        comment['_id'] = str(comment['_id'])
-        return jsonify(comment), 200
-    return jsonify({"error": "Comment not found"}), 404
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@app.route('/api/update_post/<post_id>', methods=['PUT'])
+def update_post(post_id):
+    data = request.get_json()
+    update_fields = {}
+    if 'title' in data:
+        update_fields['title'] = data['title']
+    if 'content' in data:
+        update_fields['content'] = data['content']
+    if not update_fields:
+        return jsonify({"error": "No fields to update"}), 400
+    result = posts_collection.update_one(
+        {'_id': ObjectId(post_id)},
+        {'$set': update_fields}
+    )
+    if result.matched_count == 0:
+        return jsonify({"error": "Post not found"}), 404
+    return jsonify({"message": "Post updated successfully"}), 200
+
+@app.route('/api/update_comment/<comment_id>', methods=['PUT'])
+def update_comment(comment_id):
+    data = request.get_json()
+    update_fields = {}
+    if 'text' in data:
+        update_fields['text'] = data['text']
+    if not update_fields:
+        return jsonify({"error": "No fields to update"}), 400
+    result = comments_collection.update_one(
+        {'_id': ObjectId(comment_id)},
+        {'$set': update_fields}
+    )
+    if result.matched_count == 0:
+        return jsonify({"error": "Comment not found"}), 404
+    return jsonify({"message": "Comment updated successfully"}), 200
+
+@app.route('/api/update_user/<user_id>', methods=['PUT'])
+def update_user(user_id):
+    data = request.get_json()
+    update_fields = {}
+    if 'name' in data:
+        update_fields['name'] = data['name']
+    if 'email' in data:
+        existing_email = users_collection.find_one({'email': data['email'], '_id': {'$ne': ObjectId(user_id)}})
+        if existing_email:
+            return jsonify({"error": "Email already in use"}), 400
+        update_fields['email'] = data['email']
+    if 'username' in data:
+        existing_user = users_collection.find_one({'username': data['username'], '_id': {'$ne': ObjectId(user_id)}})
+        if existing_user:
+            return jsonify({"error": "Username already in use"}), 400
+        update_fields['username'] = data['username']
+    if 'password' in data:
+        update_fields['password'] = Binary(hash_password(data['password']))
+    if not update_fields:
+        return jsonify({"error": "No valid fields provided for update"}), 400
+    result = users_collection.update_one(
+        {'_id': ObjectId(user_id)},
+        {'$set': update_fields}
+    )
+    if result.matched_count == 0:
+        return jsonify({"error": "User not found"}), 404
+    return jsonify({"message": "User updated successfully"}), 200
     
+@app.route('/api/like_post/<post_id>', methods=['POST'])
+def like_post(post_id):
+    data = request.get_json()
+    user_id = data.get('user_id')
+    if not user_id:
+        return jsonify({"error": "User ID is required"}), 400
+    post = posts_collection.find_one({"_id": ObjectId(post_id)})
+    if not post:
+        return jsonify({"error": "Post not found"}), 404
+    if 'liked_by' in post and user_id in post['liked_by']:
+        return jsonify({"error": "User already liked this post"}), 400
+    result = posts_collection.update_one(
+        {"_id": ObjectId(post_id)},
+        {
+            "$inc": {"likes": 1},
+            "$addToSet": {"liked_by": user_id}
+        }
+    )
+    return jsonify({"message": "Post liked successfully"}), 200
+
+
+    
+
 if __name__ == "__main__":
     app.run(debug=True)
