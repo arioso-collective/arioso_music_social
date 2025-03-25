@@ -92,6 +92,70 @@ def get_user(username):
         return jsonify(user), 200
     return jsonify({"error": "User not found"}), 404
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @app.route('/api/update_post/<post_id>', methods=['PUT'])
 def update_post(post_id):
     data = request.get_json()
@@ -114,47 +178,6 @@ def update_post(post_id):
         return jsonify({"error": "Post not found"}), 404
 
     return jsonify({"message": "Post updated successfully"}), 200
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @app.route('/api/update_comment/<comment_id>', methods=['PUT'])
 def update_comment(comment_id):
