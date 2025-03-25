@@ -29,6 +29,7 @@ const LogInForm = () => {
   const [loginStatus, setLoginStatus] = useState({ success: null, message: "" });
   const [loading, setLoading] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -87,15 +88,23 @@ const LogInForm = () => {
         />
         {errors.email && <p className="error">{errors.email}</p>}
 
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter your password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
+        <div className="password-container">
+          <label>Password</label>
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Enter your password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <span
+            className="toggle-password"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "👁️" : "🙈"}
+          </span>
+        </div>
         {errors.password && <p className="error">{errors.password}</p>}
 
         {loading ? (
