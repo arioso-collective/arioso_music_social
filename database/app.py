@@ -131,6 +131,14 @@ def get_post(url):
         post['_id'] = str(post['_id'])
         return jsonify(post), 200
     return jsonify({"error": "Post not found"}), 404
+
+@app.route('/api/get_comment/<url>', methods=['GET'])
+def get_comment(url):
+    comment = comments_collection.find_one({'url': url})
+    if comment:
+        comment['_id'] = str(comment['_id'])
+        return jsonify(comment), 200
+    return jsonify({"error": "Comment not found"}), 404
     
 if __name__ == "__main__":
     app.run(debug=True)
