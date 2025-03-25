@@ -1,11 +1,11 @@
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError, PyMongoError, DuplicateKeyError
 from flask import Flask, request, jsonify, render_template, url_for, redirect
-from bson.objectid import ObjectId
-from bson.binary import Binary
+from bson import ObjectId, Binary
 from flask_cors import CORS
 from urllib.parse import quote_plus
 from password_util import hash_password
+from datetime import datetime
 from dotenv import load_dotenv
 import os
 
@@ -103,6 +103,19 @@ def create_post(username):
     user = users_collection.find_one({'username': username})
     if not user:
         return jsonify({"error": "User not found"}), 404
+   
+    post_data = {
+        "username": username,
+        "userID": str(user['_id']),
+        "caption": data.get('caption'),
+        "createdAt": datetime.now(),
+        "likes": 0,
+        "url": data.get('url'),
+        "musicID": data.get('musicID')
+    }
+
+    result = posts_collection.insert_one(post_data)
+
     
 if __name__ == "__main__":
     app.run(debug=True)
