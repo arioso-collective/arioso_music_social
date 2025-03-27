@@ -20,7 +20,12 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-CORS(app)
+# Configure CORS
+CORS(app, 
+     origins=["http://localhost:5173"],
+     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+     allow_headers=["Content-Type", "Authorization", "Accept"],
+     supports_credentials=True)
 
 load_dotenv()
 encoded_username = quote_plus(os.getenv("MONGO_USERNAME"))
@@ -61,19 +66,18 @@ def log_request_info():
     logger.debug('Method: %s', request.method)
     logger.debug('URL: %s', request.url)
 
-@app.after_request
-def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-    return response
-
 @app.route('/test', methods=['GET'])
 def test():
     return jsonify({"message": "Test endpoint working!"}), 200
 
-@app.route('/api/create_user', methods=['POST'])
+@app.route('/api/create_user', methods=['POST', 'OPTIONS'])
 def create_user():
+    logger.info("Received %s request to /api/create_user", request.method)
+    
+    if request.method == 'OPTIONS':
+        logger.debug("Handling OPTIONS preflight request")
+        return jsonify({"message": "OK"}), 200
+
     try:
         data = request.get_json()
         if 'name' not in data or 'email' not in data or 'username' not in data or 'password' not in data:
@@ -303,7 +307,60 @@ def unlike_post(post_id):
     )
     return jsonify({"message": "Post unliked successfully"}), 200
 
+@app.route('/api/login', methods=['POST', 'OPTIONS'])
+def login():
+    logger.info("Received %s request to /api/login", request.method)
     
+    if request.method == 'OPTIONS':
+        logger.debug("Handling OPTIONS preflight request")
+        response = jsonify({"message": "OK"})
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:5173'
+        response.headers['Access-Control-Allow-Methods'] = 'POST'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        return response
+
+    try:
+        data = request.get_json()
+        logger.debug("Login attempt with email: %s", data.get('email'))
+        
+        if 'email' not in data or 'password' not in data:
+            logger.warning("Login attempt missing required fields")
+            return jsonify({"error": "Email and password are required"}), 400
+        
+        user = users_collection.find_one({"email": data['email']})
+        if not user:
+            logger.warning("Login attempt failed: Email not found - %s", data['email'])
+            return jsonify({"error": "Invalid email or password"}), 401
+        
+        # For demo purposes, just check if user exists
+        # In production, you would verify the password hash here
+        
+        logger.info("User logged in successfully: %s", data['email'])
+        logger.debug("User data: %s", {
+            "name": user.get("name"),
+            "email": user.get("email"),
+            "username": user.get("username")
+        })
+        
+        response = jsonify({
+            "message": "Login successful",
+            "user": {
+                "_id": str(user["_id"]),
+                "name": user["name"],
+                "email": user["email"],
+                "username": user["username"]
+            }
+        })
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:5173'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        return response
+    except Exception as e:
+        logger.error('Login error: %s', str(e))
+        response = jsonify({"error": "An error occurred during login"})
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:5173'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        return response, 500
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
