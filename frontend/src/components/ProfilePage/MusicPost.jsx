@@ -1,14 +1,14 @@
 import React from "react";
 import styles from "./MusicPost.module.css";
 
-const MusicPost = ({ text, song }) => {
+const MusicPost = ({ text, song, path }) => {
   return (
     <div className={styles.postContainer}>
       <p>{text}</p>
       <div className={styles.songEmbed}>🎶 {song}
         <div className={styles.audioPlayer}>
           <audio
-            src={song}
+            src={path}
             preload="metadata"
             className={styles.audioElement}
             controls

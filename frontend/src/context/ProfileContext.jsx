@@ -1,4 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import soulSyrup from '../assets/Ketsa - Soul Syrup.mp3';
+import happyHearts from '../assets/Dirk Dehler - Happy Hearts.mp3';
+import stickToIt from '../assets/Noisy Oyster - Stick To It.mp3.mp3';
 
 const ProfileContext = createContext();
 
@@ -25,9 +28,9 @@ export const ProfileProvider = ({ children }) => {
       'Florence + The Machine'
     ],
     posts: [
-      { id: 1, text: "Loving this song!", song: "Song 1" },
-      { id: 2, text: "Throwback to this classic!", song: "Song 2" },
-      { id: 3, text: "This is my favorite song!", song: "Song 3" }
+      { id: 1, text: "Loving this song!", song: "Soul Syrup", path: soulSyrup },
+      { id: 2, text: "Throwback to this classic!", song: "Happy Hearts", path: happyHearts },
+      { id: 3, text: "This is my favorite song!", song: "Stick To It", path: stickToIt }
     ]
   });
 
