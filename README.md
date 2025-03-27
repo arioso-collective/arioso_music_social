@@ -1,4 +1,4 @@
-# Arioso
+# Arioso :headphones:
 > A social media platform for music lovers to collect, share, and connect through music.
 
 ---
@@ -7,7 +7,8 @@
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
-* [Sprint 1](#sprint-1-(2/10/25-2/21/25))
+* [Sprint 1](#sprint-1-(2/10/25-2/21/25)-:musical_note:)
+* [Sprint 2](#Sprint-2-(3/03/25-3/24/25)-:notes:)
 * [Next Steps](#next_steps)
 
 <!--
@@ -24,9 +25,7 @@
 ## General Information
 ![Arioso_Logo-03](https://bitbucket.org/cs3398-enceladus-s25/arioso/raw/60f77e0922d6db40675d2d85d7fa504b468c7c37/Arioso_Logo-03.png)
   
-
 ---
-
 
 ## Description
 - **Who’s working on it?**  
@@ -44,9 +43,12 @@
 ---
 
 ## Technologies Used
-- [SQLite](https://www.sqlite.org/docs.html) 
+- [MongoDB](https://www.mongodb.com/docs/) 
 - [Flask](https://flask.palletsprojects.com/en/stable/)
 - [React](https://react.dev/reference/react) 
+- [Axios](https://axios-http.com/docs/intro)
+- [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/)
+- [Flask-JWT-Extended](https://flask-jwt-extended.readthedocs.io/en/stable/)
 <!-- Include links to documentation where possible. -->
 
 ---
@@ -69,7 +71,7 @@
 
 ---
 
-## Sprint 1 (2/10/25 - 2/21/25)
+# Sprint 1 (2/10/25 - 2/21/25) :musical_note:
 ## Contributions
   - **Juluissa:** "Researched and started creating a comment form to interact with the database. Basis for how site will gather information"    
       - `Jira Task SCRUM-45: Create a comment form using flask` 
@@ -127,12 +129,11 @@
           - Jira Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/feature%2FSCRUM-58-check-password-logic
 <br />
 
-# Sprint Progress Chart
+## Sprint Progress Chart
 
 This chart represents the sprint progress from February 10th, 2025, to February 21st, 2025.
 
 ![Sprint Progress](https://bitbucket.org/cs3398-enceladus-s25/arioso/raw/70d0cbaee3cfbcc296ac7af8ae733e75052bf5ad/burn_up_1.png)
-
 
 ## Next Steps
 - **Juluissa:**
@@ -151,7 +152,7 @@ This chart represents the sprint progress from February 10th, 2025, to February 
     - Create Login Page Logic and Functionality with Database
     - Research Firebase Deployment
     
-## Sprint 2 (3/03/25 - 3/24/25)
+# Sprint 2 (3/03/25 - 3/24/25) :notes:
 ## Contributions
   - **Juluissa:** "Worked as part of backend team to get skeleton of database started and layout of app routes"    
       - `Jira Task SCRUM-91: Research Connecting Flask backend and React frontend` 
@@ -170,15 +171,32 @@ This chart represents the sprint progress from February 10th, 2025, to February 
 <br />
   - **Cameron:** 
 <br />
-  - **Sebastian:** 
+  - **Sebastian:** "Worked on the backend team to create a Flask Backend API that can be called by the React frontend to access and modify the cloud database."
+    - `Jira Task SCRUM-17: Implementing Password Hashing` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-17
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/feature/SCRUM-17-implementing-password-hashing
+    - `Jira Task SCRUM-50: Implement Create and Read Operations for Users (Backend API)` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-50
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/feature/SCRUM-50-implement-create-and-read-opera
+    - `Jira Task SCRUM-73: MongoDB Database Setup` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-73
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/feature/SCRUM-73-mongodb-database-setup
+    - `Jira Task SCRUM-74: Research MongoDB Database` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-74
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-74-research-mongodb-database
+    - `Jira Task SCRUM-113: Implement Create and Read Operations for Posts (Backend API)` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-113
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/feature/SCRUM-113-implement-create-and-read-oper
+    - `Jira Task SCRUM-114: Implement Create and Read Operations for Comments (Backend API)` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-114
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-114-implement-create-and-read-oper
 <br />
 
-# Sprint Progress Chart
+## Sprint Progress Chart
 
 This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2025.
 
 ![Sprint Progress](https://bitbucket.org/cs3398-enceladus-s25/arioso/raw/3be0b7d83c8ca30f93611ce9ed8826fce93c56e6/burn_up_2.png)
-
 
 ## Next Steps 2
 - **Juluissa:**
@@ -188,6 +206,10 @@ This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2
 - **Aaron:** 
 - **Cameron:**
 - **Sebastian:**
+    - Work with backend team to implement new Backend API routes as needed
+    - Implement some form of music REST API (Spotify API)
+    - Continue researching Firebase Deployment
+    - Work with frontend team to develop JWT Token functionality
 
 ## Contact
 Created by Juluissa Elias, Aaron Reed, Cameron Salazar, and Sebastian Zeidler.  
