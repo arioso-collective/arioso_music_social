@@ -156,6 +156,7 @@ This chart represents the sprint progress from February 10th, 2025, to February 
     
 # Sprint 2 (3/03/25 - 3/24/25) :notes:
 ## Contributions
+### All contributions were merged into our new development branch (development_new) unless stated otherwise. We created development_new because we changed technologies between the first and second Sprint.
   - **Juluissa:** "Worked as part of backend team to get skeleton of database started and layout of app routes"    
       - `Jira Task SCRUM-91: Research Connecting Flask backend and React frontend` 
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-91
@@ -177,6 +178,7 @@ This chart represents the sprint progress from February 10th, 2025, to February 
     - `Jira Task SCRUM-17: Implementing Password Hashing` 
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-17
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/feature/SCRUM-17-implementing-password-hashing
+          - *This branch was merged into SCRUM-50's branch, as it was needed to hash passwords before passing them to the database using the Create Operation. Both branches belong to Sebastian, so he approved the pull request.*
     - `Jira Task SCRUM-50: Implement Create and Read Operations for Users (Backend API)` 
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-50
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/feature/SCRUM-50-implement-create-and-read-opera
@@ -212,6 +214,7 @@ This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2
     - Implement some form of music REST API (Spotify API)
     - Continue researching Firebase Deployment
     - Work with frontend team to develop JWT Token functionality
+    - Assist frontend and backend team with debugging as needed
 
 ## Contact
 Created by Juluissa Elias, Aaron Reed, Cameron Salazar, and Sebastian Zeidler.  
