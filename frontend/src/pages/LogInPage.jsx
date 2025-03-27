@@ -7,7 +7,13 @@ const LogInPage = () => {
     <div className="login-page">
       {/* Left Section: Logo */}
       <div className="left-section">
-        <img src={logo} alt="Arioso Logo" className="logo" />
+        <div className="logo-container">
+          <img src={logo} alt="Arioso Logo" className="logo" />
+          <p className="welcome-text">
+            Welcome To Arioso! <br />
+            Find your music community.
+          </p>
+        </div>
       </div>
 
       {/* Right Section: Login Form */}
