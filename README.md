@@ -152,6 +152,8 @@ This chart represents the sprint progress from February 10th, 2025, to February 
     - Create Login Page Logic and Functionality with Database
     - Research Firebase Deployment
     
+---
+    
 # Sprint 2 (3/03/25 - 3/24/25) :notes:
 ## Contributions
   - **Juluissa:** "Worked as part of backend team to get skeleton of database started and layout of app routes"    
