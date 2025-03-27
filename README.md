@@ -150,6 +150,45 @@ This chart represents the sprint progress from February 10th, 2025, to February 
     - Research MongoDB Databases
     - Create Login Page Logic and Functionality with Database
     - Research Firebase Deployment
+    
+## Sprint 2 (3/03/25 - 3/24/25)
+## Contributions
+  - **Juluissa:** "Worked as part of backend team to get skeleton of database started and layout of app routes"    
+      - `Jira Task SCRUM-91: Research Connecting Flask backend and React frontend` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-91
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-91-research-connecting-flask-backe
+      - `Jira Task SCRUM-102: Set up Mongo DB account and adding to collections `
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-102
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-102-set-up-mongo-db-account-and-pr     
+      - `Jira Task SCRUM-92: Implement Update Operations`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-92
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-92-implement-update-operations
+      - `Jira Task SCRUM-93: Implement Delete Operations`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-93
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-93-implement-delete-operations
+  - **Aaron:** 
+<br />
+  - **Cameron:** 
+<br />
+  - **Sebastian:** 
+<br />
+
+# Sprint Progress Chart
+
+This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2025.
+
+![Sprint Progress](https://bitbucket.org/cs3398-enceladus-s25/arioso/raw/3be0b7d83c8ca30f93611ce9ed8826fce93c56e6/burn_up_2.png)
+
+
+## Next Steps 2
+- **Juluissa:**
+    - Work with backend team to properly connect app routes
+    - Polish up database to allow for more feature additions
+    - Help to enhance site after database completion
+- **Aaron:** 
+- **Cameron:**
+- **Sebastian:**
+
 ## Contact
 Created by Juluissa Elias, Aaron Reed, Cameron Salazar, and Sebastian Zeidler.  
 
