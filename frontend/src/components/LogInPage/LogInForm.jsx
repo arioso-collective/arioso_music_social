@@ -1,29 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./LogInForm.css";
 
-// Mock API function to simulate user authentication
-const mockLogin = (email, password) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      // Mock user database
-      const users = [
-        { email: "user@example.com", password: "Password123!" },
-        { email: "music@arioso.com", password: "MusicLover@2025" },
-      ];
-
-      // Check if user exists
-      const user = users.find((u) => u.email === email && u.password === password);
-
-      if (user) {
-        resolve({ success: true, message: "🎉 Login successful!" });
-      } else {
-        resolve({ success: false, message: "❌ Invalid email or password" });
-      }
-    }, 1500); // Simulate API delay (1.5s)
-  });
-};
-
 const LogInForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [loginStatus, setLoginStatus] = useState({ success: null, message: "" });
@@ -57,20 +37,46 @@ const LogInForm = () => {
     }
 
     setErrors(newErrors);
-    setIsButtonDisabled(Object.keys(newErrors).length > 0); // Disable button if there are errors
+    setIsButtonDisabled(Object.keys(newErrors).length > 0);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isButtonDisabled) return; // Prevent submission if validation fails
+    if (isButtonDisabled) return;
 
     setLoading(true);
     setLoginStatus({ success: null, message: "" });
 
-    const response = await mockLogin(formData.email, formData.password);
+    try {
+      const response = await fetch('http://localhost:5001/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password
+        }),
+      });
 
-    setLoading(false);
-    setLoginStatus(response);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Login failed');
+      }
+
+      setLoginStatus({ success: true, message: "🎉 Login successful!" });
+      // Clear form
+      setFormData({ email: "", password: "" });
+      // Redirect to home page after successful login
+      setTimeout(() => {
+        navigate('/home');
+      }, 1500);
+    } catch (error) {
+      setLoginStatus({ success: false, message: error.message });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -119,7 +125,9 @@ const LogInForm = () => {
       </form>
 
       {loginStatus.message && (
-        <p className={loginStatus.success ? "success" : "error"}>{loginStatus.message}</p>
+        <p className={loginStatus.success ? "success" : "error"}>
+          {loginStatus.message}
+        </p>
       )}
 
       <div className="login-links">

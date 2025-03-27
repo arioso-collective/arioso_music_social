@@ -12,7 +12,7 @@ export const ProfileProvider = ({ children }) => {
     bio: '🎵 Music lover & playlist curator',
     followers: 100,
     following: 50,
-    posts: 25,
+    postCount: 25,
     favoriteGenres: [
       'Alternative Rock',
       'Indie Pop',
