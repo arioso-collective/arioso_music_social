@@ -1,26 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SignUpForm.css";
 
-
-// Mock API function to simulate username/email validation
-const mockCheckAvailability = (username, email) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const takenUsernames = ["user123", "musiclover", "rockstar"];
-      const takenEmails = ["test@example.com", "hello@music.com"];
-
-      if (takenUsernames.includes(username)) {
-        resolve({ available: false, message: "Username is already taken" });
-      } else if (takenEmails.includes(email)) {
-        resolve({ available: false, message: "Email is already registered" });
-      } else {
-        resolve({ available: true });
-      }
-    }, 1500);
-  });
-};
-
 const SignUpForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -101,16 +84,37 @@ const SignUpForm = () => {
     setLoading(true);
     setFormStatus({ success: null, message: "" });
 
-    // Simulating an API call for username/email availability
-    const response = await mockCheckAvailability(formData.name, formData.email);
+    try {
+      const response = await fetch('http://localhost:5001/api/create_user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          username: formData.name, // Using name as username for now
+          password: formData.password
+        }),
+      });
 
-    setLoading(false);
+      const data = await response.json();
 
-    if (!response.available) {
-      setFormStatus({ success: false, message: response.message });
-    } else {
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to create account');
+      }
+
       setFormStatus({ success: true, message: "🎉 Account successfully created!" });
+      // Clear form
       setFormData({ name: "", email: "", password: "", confirmPassword: "" });
+      // Redirect to login page after 2 seconds
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+    } catch (error) {
+      setFormStatus({ success: false, message: error.message });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -183,7 +187,7 @@ const SignUpForm = () => {
 
         {loading ? (
           <button type="submit" disabled className="loading-btn">
-            Checking...
+            Creating Account...
           </button>
         ) : (
           <button type="submit">Sign Up</button>
