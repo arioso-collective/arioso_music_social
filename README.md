@@ -172,7 +172,28 @@ This chart represents the sprint progress from February 10th, 2025, to February 
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-93-implement-delete-operations
   - **Aaron:** 
 <br />
-  - **Cameron:** 
+  - **Cameron:** "Worked as part of the frontend team to set up SignUp page and LogIn page.
+      - `Jira Task SCRUM-112: Research React and JavaScript` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-112
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-112-research-react-and-javascript
+      - `Jira Task SCRUM-107: Set Up the Sign-Up Page Structure `
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-107
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-107-set-up-the-sign-up-page-struct     
+      - `Jira Task SCRUM-108: Implement Input Validation & User Feedback`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-108
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-108-implement-input-validation-use
+      - `Jira Task SCRUM-109: Simulate API Responses & Form Submission`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-109
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-109-simulate-api-responses-form-su
+      - `Jira Task SCRUM-110: Implement UI Enhancements` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-110
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-110-implement-ui-enhancements
+      - `Jira Task SCRUM-59: Create Basic Component & Layout `
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-59
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-59-create-basic-component-and-layo     
+      - `Jira Task SCRUM-60: Implement Form State and Validation`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-60
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-60-implement-form-state-and-valida
 <br />
   - **Sebastian:** "Worked on the backend team to create a Flask Backend API that can be called by the React frontend to access and modify the cloud database."
     - `Jira Task SCRUM-17: Implementing Password Hashing` 
