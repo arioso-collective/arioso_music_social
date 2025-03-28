@@ -170,7 +170,24 @@ This chart represents the sprint progress from February 10th, 2025, to February 
       - `Jira Task SCRUM-93: Implement Delete Operations`
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-93
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-93-implement-delete-operations
-  - **Aaron:** 
+<br />
+  - **Aaron:** "Worked as part of the frontend team to setup ProfilePage and related components. Built off the backends api routes to 
+        connect the frontend SignUp an Login pages to our cloud database."
+      - `Jira Task SCRUM-84: Setup Profile Page and Component Structure` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-84
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/branch/SCRUM-84-setup-and-component-structure
+      - `Jira Task SCRUM-85: Display User Information`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-85
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/branch/SCRUM-85-display-user-information     
+      - `Jira Task SCRUM-88: Navigation and Routing`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-88
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/branch/SCRUM-88-navigation-and-routing
+      - `Jira Task SCRUM-89: State Management and Data Flow`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-89
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/branch/SCRUM-89-state-management-and-data-flow
+      - `Jira Task SCRUM-94: Setup API Connection`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-95
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/branch/SCRUM-95-setup-api-connection
 <br />
   - **Cameron:** "Worked as part of the frontend team to set up SignUp page and LogIn page.
       - `Jira Task SCRUM-112: Research React and JavaScript` 
@@ -228,7 +245,12 @@ This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2
     - Work with backend team to properly connect app routes
     - Polish up database to allow for more feature additions
     - Help to enhance site after database completion
-- **Aaron:** 
+- **Aaron:**
+    - Transition to axios for api endpoint calls
+    - Design and implement a HomePage with a feed of user's posts
+    - Improve understanding of CORS and refactor api endpoints
+    - Work with backend team to develop JWT functionality
+    - Incorporate music seamlessly across platform, 
 - **Cameron:**
 - **Sebastian:**
     - Work with backend team to implement new Backend API routes as needed
