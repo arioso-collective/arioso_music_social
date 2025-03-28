@@ -211,6 +211,12 @@ This chart represents the sprint progress from February 10th, 2025, to February 
       - `Jira Task SCRUM-60: Implement Form State and Validation`
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-60
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-60-implement-form-state-and-valida
+      - `Jira Task SCRUM-61: Mock API for Login `
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-61
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-61-mock-api-for-login     
+      - `Jira Task SCRUM-62: Enhance User Experience`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-62
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-62-enhance-user-experience-and-acc
 <br />
   - **Sebastian:** "Worked on the backend team to create a Flask Backend API that can be called by the React frontend to access and modify the cloud database."
     - `Jira Task SCRUM-17: Implementing Password Hashing` 
@@ -252,6 +258,9 @@ This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2
     - Work with backend team to develop JWT functionality
     - Incorporate music seamlessly across platform, 
 - **Cameron:**
+    - Design and implement footer bar that plays music
+    - Design and implement settings page for NavBar
+    - Change design to be more accessible visually
 - **Sebastian:**
     - Work with backend team to implement new Backend API routes as needed
     - Implement some form of music REST API (Spotify API)
