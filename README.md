@@ -46,7 +46,7 @@
 - [MongoDB](https://www.mongodb.com/docs/) 
 - [Flask](https://flask.palletsprojects.com/en/stable/)
 - [React](https://react.dev/reference/react) 
-- [Axios](https://axios-http.com/docs/intro)
+- [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
 - [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/)
 - [Flask-JWT-Extended](https://flask-jwt-extended.readthedocs.io/en/stable/)
 <!-- Include links to documentation where possible. -->
