@@ -1,0 +1,58 @@
+.music-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: #1e1e2e;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+    z-index: 100;
+    font-family: Arial, sans-serif;
+  }
+  
+  .song-info {
+    flex: 1;
+  }
+  
+  .controls {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .controls button {
+    font-size: 20px;
+    margin-bottom: 5px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .progress-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .progress-container input {
+    flex: 1;
+  }
+  
+  .volume-control {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .volume-control input {
+    margin-right: 10px;
+  }
+  
