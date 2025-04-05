@@ -17,3 +17,7 @@ SCRUM-128 - User Authentication with JWT
 - [Medium: Understanding CORS](https://medium.com/itnext/understanding-cors-4157bf640e11) - Concise Introduction and Overview
 - [Mozilla - Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) - Longer Overview - Descriptions of HTTP Headers
 - [Flask-Cors Documentation](https://corydolphin.com/flask-cors/)
+
+
+##Related Resources
+- [HTTP Request Methods](https://www.freecodecamp.org/news/http-request-methods-explained/)
