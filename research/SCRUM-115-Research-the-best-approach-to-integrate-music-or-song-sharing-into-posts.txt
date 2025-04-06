@@ -37,3 +37,21 @@ SoundCloud allows us to embed a player widget, rather than needing to design our
 This has drawbacks however, as we couldn't customize it to fit Arioso's brand identity. SoundCloud does allow editing, but we still would need to follow their guidelines on the format of the widget.
 For more information on the SoundCloud Widget, see their documentation: https://developers.soundcloud.com/docs/api/html5-widget#resources
 
+One benefit of SoundCloud is that, unlike Spotify and Apple Music, it is free to use the playback features (widget).
+
+---
+
+MusicAPI Research
+MusicAPI Documentation: https://musicapi.com/docs/intro
+MusicAPI allows you to access multiple different MusicAPIs at once. The supported APIs and features can be found here: https://musicapi.com/docs/api-basics/supported-features
+
+MusicAPI requires a paid account and cannot be used directly to play music within the browser.
+
+---
+
+MusicBrainz (Music Database) Research
+MusicBrainz Documentation: https://musicbrainz.org/doc/Beginners_Guide
+
+MusicBrainz has a lot of information on songs, including genre tags for songs. Despite this, it seems this API is mainly used for updating and editing information, and may not reflect our needs accurately.
+
+
