@@ -17,3 +17,23 @@ We would like to use the Web Playback SDK API for playing music clips in our app
 ---
 
 Apple Music API Research
+Apple Music prefers that developers use Swift and MusicKit to utilize their API. There is not as much documentation for developers using other platforms and tools.
+
+It looks as though they may not support in-browser playback, but this API can be used to get song information in liu of us storing it in our own database: https://developer.apple.com/documentation/applemusicapi/songs-api
+To utilize the Apple Music APi, we would need to use MusicKit JS to do in-browser playback and a subscription to Apple Music.
+MusicKit JS Documentation: https://js-cdn.music.apple.com/musickit/v1/index.html
+
+MusicKit JS offers a few different playback modes and utilities: https://js-cdn.music.apple.com/musickit/v1/index.html#playback-modes
+
+---
+
+SoundCloud API Research
+Documentation: https://developers.soundcloud.com/docs/api/guide
+
+SoundCloud's API offers the cool functionality of uploading files for play: https://developers.soundcloud.com/docs/api/guide#uploading
+This could be useful if we want to lean in to Arioso's Artist support, which would allow artists to upload new tracks to SoundCloud and post about it all through Arioso.
+
+SoundCloud allows us to embed a player widget, rather than needing to design our own: https://developers.soundcloud.com/docs/api/guide#embedding
+This has drawbacks however, as we couldn't customize it to fit Arioso's brand identity. SoundCloud does allow editing, but we still would need to follow their guidelines on the format of the widget.
+For more information on the SoundCloud Widget, see their documentation: https://developers.soundcloud.com/docs/api/html5-widget#resources
+
