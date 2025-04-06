@@ -1,0 +1,19 @@
+Spotify API Research
+https://developer.spotify.com/documentation/web-api
+
+Spotify recommends the Authorization Code Flow option for web and mobile apps where a user only grants permission once. https://developer.spotify.com/documentation/web-api/tutorials/code-flow
+
+An example of authorization for SpotifyAPI can be found here: https://github.com/spotify/web-api-examples/tree/master/authorization/authorization_code
+
+
+To use the Access Code for Spotify API you must include it in your calls to the API. Example here: https://developer.spotify.com/documentation/web-api/concepts/access-token
+
+Spotify has some rules for defining redirect URIs for security purposes. The list of best practices can be found on their website here: https://developer.spotify.com/documentation/web-api/concepts/redirect_uri
+
+https://developer.spotify.com/documentation/web-api/concepts/playlists
+
+We would like to use the Web Playback SDK API for playing music clips in our application. This will require a premium Spotify account for us to use. Spotify provides an in-depth step-by-step guide to creating a Spotify player within a web app: https://developer.spotify.com/documentation/web-playback-sdk
+
+---
+
+Apple Music API Research
