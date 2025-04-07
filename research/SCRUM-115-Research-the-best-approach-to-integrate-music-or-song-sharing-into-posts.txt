@@ -1,0 +1,65 @@
+
+#Researching Music APIs 
+-We are researching multiple different Music APIs to determine which would be best for our application.
+-We expect to have enough information about multiple Music APIs to easily contrast and compare them to make a decision on which to use. This research will directly be used to decide which Music API to implement.
+To be more specific, which Music API to use for web browser music playback, as well as which Music API will provide us with a database of songs, user song/playlist/album/artist metadata, and other music functionality. 
+-Both the backend and frontend code will be effected by this research as we go to implement a Music API. Some specific examples of what will be added using this research: A web music player, music featured on posts, and the feed recommendation algorithm.
+-Jira tasks SCRUM-120, SCRUM-117, SCRUM-118, SCRUM-130, SCRUM-131, SCRUM-132, SCRUM-121, and SCRUM-124 are all dependent on this research.
+
+
+
+#Spotify API Research
+#Documentation: https://developer.spotify.com/documentation/web-api
+
+Spotify recommends the Authorization Code Flow option for web and mobile apps where a user only grants permission once. https://developer.spotify.com/documentation/web-api/tutorials/code-flow
+An example of authorization for SpotifyAPI can be found here: https://github.com/spotify/web-api-examples/tree/master/authorization/authorization_code
+
+To use the Access Code for Spotify API you must include it in your calls to the API. Example here: https://developer.spotify.com/documentation/web-api/concepts/access-token
+
+Spotify has some rules for defining redirect URIs for security purposes. The list of best practices can be found on their website here: https://developer.spotify.com/documentation/web-api/concepts/redirect_uri
+
+We would like to use the Web Playback SDK API for playing music clips in our application. This will require a premium Spotify account for us to use. Spotify provides an in-depth step-by-step guide to creating a Spotify player within a web app: https://developer.spotify.com/documentation/web-playback-sdk
+
+---
+
+#Apple Music API Research
+#Documentation: https://developer.apple.com/documentation/applemusicapi/
+
+Apple Music prefers that developers use Swift and MusicKit to utilize their API. There is not as much documentation for developers using other platforms and tools.
+
+This API can be used to get song information in liu of us storing it in our own database: https://developer.apple.com/documentation/applemusicapi/songs-api
+To utilize the Apple Music APi, we would need to use MusicKit JS to do in-browser playback and a subscription to Apple Music.
+MusicKit JS Documentation: https://js-cdn.music.apple.com/musickit/v1/index.html
+
+MusicKit JS offers a few different playback modes and utilities: https://js-cdn.music.apple.com/musickit/v1/index.html#playback-modes
+
+---
+
+#SoundCloud API Research
+#Documentation: https://developers.soundcloud.com/docs/api/guide
+
+SoundCloud's API offers the cool functionality of uploading files for play: https://developers.soundcloud.com/docs/api/guide#uploading
+This could be useful if we want to lean in to Arioso's Artist support, which would allow artists to upload new tracks to SoundCloud and post about it all through Arioso.
+
+SoundCloud allows us to embed a player widget, rather than needing to design our own: https://developers.soundcloud.com/docs/api/guide#embedding
+This has drawbacks however, as we couldn't customize it to fit Arioso's brand identity. SoundCloud does allow editing, but we still would need to follow their guidelines on the format of the widget.
+For more information on the SoundCloud Widget, see their documentation: https://developers.soundcloud.com/docs/api/html5-widget#resources
+
+One benefit of SoundCloud is that, unlike Spotify and Apple Music, it is free to use the playback features (widget).
+
+---
+
+#MusicAPI Research
+#MusicAPI Documentation: https://musicapi.com/docs/intro
+
+MusicAPI allows you to access multiple different MusicAPIs at once. The supported APIs and features can be found here: https://musicapi.com/docs/api-basics/supported-features
+MusicAPI requires a paid account and cannot be used directly to play music within the browser.
+
+---
+
+#MusicBrainz (Music Database) Research
+#MusicBrainz Documentation: https://musicbrainz.org/doc/Beginners_Guide
+
+MusicBrainz has a lot of information on songs, including genre tags for songs. Despite this, it seems this API is mainly used for updating and editing information, and may not reflect our needs accurately.
+
+
