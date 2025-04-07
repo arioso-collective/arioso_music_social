@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify, render_template, url_for, redirect
 from bson import ObjectId, Binary
 from flask_cors import CORS
 from urllib.parse import quote_plus
-from password_util import hash_password
+from password_util import hash_password, compare_password
 from datetime import datetime
 from dotenv import load_dotenv
 import os
@@ -332,9 +332,9 @@ def login():
         if not user:
             logger.warning("Login attempt failed: Email not found - %s", data['email'])
             return jsonify({"error": "Invalid email or password"}), 401
-        
-        # For demo purposes, just check if user exists
-        # In production, you would verify the password hash here
+        if not compare_password(data['password'], user['password']):
+            logger.warning("Login attempt failed due to incorrect password")
+            return jsonify({"error": "Invalid password"}), 401
         
         logger.info("User logged in successfully: %s", data['email'])
         logger.debug("User data: %s", {
