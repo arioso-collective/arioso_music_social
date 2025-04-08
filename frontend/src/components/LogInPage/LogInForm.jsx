@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { validateEmail } from "../utils/validation";
+import { validateEmail } from "../../utils/validation";
 import "./LogInForm.css";
 
 const LogInForm = () => {
