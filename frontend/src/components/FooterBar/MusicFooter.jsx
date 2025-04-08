@@ -52,38 +52,43 @@ const MusicFooter = () => {
         preload="metadata"
       />
 
-      <div className="song-info">
+      {/* Play/Pause Button */}
+    <div className="left-controls">
+      <button onClick={togglePlay}>{isPlaying ? "⏸️" : "▶️"}</button>
+    </div>
+
+      {/* Song Info + Progress */}
+    <div className="center-info">
+      <div className="song-info horizontal">
         <strong>Sample Song</strong>
+        <span className="separator"></span>
         <p>Sample Artist</p>
-      </div>
+    </div>
+    <div className="progress-container">
+      <span>{formatTime(progress)}</span>
+      <input
+        type="range"
+        min="0"
+        max={duration}
+        value={progress}
+        onChange={handleProgressChange}
+      />
+      <span>{formatTime(duration)}</span>
+    </div>
+  </div>
 
-      <div className="controls">
-        <button onClick={togglePlay}>{isPlaying ? "⏸️" : "▶️"}</button>
-
-        <div className="progress-container">
-          <span>{formatTime(progress)}</span>
-          <input
-            type="range"
-            min="0"
-            max={duration}
-            value={progress}
-            onChange={handleProgressChange}
-          />
-          <span>{formatTime(duration)}</span>
-        </div>
-      </div>
-
-      <div className="volume-control">
-        <input
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          value={volume}
-          onChange={handleVolumeChange}
-        />
-        🔊
-      </div>
+  {/* Volume */}
+  <div className="volume-control">
+    <input
+      type="range"
+      min="0"
+      max="1"
+      step="0.01"
+      value={volume}
+      onChange={handleVolumeChange}
+    />
+    <span className="volume-icon">🔊</span>
+  </div>
     </div>
   );
 };
