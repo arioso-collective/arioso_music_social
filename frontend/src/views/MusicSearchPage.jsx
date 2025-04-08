@@ -75,7 +75,7 @@ function MusicSearchPage() {
         <ul className="results-list">
           {results.map((track) => (
             <li key={track.trackId} className="result-item">
-              <div className="track-title">(track.trackName, query)</div>
+              <div className="track-title">{highlightMatch(track.trackName, query)}</div>
 
               <div className="artist-name">{track.artistName}</div>
               {track.previewUrl && (

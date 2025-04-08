@@ -61,3 +61,7 @@
     font-style: italic;
   }
   
+  .highlight {
+    background-color: rgb(222, 175, 255);
+    font-weight: bold;
+  }
