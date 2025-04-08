@@ -6,7 +6,7 @@ from bson import ObjectId, Binary
 from flask_cors import CORS
 from urllib.parse import quote_plus
 from password_util import hash_password, compare_password
-from datetime import datetime
+from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import os
 import logging
@@ -22,6 +22,7 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 app.secret_key = ""
+app.config['JWT_Expiration_DELTA'] = timedelta()
 jwt = JWT(app)
 
 # Configure CORS
@@ -72,12 +73,7 @@ def log_request_info():
 def test():
     return jsonify({"message": "Test endpoint working!"}), 200
 
-@app.route('/protected')
-@jwt_required()
-def protected():
-    return '%s' % current_identity
-
-@app.route('/api/create_user', methods=['POST', 'OPTIONS'])
+@app.route('/api/create_user', methods=['POST'])
 def create_user():
     logger.info("Received %s request to /api/create_user", request.method)
     
@@ -359,6 +355,15 @@ def login():
             "email": user.get("email"),
             "username": user.get("username")
         })
+
+        payload = {
+            "sub": str(user["_id"]),
+            "email": user["email"],
+            "name": user["name"],
+            "username": user["username"]
+        }
+        
+        access_token = jwt.encode(payload)
         
         response = jsonify({
             "message": "Login successful",
@@ -367,8 +372,10 @@ def login():
                 "name": user["name"],
                 "email": user["email"],
                 "username": user["username"]
-            }
+            },
+        "access_token": access_token
         })
+
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:5173'
         response.headers['Access-Control-Allow-Credentials'] = 'true'
         return response
