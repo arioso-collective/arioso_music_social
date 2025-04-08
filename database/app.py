@@ -28,8 +28,6 @@ jwt = JWT(app)
 # Configure CORS
 CORS(app, 
      origins=["http://localhost:5173"],
-     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-     allow_headers=["Content-Type", "Authorization", "Accept"],
      supports_credentials=True)
 
 load_dotenv()
@@ -320,18 +318,9 @@ def unlike_post(post_id):
     )
     return jsonify({"message": "Post unliked successfully"}), 200
 
-@app.route('/api/login', methods=['POST', 'OPTIONS'])
+@app.route('/api/login', methods=['POST'])
 def login():
     logger.info("Received %s request to /api/login", request.method)
-    
-    if request.method == 'OPTIONS':
-        logger.debug("Handling OPTIONS preflight request")
-        response = jsonify({"message": "OK"})
-        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:5173'
-        response.headers['Access-Control-Allow-Methods'] = 'POST'
-        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-        response.headers['Access-Control-Allow-Credentials'] = 'true'
-        return response
 
     try:
         data = request.get_json()
@@ -375,15 +364,10 @@ def login():
             },
         "access_token": access_token
         })
-
-        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:5173'
-        response.headers['Access-Control-Allow-Credentials'] = 'true'
         return response
     except Exception as e:
         logger.error('Login error: %s', str(e))
         response = jsonify({"error": "An error occurred during login"})
-        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:5173'
-        response.headers['Access-Control-Allow-Credentials'] = 'true'
         return response, 500
 
 if __name__ == "__main__":
