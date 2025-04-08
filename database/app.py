@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError, PyMongoError, DuplicateKeyError
 from flask import Flask, request, jsonify, render_template, url_for, redirect
+from flask_jwt import JWT, jwt_required, current_identity
 from bson import ObjectId, Binary
 from flask_cors import CORS
 from urllib.parse import quote_plus
@@ -20,6 +21,9 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
+app.secret_key = ""
+jwt = JWT(app)
+
 # Configure CORS
 CORS(app, 
      origins=["http://localhost:5173"],
@@ -35,8 +39,6 @@ MONGO_CONNECTION_STRING = f"mongodb+srv://{encoded_username}:{encoded_password}@
 
 #try:
 mongo_client = MongoClient(MONGO_CONNECTION_STRING, serverSelectionTimeoutMS=5000)
-#mongo_client.server_info()  # Check if the server is reachable
-#print("Connected to MongoDB Server...")
 
 db = mongo_client['arioso']
 users_collection = db['users']
@@ -69,6 +71,11 @@ def log_request_info():
 @app.route('/test', methods=['GET'])
 def test():
     return jsonify({"message": "Test endpoint working!"}), 200
+
+@app.route('/protected')
+@jwt_required()
+def protected():
+    return '%s' % current_identity
 
 @app.route('/api/create_user', methods=['POST', 'OPTIONS'])
 def create_user():
@@ -143,6 +150,7 @@ def create_user():
 
 
 @app.route('/api/get_users', methods=['GET'])
+@jwt_required()
 def get_users():
     username = request.args.get('username')
     user_id = request.args.get('_id')  
@@ -172,6 +180,7 @@ def get_users():
         return jsonify(users), 200
 
 @app.route('/api/get_user/<username>', methods=['GET'])
+@jwt_required()
 def get_user(username):
     user = users_collection.find_one({'username': username})
     if user:
@@ -180,6 +189,7 @@ def get_user(username):
     return jsonify({"error": "User not found"}), 404
 
 @app.route('/api/update_post/<post_id>', methods=['PUT'])
+@jwt_required()
 def update_post(post_id):
     data = request.get_json()
     update_fields = {}
@@ -203,6 +213,7 @@ def update_post(post_id):
     return jsonify({"message": "Post updated successfully"}), 200
 
 @app.route('/api/update_comment/<comment_id>', methods=['PUT'])
+@jwt_required()
 def update_comment(comment_id):
     data = request.get_json()
     update_fields = {}
@@ -219,6 +230,7 @@ def update_comment(comment_id):
     return jsonify({"message": "Comment updated successfully"}), 200
 
 @app.route('/api/update_user/<user_id>', methods=['PUT'])
+@jwt_required()
 def update_user(user_id):
     data = request.get_json()
     update_fields = {}
@@ -247,6 +259,7 @@ def update_user(user_id):
     return jsonify({"message": "User updated successfully"}), 200
     
 @app.route('/api/like_post/<post_id>', methods=['POST'])
+@jwt_required()
 def like_post(post_id):
     data = request.get_json()
     user_id = data.get('user_id')
@@ -267,6 +280,7 @@ def like_post(post_id):
     return jsonify({"message": "Post liked successfully"}), 200
 
 @app.route('/api/delete_post/<post_id>', methods=['DELETE'])
+@jwt_required()
 def delete_post(post_id):
     result = posts_collection.delete_one({'_id': ObjectId(post_id)})
     if result.deleted_count == 0:
@@ -274,6 +288,7 @@ def delete_post(post_id):
     return jsonify({"message": "Post deleted successfully"}), 200
 
 @app.route('/api/delete_comment/<comment_id>', methods=['DELETE'])
+@jwt_required()
 def delete_comment(comment_id):
     result = comments_collection.delete_one({'_id': ObjectId(comment_id)})
     if result.deleted_count == 0:
@@ -281,6 +296,7 @@ def delete_comment(comment_id):
     return jsonify({"message": "Comment deleted successfully"}), 200
 
 @app.route('/api/delete_user/<user_id>', methods=['DELETE'])
+@jwt_required()
 def delete_user(user_id):
     result = users_collection.delete_one({'_id': ObjectId(user_id)})
     if result.deleted_count == 0:
@@ -288,6 +304,7 @@ def delete_user(user_id):
     return jsonify({"message": "User deleted successfully"}), 200
 
 @app.route('/api/unlike_post/<post_id>', methods=['POST'])
+@jwt_required()
 def unlike_post(post_id):
     data = request.get_json()
     user_id = data.get('user_id')
