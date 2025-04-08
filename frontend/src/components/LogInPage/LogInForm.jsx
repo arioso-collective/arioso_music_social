@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { validateEmail } from "../utils/validation";
 import "./LogInForm.css";
 
 const LogInForm = () => {
@@ -17,11 +18,6 @@ const LogInForm = () => {
 
     // Validate form after each input change
     validateForm({ ...formData, [name]: value });
-  };
-
-  // Email validation regex
-  const validateEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
   // Form validation function
