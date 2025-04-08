@@ -74,10 +74,6 @@ def test():
 @app.route('/api/create_user', methods=['POST'])
 def create_user():
     logger.info("Received %s request to /api/create_user", request.method)
-    
-    if request.method == 'OPTIONS':
-        logger.debug("Handling OPTIONS preflight request")
-        return jsonify({"message": "OK"}), 200
 
     try:
         data = request.get_json()
