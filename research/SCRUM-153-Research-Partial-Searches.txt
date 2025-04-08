@@ -1,0 +1,120 @@
+Search APIS 
+This research will assist with implementing APIs in order to allow users to find songs by titles and lyrics. 
+This will also allow for partial searches. 
+We hope to implent a search bar feature where users can find any track with just part of a title or lyric.
+This will allow users to easily find tracks and share or even discover new music. 
+We want to either impelent a search bar or search page to allow users to find tracks easier. 
+Jira tasks 121 / 122 / and 126 depend on this research as they are tasks dealing with finding tracks
+
+
+
+
+ITunes Lookup Search: 
+Allows partial search feature and gives a 30-sec preview 
+
+https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html#//apple_ref/doc/uid/TP40017632-CH3-SW1 
+
+https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/UnderstandingSearchResults.html?utm_source=chatgpt.com 
+
+
+GitHub ITunes implementations 
+https://github.com/anjum121/react-itune-search?tab=readme-ov-file
+
+
+Other options:
+Might want to implment chat bot later for more fun options 
+
+
+Here are some good APIs with music search capabilities:
+
+Spotify Web API — powerful but requires OAuth (https://developer.spotify.com)
+
+Deezer API — lightweight and no auth for basic search (https://developers.deezer.com/api)
+
+Last.fm API — also no auth required for basic searches (https://www.last.fm/api)
+
+iTunes Search API — super easy to use, no auth (https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html)
+
+.jsx file template to use the API:
+
+import { useState, useEffect } from "react";
+
+function SearchComponent({ apiUrlBuilder, extractResults, renderItem }) {
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  // Debounce logic
+  useEffect(() => {
+    if (query.length < 2) {
+      setResults([]);
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      fetchResults(query);
+    }, 300); // debounce delay (ms)
+
+    return () => clearTimeout(timeoutId);
+  }, [query]);
+
+  const fetchResults = async (searchTerm) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(apiUrlBuilder(searchTerm));
+      const data = await response.json();
+      const parsed = extractResults(data);
+      setResults(parsed);
+    } catch (err) {
+      setError("Something went wrong while searching.");
+      setResults([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="p-4">
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search..."
+        className="w-full border p-2 rounded"
+      />
+
+      {loading && <p>Loading...</p>}
+      {error && <p className="text-red-500">{error}</p>}
+
+      <ul className="mt-2">
+        {results.map((item, index) => (
+          <li key={index}>{renderItem(item)}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default SearchComponent;
+
+How to utilize general template:
+import SearchComponent from "./components/SearchComponent";
+
+function App() {
+  return (
+    <SearchComponent
+      apiUrlBuilder={(query) =>
+        `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&limit=5`
+      }
+      extractResults={(data) => data.results}
+      renderItem={(item) => (
+        <div>
+          <strong>{item.artistName}</strong> – {item.trackName || item.collectionName}
+        </div>
+      )}
+    />
+  );
+}
