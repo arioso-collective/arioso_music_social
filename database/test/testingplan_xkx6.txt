@@ -1,0 +1,10 @@
+1. Test Password Hashing (hash_password) and Compare Password (compare_password) functions. 
+The test will return successfully if the plain_text_password passed to hash_password returns a hashed password that does NOT match the plain_text_password.
+The test will return successfully if the plain_text_password and hashed_password passed to compare_password returns True.
+
+2. Test Create User (create_user) method to ensure user information is successfully sent to the database.
+This test will use MongoMock to set up a mock database to test the create_user function without actually using the React frontend or making any changes to our database as it is.
+It will pass a pseudo user document to the database and then confirm that the information is actually found in the database.
+
+3. Test Get User (get_user(username)) method to ensure user information is successfully read from the database. 
+This test will use MongoMock as well, and should return the user’s username if it exists, and return a 404 error message if the user does not exist.
