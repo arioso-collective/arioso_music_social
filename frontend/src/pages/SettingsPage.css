@@ -6,4 +6,20 @@
   .settings-page h2 {
     color: rgb(106, 52, 232);
   }
+  .back-button {
+    background-color: rgb(106, 52, 232);
+    color: rgb(250, 250, 250);
+    border: 2px solid rgb(106, 52, 232);
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.2s ease;
+  }
+  
+  .back-button:hover {
+    background-color: rgb(106, 52, 232);
+    color: white;
+  }
   
