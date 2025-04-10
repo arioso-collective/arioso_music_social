@@ -21,20 +21,12 @@ const ProfilePage = () => {
         <div className={styles.mainSection}>
           <div className={styles.buttonContainer}>
             {isCurrentUser ? (
-              <>
               <button 
                 className={styles.editButton}
                 onClick={() => navigate('/profile/edit')}
               >
                 Edit Profile
               </button>
-              <button 
-                className={styles.editButton}
-                onClick={() => navigate('/settings')}
-            >
-                Settings
-            </button>
-          </>
             ) : (
               <FollowButton />
             )}
