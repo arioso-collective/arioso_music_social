@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import "./MusicFooter.css";
-import sampleAudio from "/Users/shrimp/Desktop/Software_Engineering/arioso/frontend/src/assets/Ketsa - Soul Syrup.mp3"; // Replace with your own or mock
+import soulSyrup from '../../assets/Ketsa - Soul Syrup.mp3'; // Replace with your own or mock
 
 const MusicFooter = () => {
   const audioRef = useRef(null);
@@ -47,7 +47,7 @@ const MusicFooter = () => {
     <div className="music-footer">
       <audio
         ref={audioRef}
-        src={sampleAudio}
+        src={soulSyrup}
         onTimeUpdate={handleTimeUpdate}
         preload="metadata"
       />
