@@ -2,11 +2,24 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-  // TODO: Replace with actual auth check
-  const isAuthenticated = true; // Temporarily set to true for testing
+  const token = localStorage.getItem('token');
+  const isAuthenticated = !!token;
 
-  if (!isAuthenticated) {
-    return <Navigate to="/" replace />;
+  // Optional: Check if token is expired
+  const isTokenExpired = () => {
+    if (!token) return true;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.exp * 1000 < Date.now();
+    } catch (error) {
+      return true;
+    }
+  };
+
+  if (!isAuthenticated || isTokenExpired()) {
+    // Clear any expired tokens
+    localStorage.removeItem('token');
+    return <Navigate to="/login" replace />;
   }
 
   return children;

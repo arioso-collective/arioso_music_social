@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError, PyMongoError, DuplicateKeyError
 from flask import Flask, request, jsonify, render_template, url_for, redirect
-from flask_jwt import JWT, jwt_required, current_identity
+from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity, create_access_token
 from bson import ObjectId, Binary
 from flask_cors import CORS
 from urllib.parse import quote_plus
@@ -21,9 +21,9 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-app.secret_key = ""
-app.config['JWT_Expiration_DELTA'] = timedelta()
-jwt = JWT(app)
+app.secret_key = os.getenv("JWT_SECRET_KEY", "your-secret-key")
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)
+jwt = JWTManager(app)
 
 # Configure CORS
 CORS(app, 
@@ -341,14 +341,16 @@ def login():
             "username": user.get("username")
         })
 
-        payload = {
+        # Create identity for JWT
+        identity = {
             "sub": str(user["_id"]),
             "email": user["email"],
             "name": user["name"],
             "username": user["username"]
         }
         
-        access_token = jwt.encode(payload)
+        # Create access token with the identity
+        access_token = create_access_token(identity=identity)
         
         response = jsonify({
             "message": "Login successful",
@@ -358,7 +360,7 @@ def login():
                 "email": user["email"],
                 "username": user["username"]
             },
-        "access_token": access_token
+            "access_token": access_token
         })
         return response
     except Exception as e:
