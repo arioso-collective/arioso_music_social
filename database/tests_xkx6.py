@@ -3,19 +3,20 @@ import mongomock
 from app import app
 from bson import Binary
 from password_util import hash_password, compare_password
+from datetime import datetime
 #import HtmlTestRunner
 
 class Tests_XKX6(unittest.TestCase):
-    #def setUp(self):
-        #app.config['TESTING'] = True
-        #self.client = app.test_client()
+    def setUp(self):
+        app.config['TESTING'] = True
+        self.client = app.test_client()
 
-        #self.mock_client = mongomock.MongoClient()
-        #self.mock_db = self.mock_client.testdb
-        #self.mock_users = self.mock_db.users
+        self.mock_client = mongomock.MongoClient()
+        self.mock_db = self.mock_client.testdb
+        self.mock_users = self.mock_db.users
 
-        #import app as app_module
-        #app_module.users_collection = self.mock_users
+        import app as app_module
+        app_module.users_collection = self.mock_users
 
     #Test that password is successfully hashed, and that it does not equal the plain_text_password after hashing
     def test_password_hashing(self):
@@ -44,17 +45,54 @@ class Tests_XKX6(unittest.TestCase):
         hashed_password = hash_password(plain_text_password)
         self.assertFalse(compare_password(incorrect_password, hashed_password))
 
+    #Test create user to ensure it requires all fields
+    def test_create_user_with_missing_fields(self):
+        response = self.client.post('/api/create_user', json={
+            "name": "Aria",
+            "email": "arioso@arioso.com",
+            "username": "aria"
+            # Missing "password" field   
+        })
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("All fields are required", response.get_data(as_text=True))
 
-    #def test_create_user(self): 
+    #Test create user does not allow duplicate usernames
+    def test_create_user_with_duplicate_username(self):
+        self.mock_users.insert_one({
+            'name': 'Dr. Lehr',
+            'email': 'drlehr@txstate.edu',
+            'username': 'drlehr',
+            'password': Binary(b'hashed')
+        })
 
-        #payload = {
-            #"name": "Aria",
-            #"email": "arioso@arioso.com",
-            #"username": "aria",
-            #"password": Binary(hash_password('password')),   
-        #}
+        response = self.client.post('/api/create_user', json={
+            'name': 'Not Dr. Lehr',
+            'email': 'notdrlehr@txstate.edu',
+            'username': 'drlehr',
+            'password': 'reallystrongpassword'
+        })
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('Username already exists', response.get_data(as_text=True))
+    
+    #Test create user does not allow duplicate emails
+    def test_create_user_with_duplicate_email(self):
+        self.mock_users.insert_one({
+            'name': 'Dr. Lehr',
+            'email': 'drlehr@txstate.edu',
+            'username': 'drlehr',
+            'password': Binary(b'hashed')
+        })
 
-    #def test_get_user(self):
+        response = self.client.post('/api/create_user', json={
+            'name': 'Not Dr. Lehr',
+            'email': 'drlehr@txstate.edu',
+            'username': 'notdrlehr',
+            'password': 'reallystrongpassword'
+        })
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('Email already exists', response.get_data(as_text=True))
+
+
 
 if __name__ == '__main__':
     unittest.main()
