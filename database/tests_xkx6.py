@@ -23,6 +23,13 @@ class Tests_XKX6(unittest.TestCase):
         hashed_password = hash_password(plain_text_password)
         self.assertIsInstance(hashed_password, bytes)
         self.assertNotEqual(plain_text_password.encode('utf-8'), hashed_password)
+    
+    #Test that the same password hashed twice returns a unique hash
+    def test_unique_password_hashing(self):
+        plain_text_password = "password"
+        hashed_password_1 = hash_password(plain_text_password)
+        hashed_password_2 = hash_password(plain_text_password)
+        self.assertNotEqual(hashed_password_1, hashed_password_2)
 
     #Test compare password when passwords match
     def test_password_comparison_match(self):
