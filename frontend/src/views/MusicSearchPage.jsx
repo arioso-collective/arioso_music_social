@@ -9,7 +9,7 @@ function MusicSearchPage() {
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
-      if (query.length >= 2) {
+      if (query.length >= 1) {
         searchMusic(query);
       } else {
         setResults([]);
