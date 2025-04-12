@@ -12,10 +12,13 @@ This test file is located at '../docs/planning/TestingPlan.md'
 
 ### 🧩 UI Components
 
-| Feature   | File            | Test Description |
-|-----------|------------------|------------------|
-| NavBar    | `NavBar.jsx`     | Validate rendering of navigation options depending on user login state. Includes checks for presence of correct links and dynamic content. |
-| MusicPost | `MusicPost.jsx`  | Ensure proper rendering of music post content, including audio playback component, metadata, and associated user actions such as likes or comments. |
+| Feature         | File                  | Test Description |
+|-----------------|-----------------------|------------------|
+| NavBar          | `NavBar.jsx`          | Validate rendering of navigation options depending on user login state. Includes checks for presence of correct links and dynamic content. |
+| MusicPost       | `MusicPost.jsx`       | Ensure proper rendering of music post content, including audio playback component, metadata, and associated user actions such as likes or comments. |
+| MusicSearchPage | 'MusicSearchPage.jsx' |	Mocks the iTunes API call and verifies that the response is filtered correctly based on the search query
+| HighlightMatch  | 'MusicSearchPage.jsx' | Match-highlighting functionality Tests ensure debounce logic is respected and highlight rendering is accurate.
+| Search Music    | 'MusicSearchPage.jxs' |  Verifies that `"Loading..."` is shown during the API fetch and that results are displayed afterward. 
 
 ### 🔐 Routing Logic
 
@@ -46,6 +49,6 @@ This test file is located at '../docs/planning/TestingPlan.md'
 - Unit tests should validate individual components or methods in isolation.
 - Return values, context usage, API interactions, and UI rendering logic must be covered.
 - Testing frameworks:
-  - **Frontend:** Vitest + React Testing Library + Jest DOM
+  - **Frontend:** Vitest + React Testing Library + Jest DOM + Jest
   - **Backend:** Pytest 
 
