@@ -6,15 +6,18 @@ const MusicPost = ({ text, song, path }) => {
     <div className={styles.postContainer}>
       <p>{text}</p>
       <div className={styles.songEmbed}>🎶 {song}
-        <div className={styles.audioPlayer}>
-          <audio
-            src={path}
-            preload="metadata"
-            className={styles.audioElement}
-            controls
-            controlsList="noplaybackrate"
-          />
-        </div>
+        {path && (
+          <div className={styles.audioPlayer}>
+            <audio
+              data-testid="audio-player"
+              src={path}
+              preload="metadata"
+              className={styles.audioElement}
+              controls
+              controlsList="noplaybackrate"
+            />
+          </div>
+        )}
       </div>
     </div>
   );
