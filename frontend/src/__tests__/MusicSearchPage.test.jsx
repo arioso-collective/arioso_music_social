@@ -84,5 +84,21 @@ describe("MusicSearchPage Component", () => {
       });
     });
   });
+  it("shows 'No results found' message when query is long enough but no matches", async () => {
+    global.fetch = vi.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve({ results: [] }),
+      })
+    );
+  
+    render(<MusicSearchPage />);
+    const input = screen.getByPlaceholderText(/search for music by title/i);
+    await userEvent.type(input, "akdfjalk"); // unlikely match
+  
+    await waitFor(() => {
+      expect(screen.getByText(/no results found/i)).toBeTruthy();
+    });
+  });
+  
 });
 
