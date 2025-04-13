@@ -39,5 +39,26 @@ describe("MusicSearchPage Component", () => {
       expect(listItems[1].textContent).toMatch(/Hey Jude/);
     });
   }, 10000);
+  it("shows loading indicator while fetching results", async () => {
+    global.fetch = vi.fn(() =>
+      new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({
+            json: () => Promise.resolve({ results: [] }),
+          });
+        }, 300); // simulate fetch delay
+      })
+    );
+
+    render(<MusicSearchPage />);
+    const input = screen.getByPlaceholderText(/search for music by title/i);
+    await userEvent.type(input, "anything");
+
+    expect(await screen.findByText(/loading/i)).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+    });
+  });
 
 });
