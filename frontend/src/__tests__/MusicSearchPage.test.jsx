@@ -27,10 +27,8 @@ describe("MusicSearchPage Component", () => {
 
     render(<MusicSearchPage />);
     const input = screen.getByPlaceholderText(/search for music by title/i);
-    // Type "he" into the search box.
     await userEvent.type(input, "he");
 
-    // Wait for results to show up.
     await waitFor(() => {
       // Instead of looking for "Hello" directly, query listitems and check their text.
       const listItems = screen.getAllByRole("listitem");
@@ -46,7 +44,7 @@ describe("MusicSearchPage Component", () => {
           resolve({
             json: () => Promise.resolve({ results: [] }),
           });
-        }, 300); // simulate fetch delay
+        }, 300); // simulate a 300ms delay
       })
     );
 
@@ -54,11 +52,37 @@ describe("MusicSearchPage Component", () => {
     const input = screen.getByPlaceholderText(/search for music by title/i);
     await userEvent.type(input, "anything");
 
-    expect(await screen.findByText(/loading/i)).toBeInTheDocument();
-
+    const loadingIndicator = await screen.findByText(/loading/i);
+    expect(loadingIndicator).toBeTruthy();
     await waitFor(() => {
-      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/loading/i)).toBeNull();
     });
   });
 
+  it("highlights matching query text inside track titles", async () => {
+    global.fetch = vi.fn(() =>
+      Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            results: [
+              { trackId: 1, trackName: "Hello", artistName: "Adele", previewUrl: "https://audio.mp3" },
+            ],
+          }),
+      })
+    );
+
+    render(<MusicSearchPage />);
+    const input = screen.getByPlaceholderText(/search for music by title/i);
+    await userEvent.type(input, "he");
+
+
+    await waitFor(() => {
+      const highlightedEls = screen.getAllByText("He", { selector: ".highlight" });
+      expect(highlightedEls.length).toBeGreaterThan(0);
+      highlightedEls.forEach(el => {
+        expect(el.textContent).toMatch(/he/i);
+      });
+    });
+  });
 });
+
