@@ -1,19 +1,18 @@
+import os
+import sys
 import unittest
 import mongomock
-from unittest.mock import patch
-patch('flask_jwt_extended.view_decorators.jwt_required', lambda: lambda fn: fn).start()
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from app import app
 from bson import Binary
 from password_util import hash_password, compare_password
 from datetime import datetime
-#import HtmlTestRunner
+import HtmlTestRunner
 
 class Tests_XKX6(unittest.TestCase):
     # Set up Mock MongoDB Database for testing when running each test
     def setUp(self):
         app.config['TESTING'] = True
-        app.config['JWT_TOKEN_LOCATION'] = ['headers'] # Disable need for JWT Tokens with one header
-        app.config['JWT_SECRET_KEY'] = 'test-key'
         self.client = app.test_client()
 
         self.mock_client = mongomock.MongoClient()
@@ -125,4 +124,4 @@ class Tests_XKX6(unittest.TestCase):
         self.assertNotIn('password', data['user']) 
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output='database/test/testresults'))
