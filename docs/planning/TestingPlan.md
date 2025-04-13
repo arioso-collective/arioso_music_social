@@ -5,6 +5,7 @@ This document defines the unit testing scope for key features of the Arioso appl
 
 ## Location in Repository  
 This test file is located at '../docs/planning/TestingPlan.md'
+Test Results are located at '../docs/planning/Frontend_TestResults.pdf' and  '..database/test/testresults/Backend_TestResults.pdf'
 
 ---
 
@@ -16,9 +17,10 @@ This test file is located at '../docs/planning/TestingPlan.md'
 |-----------------|-----------------------|------------------|
 | NavBar          | `NavBar.jsx`          | Validate rendering of navigation options depending on user login state. Includes checks for presence of correct links and dynamic content. |
 | MusicPost       | `MusicPost.jsx`       | Ensure proper rendering of music post content, including audio playback component, metadata, and associated user actions such as likes or comments. |
-| MusicSearchPage | 'MusicSearchPage.jsx' |	Mocks the iTunes API call and verifies that the response is filtered correctly based on the search query
-| HighlightMatch  | 'MusicSearchPage.jsx' | Match-highlighting functionality Tests ensure debounce logic is respected and highlight rendering is accurate.
-| Search Music    | 'MusicSearchPage.jxs' |  Verifies that `"Loading..."` is shown during the API fetch and that results are displayed afterward. 
+| MusicSearchPage | `MusicSearchPage.jsx` |	Mocks the iTunes API call and verifies that the response is filtered correctly based on the search query
+| HighlightMatch  | `MusicSearchPage.jsx` | Match-highlighting functionality Tests ensure debounce logic is respected and highlight rendering is accurate.
+| Search Music    | `MusicSearchPage.jsx` | Verifies that `"Loading..."` is shown during the API fetch and that results are displayed afterward. 
+| LoginForm       | `LoginForm.jsx`       | Tests for email validation and form behavior, verifying input validation, button states, and error message display in the login form component.
 
 ### 🔐 Routing Logic
 
@@ -34,14 +36,13 @@ This test file is located at '../docs/planning/TestingPlan.md'
 
 | Endpoint / Function | File / Module       | Test Description |
 |---------------------|---------------------|------------------|
-|                     |                     | _Add backend API targets here (e.g., user auth, comment submission, playlist creation, etc.)_ |
+| create_user          | `app.py`              | Uses MongoMock to verify user creation functionality, checking required fields, duplicate prevention, and JSON response formatting without modifying the actual database.
 
 ### 🔒 Utilities & Services
 
 | Utility / Method     | File / Module       | Test Description |
 |----------------------|---------------------|------------------|
-|                      |                     | _Add backend logic targets here (e.g., token validation, password hashing, file upload parsing, etc.)_ |
-
+| hash_password/compare_password| `password_util.py` | The tests verify password hashing functionality by ensuring unique hashes are generated, original passwords are not stored in plain text, and password comparison works correctly for both matching and non-matching cases.
 ---
 
 ## 🧩 Testing Guidelines
