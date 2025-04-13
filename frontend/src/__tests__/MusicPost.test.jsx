@@ -1,8 +1,8 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import MusicPost from '../components/ProfilePage/MusicPost';
+import MusicPost from '../Components/ProfilePage/MusicPost';
 import '@testing-library/jest-dom';
-import styles from '../components/ProfilePage/MusicPost.module.css';
+import styles from '../Components/ProfilePage/MusicPost.module.css';
 
 describe('MusicPost', () => {
   const mockProps = {
