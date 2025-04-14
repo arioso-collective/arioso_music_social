@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./SettingsPage.css";
+import ChangePassword from "../components/Settings/ChangePassword";
 
 const SettingsPage = () => {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ const SettingsPage = () => {
         Save Changes
       </button>
       <h2>Settings</h2>
-      <p>This is where you’ll be able to update your profile, preferences, and more!</p>
+      <ChangePassword />
     </div>
   );
 };
