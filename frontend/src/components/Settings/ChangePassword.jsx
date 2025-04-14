@@ -30,15 +30,52 @@ const ChangePassword = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validate()) return;
+    const demoMode = true; // Set to false once backend is ready
 
-    // Simulate password update API
-    setStatus("Saving...");
-    setTimeout(() => {
-      setStatus("✅ Password successfully changed!");
-      setForm({ current: "", new: "", confirm: "" });
-    }, 1000);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!validate()) return;
+      
+        setStatus("Saving...");
+      
+        if (demoMode) {
+          // Simulated delay + mock success
+          setTimeout(() => {
+            setStatus("✅ Password successfully changed! (demo)");
+            setForm({ current: "", new: "", confirm: "" });
+          }, 1000);
+          return;
+        }
+      
+        const token = localStorage.getItem("token");
+      
+        try {
+          const response = await fetch("http://localhost:5001/api/users/change-password", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              currentPassword: form.current,
+              newPassword: form.new,
+            }),
+          });
+      
+          const data = await response.json();
+      
+          if (!response.ok) {
+            throw new Error(data.error || "Failed to update password.");
+          }
+      
+          setStatus("✅ Password successfully changed!");
+          setForm({ current: "", new: "", confirm: "" });
+          setErrors({});
+        } catch (err) {
+          setStatus(`❌ ${err.message}`);
+        }
+      };      
+
   };
 
   return (
