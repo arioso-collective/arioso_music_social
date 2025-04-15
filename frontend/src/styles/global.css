@@ -1,15 +1,15 @@
 :root {
-  --bg-color: #ffffff;
+  --bg-color: #c6a9f9;
   --text-color: #000000;
   --primary-color: rgb(106, 52, 232);
   --card-bg: #f4f4f4;
 }
 
 [data-theme="dark"] {
-  --bg-color: #121212;
+  --bg-color: #290443;
   --text-color: #eaeaea;
   --primary-color: rgb(106, 52, 232); /* You can keep this consistent */
-  --card-bg: #1e1e1e;
+  --card-bg: #0b0a0a;
 }
 
 body {
