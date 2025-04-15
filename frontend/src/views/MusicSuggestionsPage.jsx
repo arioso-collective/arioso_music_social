@@ -1,5 +1,7 @@
 import { useState } from "react";
-import "./MusicSuggestionsPage.css"; // optional CSS
+import "./MusicSuggestionsPage.css";
+const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+
 
 export default function MusicSuggestionsPage() {
   const [messages, setMessages] = useState([]);
@@ -8,29 +10,38 @@ export default function MusicSuggestionsPage() {
 
   const sendMessage = async () => {
     if (!input.trim()) return;
-
+  
     const userMsg = { sender: "user", text: input };
     setMessages((prev) => [...prev, userMsg]);
     setLoading(true);
-
+  
     try {
-      const res = await fetch("http://localhost:3001/api/chat", {
+      const res = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: input }],
+        }),
       });
-
+  
       const data = await res.json();
-      const botMsg = { sender: "bot", text: data.reply };
+      const botReply = data.choices[0].message.content.trim();
+  
+      const botMsg = { sender: "bot", text: botReply };
       setMessages((prev) => [...prev, botMsg]);
     } catch (err) {
-      console.error("Failed to fetch:", err);
+      console.error("Fetch error:", err);
       setMessages((prev) => [...prev, { sender: "bot", text: "Oops! Something went wrong." }]);
     }
-
+  
     setInput("");
     setLoading(false);
   };
+  
 
   return (
     <div className="chat-container">
