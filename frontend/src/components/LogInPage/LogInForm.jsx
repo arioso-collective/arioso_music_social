@@ -60,6 +60,8 @@ const LogInForm = () => {
       if (!response.ok) {
         throw new Error(data.error || 'Login failed');
       }
+      localStorage.setItem('token', data.access_token);
+      localStorage.setItem('user', JSON.stringify(data.user));
 
       setLoginStatus({ success: true, message: "🎉 Login successful!" });
       // Clear form

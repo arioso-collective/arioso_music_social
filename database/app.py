@@ -1,11 +1,12 @@
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError, PyMongoError, DuplicateKeyError
 from flask import Flask, request, jsonify, render_template, url_for, redirect
+from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity, create_access_token
 from bson import ObjectId, Binary
 from flask_cors import CORS
 from urllib.parse import quote_plus
 from password_util import hash_password, compare_password
-from datetime import datetime
+from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import os
 import logging
@@ -20,11 +21,13 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
+app.secret_key = os.getenv("JWT_SECRET_KEY", "your-secret-key")
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=24)
+jwt = JWTManager(app)
+
 # Configure CORS
 CORS(app, 
      origins=["http://localhost:5173"],
-     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-     allow_headers=["Content-Type", "Authorization", "Accept"],
      supports_credentials=True)
 
 load_dotenv()
@@ -35,8 +38,6 @@ MONGO_CONNECTION_STRING = f"mongodb+srv://{encoded_username}:{encoded_password}@
 
 #try:
 mongo_client = MongoClient(MONGO_CONNECTION_STRING, serverSelectionTimeoutMS=5000)
-#mongo_client.server_info()  # Check if the server is reachable
-#print("Connected to MongoDB Server...")
 
 db = mongo_client['arioso']
 users_collection = db['users']
@@ -70,13 +71,9 @@ def log_request_info():
 def test():
     return jsonify({"message": "Test endpoint working!"}), 200
 
-@app.route('/api/create_user', methods=['POST', 'OPTIONS'])
+@app.route('/api/create_user', methods=['POST'])
 def create_user():
     logger.info("Received %s request to /api/create_user", request.method)
-    
-    if request.method == 'OPTIONS':
-        logger.debug("Handling OPTIONS preflight request")
-        return jsonify({"message": "OK"}), 200
 
     try:
         data = request.get_json()
@@ -143,6 +140,7 @@ def create_user():
 
 
 @app.route('/api/get_users', methods=['GET'])
+@jwt_required()
 def get_users():
     username = request.args.get('username')
     user_id = request.args.get('_id')  
@@ -172,6 +170,7 @@ def get_users():
         return jsonify(users), 200
 
 @app.route('/api/get_user/<username>', methods=['GET'])
+@jwt_required()
 def get_user(username):
     user = users_collection.find_one({'username': username})
     if user:
@@ -180,6 +179,7 @@ def get_user(username):
     return jsonify({"error": "User not found"}), 404
 
 @app.route('/api/update_post/<post_id>', methods=['PUT'])
+@jwt_required()
 def update_post(post_id):
     data = request.get_json()
     update_fields = {}
@@ -203,6 +203,7 @@ def update_post(post_id):
     return jsonify({"message": "Post updated successfully"}), 200
 
 @app.route('/api/update_comment/<comment_id>', methods=['PUT'])
+@jwt_required()
 def update_comment(comment_id):
     data = request.get_json()
     update_fields = {}
@@ -219,6 +220,7 @@ def update_comment(comment_id):
     return jsonify({"message": "Comment updated successfully"}), 200
 
 @app.route('/api/update_user/<user_id>', methods=['PUT'])
+@jwt_required()
 def update_user(user_id):
     data = request.get_json()
     update_fields = {}
@@ -247,6 +249,7 @@ def update_user(user_id):
     return jsonify({"message": "User updated successfully"}), 200
     
 @app.route('/api/like_post/<post_id>', methods=['POST'])
+@jwt_required()
 def like_post(post_id):
     data = request.get_json()
     user_id = data.get('user_id')
@@ -267,6 +270,7 @@ def like_post(post_id):
     return jsonify({"message": "Post liked successfully"}), 200
 
 @app.route('/api/delete_post/<post_id>', methods=['DELETE'])
+@jwt_required()
 def delete_post(post_id):
     result = posts_collection.delete_one({'_id': ObjectId(post_id)})
     if result.deleted_count == 0:
@@ -274,6 +278,7 @@ def delete_post(post_id):
     return jsonify({"message": "Post deleted successfully"}), 200
 
 @app.route('/api/delete_comment/<comment_id>', methods=['DELETE'])
+@jwt_required()
 def delete_comment(comment_id):
     result = comments_collection.delete_one({'_id': ObjectId(comment_id)})
     if result.deleted_count == 0:
@@ -281,6 +286,7 @@ def delete_comment(comment_id):
     return jsonify({"message": "Comment deleted successfully"}), 200
 
 @app.route('/api/delete_user/<user_id>', methods=['DELETE'])
+@jwt_required()
 def delete_user(user_id):
     result = users_collection.delete_one({'_id': ObjectId(user_id)})
     if result.deleted_count == 0:
@@ -288,6 +294,7 @@ def delete_user(user_id):
     return jsonify({"message": "User deleted successfully"}), 200
 
 @app.route('/api/unlike_post/<post_id>', methods=['POST'])
+@jwt_required()
 def unlike_post(post_id):
     data = request.get_json()
     user_id = data.get('user_id')
@@ -307,18 +314,9 @@ def unlike_post(post_id):
     )
     return jsonify({"message": "Post unliked successfully"}), 200
 
-@app.route('/api/login', methods=['POST', 'OPTIONS'])
+@app.route('/api/login', methods=['POST'])
 def login():
     logger.info("Received %s request to /api/login", request.method)
-    
-    if request.method == 'OPTIONS':
-        logger.debug("Handling OPTIONS preflight request")
-        response = jsonify({"message": "OK"})
-        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:5173'
-        response.headers['Access-Control-Allow-Methods'] = 'POST'
-        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-        response.headers['Access-Control-Allow-Credentials'] = 'true'
-        return response
 
     try:
         data = request.get_json()
@@ -342,6 +340,17 @@ def login():
             "email": user.get("email"),
             "username": user.get("username")
         })
+
+        # Create identity for JWT
+        identity = {
+            "sub": str(user["_id"]),
+            "email": user["email"],
+            "name": user["name"],
+            "username": user["username"]
+        }
+        
+        # Create access token with the identity
+        access_token = create_access_token(identity=identity)
         
         response = jsonify({
             "message": "Login successful",
@@ -350,16 +359,13 @@ def login():
                 "name": user["name"],
                 "email": user["email"],
                 "username": user["username"]
-            }
+            },
+            "access_token": access_token
         })
-        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:5173'
-        response.headers['Access-Control-Allow-Credentials'] = 'true'
         return response
     except Exception as e:
         logger.error('Login error: %s', str(e))
         response = jsonify({"error": "An error occurred during login"})
-        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:5173'
-        response.headers['Access-Control-Allow-Credentials'] = 'true'
         return response, 500
 
 if __name__ == "__main__":
