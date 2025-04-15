@@ -1,11 +1,13 @@
 .settings-page {
     padding: 40px;
     font-family: Arial, sans-serif;
-    background-color: white;
+    background-color: var(--bg-color);
+    color: var(--text-color);
   }
   
   .settings-page h2 {
-    color: rgb(106, 52, 232);
+    background: var(--card-bg);
+    color: var(--text-color);
   }
   .back-button {
     background-color: rgb(106, 52, 232);

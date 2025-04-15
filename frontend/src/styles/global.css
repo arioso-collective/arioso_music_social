@@ -1,8 +1,25 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: rgb(106, 52, 232);
+  --card-bg: #f4f4f4;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #eaeaea;
+  --primary-color: rgb(106, 52, 232); /* You can keep this consistent */
+  --card-bg: #1e1e1e;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-  }
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s ease, color 0.3s ease;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
 
   
