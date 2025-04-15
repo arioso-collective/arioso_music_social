@@ -1,7 +1,8 @@
 .pageWrapper {
   min-height: 100vh;
   width: 100vw;
-  background-color: #f5f5f5;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   position: relative;
 }
 
