@@ -6,8 +6,11 @@
   }
   
   .settings-page h2 {
-    background: var(--card-bg);
+    background: none;
+    font-size: 32px;
+    font-weight: 700;
     color: var(--text-color);
+    margin-bottom: 20px;
   }
 
   .settings-flex {
