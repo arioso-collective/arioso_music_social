@@ -11,12 +11,18 @@ const ThemeToggle = () => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  const handleToggle = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
   return (
-    <div className="theme-toggle">
+    <div className="theme-toggle-box">
       <h3>Theme</h3>
-      <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-        Switch to {theme === "light" ? "Dark" : "Light"} Mode
-      </button>
+      <label className="switch">
+        <input type="checkbox" onChange={handleToggle} checked={theme === "dark"} />
+        <span className="slider" />
+      </label>
+      <p className="theme-label">{theme === "dark" ? "Dark Mode" : "Light Mode"}</p>
     </div>
   );
 };
