@@ -9,14 +9,17 @@ const SettingsPage = () => {
   return (
     <div className="settings-page">
       <button
-        className="back-button"
+        className="save-button"
         onClick={() => navigate("/profile")}
       >
         Save Changes
       </button>
       <h2>Settings</h2>
-      <ChangePassword />
-      <ThemeToggle />
+
+      <div className="settings-flex">
+        <ChangePassword />
+        <ThemeToggle />
+      </div>
     </div>
   );
 };

@@ -9,7 +9,19 @@
     background: var(--card-bg);
     color: var(--text-color);
   }
-  .back-button {
+
+  .settings-flex {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  .change-password,
+  .theme-toggle {
+    flex: 1;
+  }  
+
+  .save-button {
     background-color: rgb(106, 52, 232);
     color: rgb(250, 250, 250);
     border: 2px solid rgb(106, 52, 232);
@@ -21,7 +33,7 @@
     transition: all 0.2s ease;
   }
   
-  .back-button:hover {
+  .save-button:hover {
     background-color: rgb(106, 52, 232);
     color: white;
   }
