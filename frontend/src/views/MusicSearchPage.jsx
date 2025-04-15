@@ -85,6 +85,11 @@ function MusicSearchPage() {
                   ? highlightMatch(track.trackName, query)
                   : track.trackName}
               </div>
+              <div className="artist-name">
+                {searchBy === "artist"
+                  ? highlightMatch(track.artistName, query)
+                  : track.artistName}
+              </div>
               {track.previewUrl && (
                 <audio controls>
                   <source src={track.previewUrl} type="audio/mpeg" />
