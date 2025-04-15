@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
+import LogOutButton from '../LogOutButton';
 
 const Navbar = () => {
   return (
@@ -13,6 +14,7 @@ const Navbar = () => {
         <Link to="/profile" className={styles.navLink}>Profile</Link>
         <Link to="/search" className={styles.navLink}>Search Music</Link>
         <Link to="/suggestions" className={styles.navLink}>Discover </Link>
+        <LogOutButton />
       </div>
     </nav>
   );
