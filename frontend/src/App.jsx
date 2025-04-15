@@ -4,6 +4,9 @@ import LogInPage from "./pages/LogInPage";
 import ProfilePage from "./views/ProfilePage";
 import EditProfilePage from "./views/EditProfilePage";
 import HomePage from "./views/HomePage";
+import MusicSearchPage from "./views/MusicSearchPage"; 
+import MusicSuggestionsPage from "./views/MusicSuggestionsPage";
+import SettingsPage from "./pages/SettingsPage";
 import Navbar from "./components/Navbar/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { ProfileProvider } from "./context/ProfileContext";
@@ -52,6 +55,39 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/search"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Navbar />
+                  <MusicSearchPage /> {}
+                </>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Navbar />
+                  <SettingsPage /> {}
+                </>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/suggestions"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Navbar />
+                  <MusicSuggestionsPage /> {}
+                </>
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </Router>
     </ProfileProvider>
@@ -59,4 +95,3 @@ function App() {
 }
 
 export default App;
-
