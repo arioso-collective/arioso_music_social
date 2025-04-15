@@ -2,7 +2,9 @@
     width: 100%; /* Make it take the full page width */
     max-width: 1200px; /* Prevent it from being too stretched on large screens */
     margin: 0 auto;
-    background-color: white;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    box-shadow: var(--box-shadow);
     background-size: cover;
     background-position: center;
   }

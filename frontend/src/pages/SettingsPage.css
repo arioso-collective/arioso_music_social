@@ -1,13 +1,30 @@
 .settings-page {
     padding: 40px;
     font-family: Arial, sans-serif;
-    background-color: white;
+    background-color: var(--bg-color);
+    color: var(--text-color);
   }
   
   .settings-page h2 {
-    color: rgb(106, 52, 232);
+    background: none;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 20px;
   }
-  .back-button {
+
+  .settings-flex {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  .change-password,
+  .theme-toggle {
+    flex: 1;
+  }  
+
+  .save-button {
     background-color: rgb(106, 52, 232);
     color: rgb(250, 250, 250);
     border: 2px solid rgb(106, 52, 232);
@@ -19,7 +36,7 @@
     transition: all 0.2s ease;
   }
   
-  .back-button:hover {
+  .save-button:hover {
     background-color: rgb(106, 52, 232);
     color: white;
   }

@@ -1,8 +1,28 @@
+:root {
+  --bg-color: #c6a9f9;
+  --text-color: #000000;
+  --primary-color: rgb(106, 52, 232);
+  --card-bg: #f4f4f4;
+  --box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --bg-color: #290443;
+  --text-color: #eaeaea;
+  --primary-color: rgb(106, 52, 232); /* You can keep this consistent */
+  --card-bg: #0b0a0a;
+  --box-shadow: 0 5px 10px rgba(255, 255, 255, 0.1);
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-  }
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  box-shadow: var(--box-shadow);
+  transition: background 0.3s ease, color 0.3s ease;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
 
   
