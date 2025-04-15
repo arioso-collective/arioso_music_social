@@ -2,8 +2,8 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-  // Check if user is authenticated by looking for auth token in localStorage
-  const isAuthenticated = localStorage.getItem('authToken') !== null;
+  const token = localStorage.getItem('token');
+  const isAuthenticated = !!token;
 
   // Optional: Check if token is expired
   const isTokenExpired = () => {
