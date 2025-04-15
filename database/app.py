@@ -137,7 +137,79 @@ def create_user():
     except Exception as e:
         logger.error('Unexpected error: %s', str(e))
         return jsonify({"error": f"An unexpected error occurred: {str(e)}"}), 500
-
+    
+@app.route('/api/update_profile', methods=['PUT'])
+@jwt_required()
+def update_profile():
+    data = request.get_json()
+    user_id = data.get('_id')
+    if not user_id:
+        return jsonify({"error": "User ID is required"}), 400
+        
+    try:
+        # Check if user exists
+        user = users_collection.find_one({"_id": ObjectId(user_id)})
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+        
+        # Update user fields
+        update_fields = {}
+        updatable_fields = ['name', 'email', 'username', 'bio', 'musicID', 'favGenres', 'favArtists']
+        
+        for field in updatable_fields:
+            if field in data:
+                # Check for unique constraints
+                if field == 'email' and data[field] != user[field]:
+                    existing_email = users_collection.find_one({'email': data[field], '_id': {'$ne': ObjectId(user_id)}})
+                    if existing_email:
+                        return jsonify({"error": "Email already in use"}), 400
+                
+                if field == 'username' and data[field] != user[field]:
+                    existing_username = users_collection.find_one({'username': data[field], '_id': {'$ne': ObjectId(user_id)}})
+                    if existing_username:
+                        return jsonify({"error": "Username already in use"}), 400
+                
+                update_fields[field] = data[field]
+        
+        # Handle password update separately for hashing
+        if 'password' in data:
+            update_fields['password'] = Binary(hash_password(data['password']))
+            
+        # Handle profile picture if provided
+        if 'profilePicture' in data and data['profilePicture']:
+            update_fields['profilePicture'] = Binary(data['profilePicture'].encode())
+        
+        if not update_fields:
+            return jsonify({"error": "No valid fields provided for update"}), 400
+            
+        # Update the user document
+        result = users_collection.update_one(
+            {'_id': ObjectId(user_id)},
+            {'$set': update_fields}
+        )
+        
+        if result.modified_count == 0:
+            return jsonify({"message": "No changes made"}), 200
+            
+        # Get updated user
+        updated_user = users_collection.find_one({"_id": ObjectId(user_id)})
+        updated_user['_id'] = str(updated_user['_id'])
+        
+        # Remove binary fields from response
+        if 'password' in updated_user:
+            del updated_user['password']
+        if 'profilePicture' in updated_user:
+            del updated_user['profilePicture']
+            
+        return jsonify({"message": "Profile updated successfully", "user": updated_user}), 200
+    except PyMongoError as e:
+        logger.error('MongoDB error: %s', str(e))
+        return jsonify({"error": f"Database error occurred: {str(e)}"}), 500
+    except Exception as e:
+        logger.error('Unexpected error: %s', str(e))
+        return jsonify({"error": f"An unexpected error occurred: {str(e)}"}), 500
+        
+        
 
 @app.route('/api/get_users', methods=['GET'])
 @jwt_required()
