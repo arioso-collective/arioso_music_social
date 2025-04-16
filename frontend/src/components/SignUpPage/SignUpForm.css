@@ -66,10 +66,39 @@ button:hover {
   background-color: #0056b3;
 }
 
+.signup-message {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Green background for success */
+.signup-message.success {
+  background-color: #d4fcd4;
+  color: #155724;
+  border: 1px solid #78e378;
+}
+
+/* Red background for error */
+.signup-message.error {
+  background-color: #fddede;
+  color: #a30000;
+  border: 1px solid #ff7c7c;
+}
+
 .error {
-  color: red;
-  font-size: 12px;
-  margin-bottom: 8px;
+  background-color: #fddede;
+  color: #a30000;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 8px;
+  text-align: center;
+  width: 93%;
 }
 
 .password-strength {
@@ -79,15 +108,39 @@ button:hover {
 }
 
 .password-strength.weak {
-  color: red;
+  background-color: #fddede;
+  color: #a30000;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 8px;
+  text-align: center;
+  width: 93%;
 }
 
 .password-strength.medium {
-  color: orange;
+  background-color: #fdecde;
+  color: #b65002;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 8px;
+  text-align: center;
+  width: 93%;
 }
 
 .password-strength.strong {
-  color: green;
+  background-color: #e2fdde;
+  color: #018e20;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 8px;
+  text-align: center;
+  width: 93%;
 }
 
 p {
