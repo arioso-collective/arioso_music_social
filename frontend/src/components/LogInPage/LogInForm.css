@@ -59,17 +59,41 @@
     text-decoration: underline;
   }
 
-  .success {
-    color: green;
+  .login-message {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
     font-size: 14px;
-    margin-top: 10px;
   }
   
-  .error {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
+  /* Green background for success */
+  .login-message.success {
+    background-color: #d4fcd4;
+    color: #155724;
+    border: 1px solid #78e378;
   }
+  
+  /* Red background for error */
+  .login-message.error {
+    background-color: #fddede;
+    color: #a30000;
+    border: 1px solid #ff7c7c;
+  }
+
+  .error {
+    background-color: #fddede;
+    color: #a30000;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 8px;
+    text-align: center;
+    width: 93%;
+  }  
+  
 
   button:disabled {
     background-color: gray;
@@ -99,5 +123,4 @@
     cursor: pointer;
     font-size: 18px;
   }
-  
   

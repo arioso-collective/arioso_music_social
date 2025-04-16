@@ -196,7 +196,9 @@ const SignUpForm = () => {
       </form>
 
       {formStatus.message && (
-        <p className={formStatus.success ? "success" : "error"}>{formStatus.message}</p>
+        <div className={`signup-message ${formStatus.success ? "success" : "error"}`}>
+        {formStatus.message}
+        </div>
       )}
 
       <p>

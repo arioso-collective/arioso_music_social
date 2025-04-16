@@ -9,6 +9,10 @@ const ChangePassword = () => {
   });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("");
+  const [showCurrent, setShowCurrent] = useState(false);
+  const [showNew, setShowNew] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,10 +34,8 @@ const ChangePassword = () => {
   };
 
   const handleSubmit = async (e) => {
-    const demoMode = true; // Set to false once backend is ready
-
-    const handleSubmit = async (e) => {
         e.preventDefault();
+        const demoMode = true;
         if (!validate()) return;
       
         setStatus("Saving...");
@@ -74,7 +76,7 @@ const ChangePassword = () => {
         } catch (err) {
           setStatus(`❌ ${err.message}`);
         }
-      };      
+            
 
   };
 
@@ -84,34 +86,49 @@ const ChangePassword = () => {
 
       <label>
         Current Password
-        <input
-          type="password"
-          name="current"
-          value={form.current}
-          onChange={handleChange}
-        />
+        <div className="password-field">
+          <input
+            type={showCurrent ? "text" : "password"}
+            name="current"
+            value={form.current}
+            onChange={handleChange}
+          />
+          <span onClick={() => setShowCurrent(!showCurrent)} className="toggle-password">
+            {showCurrent ? "👁️" : "🙈"}
+          </span>
+        </div>
         {errors.current && <p className="error">{errors.current}</p>}
       </label>
 
       <label>
         New Password
-        <input
-          type="password"
-          name="new"
-          value={form.new}
-          onChange={handleChange}
-        />
+        <div className="password-field">
+          <input
+            type={showNew ? "text" : "password"}
+            name="new"
+            value={form.new}
+            onChange={handleChange}
+          />
+          <span onClick={() => setShowNew(!showNew)} className="toggle-password">
+            {showNew ? "👁️" : "🙈"}
+          </span>
+        </div>
         {errors.new && <p className="error">{errors.new}</p>}
       </label>
 
       <label>
         Confirm New Password
-        <input
-          type="password"
-          name="confirm"
-          value={form.confirm}
-          onChange={handleChange}
-        />
+        <div className="password-field">
+          <input
+            type={showConfirm ? "text" : "password"}
+            name="confirm"
+            value={form.confirm}
+            onChange={handleChange}
+          />
+          <span onClick={() => setShowConfirm(!showConfirm)} className="toggle-password">
+            {showConfirm ? "👁️" : "🙈"}
+          </span>
+        </div>
         {errors.confirm && <p className="error">{errors.confirm}</p>}
       </label>
 
