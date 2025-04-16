@@ -41,7 +41,7 @@ const LogInForm = () => {
     if (isButtonDisabled) return;
 
     setLoading(true);
-    setLoginStatus({ success: null, message: "" });
+    setLoginStatus({ success: null, message: "Invalid credentials" });
 
     try {
       const response = await fetch('http://localhost:5001/api/login', {
@@ -71,7 +71,7 @@ const LogInForm = () => {
         navigate('/home');
       }, 1500);
     } catch (error) {
-      setLoginStatus({ success: false, message: error.message });
+      setLoginStatus({ success: false, message: "Invalid credentials" });
     } finally {
       setLoading(false);
     }
@@ -123,10 +123,11 @@ const LogInForm = () => {
       </form>
 
       {loginStatus.message && (
-        <p className={loginStatus.success ? "success" : "error"}>
+        <div className={`login-message ${loginStatus.success ? "success" : "error"}`}>
           {loginStatus.message}
-        </p>
+        </div>
       )}
+
 
       <div className="login-links">
         <a href="/forgot-password">Forgot Password?</a>
