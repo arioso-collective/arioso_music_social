@@ -1,7 +1,4 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
-const clientId = console.log("SPOTIFY_CLIENT_ID");
+const clientId = "77203cf9842d4ee3a8a5d0f020c5134c";
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 
@@ -22,7 +19,7 @@ export async function redirectToAuthCodeFlow(clientId) {
     const params = new URLSearchParams();
     params.append("client_id", clientId);
     params.append("response_type", "code");
-    params.append("redirect_uri", "http://127.0.0.1:5173/callback");
+    params.append("redirect_uri", "http://localhost:5173/");
     params.append("scope", "user-read-private user-read-email");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
@@ -69,6 +66,3 @@ export async function getAccessToken(clientId, code) {
     return access_token;
 }
 
-async function fetchProfile(token) {
-    // TODO: Call Web API
-}
