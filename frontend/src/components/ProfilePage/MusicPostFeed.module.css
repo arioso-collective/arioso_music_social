@@ -1,6 +1,39 @@
+.new-post-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.new-post-form textarea,
+.new-post-form input {
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.new-post-form button {
+  background-color: rgb(106, 52, 232);
+  color: white;
+  padding: 10px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.new-post-form button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
 .feedContainer {
-    width: 100%;
-    max-width: 1200px; /* Makes posts wider */
-    margin: 0 auto;
-  }
+  width: 100%;
+  max-width: 700px; /* Wider container */
+  margin: 0 auto; /* Center container */
+  padding: 20px;
+}
+
   
