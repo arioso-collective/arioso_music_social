@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from bson import ObjectId
 from flask_jwt_extended import jwt_required
-from models.database import posts_collection
+from database.models.database import posts_collection
 
 posts_bp = Blueprint('posts', __name__)
 
@@ -29,7 +29,7 @@ def update_post(post_id):
 
     return jsonify({"message": "Post updated successfully"}), 200
 
-@posts_bp.route('/api/like_post/<post_id>', methods=['POST'])
+@posts_bp.route('/like_post/<post_id>', methods=['POST'])
 @jwt_required()
 def like_post(post_id):
     data = request.get_json()
@@ -50,7 +50,7 @@ def like_post(post_id):
     )
     return jsonify({"message": "Post liked successfully"}), 200
 
-@posts_bp.route('/api/delete_post/<post_id>', methods=['DELETE'])
+@posts_bp.route('/delete_post/<post_id>', methods=['DELETE'])
 @jwt_required()
 def delete_post(post_id):
     result = posts_collection.delete_one({'_id': ObjectId(post_id)})
@@ -58,7 +58,7 @@ def delete_post(post_id):
         return jsonify({"error": "Post not found"}), 404
     return jsonify({"message": "Post deleted successfully"}), 200
 
-@posts_bp.route('/api/unlike_post/<post_id>', methods=['POST'])
+@posts_bp.route('/unlike_post/<post_id>', methods=['POST'])
 @jwt_required()
 def unlike_post(post_id):
     data = request.get_json()

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from bson import ObjectId
 from flask_jwt_extended import jwt_required
-from models.database import comments_collection
+from database.models.database import comments_collection
 
 comments_bp = Blueprint('comments', __name__)
 

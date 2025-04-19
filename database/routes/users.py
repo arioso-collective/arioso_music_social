@@ -1,13 +1,16 @@
 from flask import Blueprint, request, jsonify
 from bson import ObjectId, Binary
 from flask_jwt_extended import jwt_required
-from models.database import users_collection
-from utils.password_util import hash_password
+from database.models.database import users_collection
 from datetime import datetime
 from pymongo.errors import PyMongoError
 from database.utils.password_util import hash_password
 from datetime import datetime
 import logging
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 
 users_bp = Blueprint('users', __name__)
@@ -80,7 +83,7 @@ def create_user():
         logger.error('Unexpected error: %s', str(e))
         return jsonify({"error": f"An unexpected error occurred: {str(e)}"}), 500
     
-@users_bp.route('/api/update_profile', methods=['PUT'])
+@users_bp.route('/update_profile', methods=['PUT'])
 @jwt_required()
 def update_profile():
     data = request.get_json()
@@ -153,7 +156,7 @@ def update_profile():
         
         
 
-@users_bp.route('/api/get_users', methods=['GET'])
+@users_bp.route('/get_users', methods=['GET'])
 @jwt_required()
 def get_users():
     username = request.args.get('username')
@@ -183,7 +186,7 @@ def get_users():
             return jsonify({"error": "No users found"}), 404
         return jsonify(users), 200
 
-@users_bp.route('/api/get_user/<username>', methods=['GET'])
+@users_bp.route('/get_user/<username>', methods=['GET'])
 @jwt_required()
 def get_user(username):
     user = users_collection.find_one({'username': username})
@@ -192,7 +195,7 @@ def get_user(username):
         return jsonify(user), 200
     return jsonify({"error": "User not found"}), 404
 
-@users_bp.route('/api/update_user/<user_id>', methods=['PUT'])
+@users_bp.route('/update_user/<user_id>', methods=['PUT'])
 @jwt_required()
 def update_user(user_id):
     data = request.get_json()
@@ -221,7 +224,7 @@ def update_user(user_id):
         return jsonify({"error": "User not found"}), 404
     return jsonify({"message": "User updated successfully"}), 200
 
-@users_bp.route('/api/delete_user/<user_id>', methods=['DELETE'])
+@users_bp.route('/delete_user/<user_id>', methods=['DELETE'])
 @jwt_required()
 def delete_user(user_id):
     result = users_collection.delete_one({'_id': ObjectId(user_id)})
