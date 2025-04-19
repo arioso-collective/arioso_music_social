@@ -1,9 +1,11 @@
 from flask import Flask
+from flask_jwt_extended import JWTManager, verify_jwt_in_request, get_jwt
 from database.config import Config
 from database.extensions import jwt, cors
 from database.routes import register_routes
 from database.routes.middleware.request_logger import register_request_logger
-from database.models.database import test_mongo_connection
+from database.models.database import test_mongo_connection, blacklist_tokens_collection
+from datetime import datetime
 
 import sys
 import os
@@ -16,6 +18,13 @@ def create_app():
     # Register extensions
     jwt.init_app(app)
     cors.init_app(app)
+
+    # Check for blacklisted token
+    @jwt.token_in_blocklist_loader
+    def check_if_token_revoked(jwt_header, jwt_payload):
+        jti = jwt_payload["jti"]
+        blacklisted = blacklist_tokens_collection.find_one({"jti": jti})
+        return blacklisted is not None
 
     # Register routes
     register_routes(app)
