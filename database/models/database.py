@@ -18,6 +18,7 @@ db = mongo_client['arioso']
 users_collection = db['users']
 posts_collection = db['posts']
 comments_collection = db['comments']
+blacklist_tokens_collection = db["blacklist_tokens"]
 
 def test_mongo_connection():
     try:
