@@ -1,11 +1,9 @@
 from flask import Flask
-from flask_jwt_extended import JWTManager, verify_jwt_in_request, get_jwt
 from database.config import Config
 from database.extensions import jwt, cors
 from database.routes import register_routes
 from database.routes.middleware.request_logger import register_request_logger
 from database.models.database import test_mongo_connection, blacklist_tokens_collection
-from datetime import datetime
 
 import sys
 import os
