@@ -1,8 +1,9 @@
 from flask import Blueprint, request, jsonify
-from database.models.database import users_collection
-from flask_jwt_extended import create_access_token
+from database.models.database import users_collection, blacklist_tokens_collection
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt
 from database.utils.password_util import compare_password
 from database.utils.logger import get_logger
+from datetime import datetime
 
 auth_bp = Blueprint('auth', __name__)
 logger = get_logger(__name__)
@@ -35,12 +36,7 @@ def login():
         })
 
         # Create identity for JWT
-        identity = {
-            "sub": str(user["_id"]),
-            "email": user["email"],
-            "name": user["name"],
-            "username": user["username"]
-        }
+        identity = str(user["_id"])
         
         # Create access token with the identity
         access_token = create_access_token(identity=identity)
@@ -59,4 +55,31 @@ def login():
     except Exception as e:
         logger.error('Login error: %s', str(e))
         response = jsonify({"error": "An error occurred during login"})
+        return response, 500
+    
+@auth_bp.route('/logout', methods=['POST'])
+@jwt_required()
+def logout():
+    try:
+        jti = get_jwt()['jti']
+        logger.info(f"Attempting to blacklist token with jti: {jti}")
+        
+        if not jti:
+            logger.error("Logout failed: Missing 'jti' in JWT")
+            return jsonify({"error": "Missing jti"}), 400
+        
+        if blacklist_tokens_collection.find_one({"jti": jti}):
+            logger.info("Token already blacklisted")
+            return jsonify({"message": "Token already blacklisted"}), 200
+        
+        blacklist_tokens_collection.insert_one({
+            "jti": str(jti),
+            "createdAt": datetime.now()
+        })
+        logger.info("Token successfully blacklisted")
+        return jsonify({"message": "Successfully logged out"}), 200
+    
+    except Exception as e:
+        logger.error('Logout error: %s', str(e))
+        response = jsonify({"error": "An error occurred during logout"})
         return response, 500
