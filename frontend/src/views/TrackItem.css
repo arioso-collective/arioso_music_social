@@ -6,11 +6,11 @@
   }
   
   .album-art {
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
     object-fit: cover;
-    animation: spin 20s linear infinite;
+    animation: spin 50s linear infinite;
     box-shadow: 0 2px 6px #00000033;
   }
   
@@ -27,8 +27,9 @@
   .track-info {
     flex: 1;
   }
-  
-  .highlight {
-    background-color: yellow;
+  .track-title {
+    font-weight: bold;
+    font-size: 1.1rem;
   }
+
   

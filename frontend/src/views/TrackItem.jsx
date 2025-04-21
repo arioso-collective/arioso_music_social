@@ -1,7 +1,9 @@
 import React from 'react';
-import './TrackItem.css'; // optional for isolated styling
+import './TrackItem.css'; // You can tweak styling here
 
+// Optional: highlight matching words from search
 const highlightMatch = (text, query) => {
+  if (!query) return text;
   const regex = new RegExp(`(${query})`, 'gi');
   const parts = text.split(regex);
   return parts.map((part, i) =>
@@ -13,7 +15,7 @@ const highlightMatch = (text, query) => {
   );
 };
 
-export default function TrackItem({ track, query, searchBy }) {
+export default function TrackItem({ track, query, searchBy = "title" }) {
   return (
     <li className="result-item">
       <img
@@ -33,7 +35,7 @@ export default function TrackItem({ track, query, searchBy }) {
             : track.artistName}
         </div>
         {track.previewUrl && (
-          <audio controls>
+          <audio controls className="audio-player">
             <source src={track.previewUrl} type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>
