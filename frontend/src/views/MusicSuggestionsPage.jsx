@@ -16,7 +16,7 @@ export default function MusicSuggestionsPage() {
     setLoading(true);
   
     try {
-      // 1. Get GPT response
+      // 1. Ask GPT to generate an intro sentence ONLY
       const gptRes = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
@@ -25,23 +25,28 @@ export default function MusicSuggestionsPage() {
         },
         body: JSON.stringify({
           model: "gpt-3.5-turbo",
-          messages: [{ role: "user", content: input }],
+          messages: [
+            {
+              role: "user",
+              content: `Respond with one sentence to introduce a music playlist based on: "${input}"`,
+            },
+          ],
         }),
       });
   
       const gptData = await gptRes.json();
       const gptReply = gptData.choices[0].message.content.trim();
   
-      // 2. Show GPT reply
-      const botMsg = { sender: "bot", text: gptReply };
-      setMessages((prev) => [...prev, botMsg]);
+      // 2. Show GPT's fun intro sentence
+      const botIntroMsg = { sender: "bot", text: gptReply };
+      setMessages((prev) => [...prev, botIntroMsg]);
   
-      // 3. Use original input to search iTunes
+      // 3. Use user input to search iTunes
       const searchTerm = encodeURIComponent(input);
       const musicRes = await fetch(`https://itunes.apple.com/search?term=${searchTerm}&media=music&limit=5`);
       const musicData = await musicRes.json();
   
-      // 4. Show top 5 song previews
+      // 4. Display exact tracks with previews
       if (musicData.results.length > 0) {
         musicData.results.forEach((track) => {
           const musicMsg = {
