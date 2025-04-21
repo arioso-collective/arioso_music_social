@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import TrackItem from "./TrackItem"; 
 import './MusicSearchPage.css';
 
 function MusicSearchPage() {
@@ -79,24 +80,12 @@ function MusicSearchPage() {
       {!loading && results.length > 0 && (
         <ul className="results-list">
           {results.map((track) => (
-            <li key={track.trackId} className="result-item">
-              <div className="track-title">
-                {searchBy === "title"
-                  ? highlightMatch(track.trackName, query)
-                  : track.trackName}
-              </div>
-              <div className="artist-name">
-                {searchBy === "artist"
-                  ? highlightMatch(track.artistName, query)
-                  : track.artistName}
-              </div>
-              {track.previewUrl && (
-                <audio controls>
-                  <source src={track.previewUrl} type="audio/mpeg" />
-                  Your browser does not support the audio element.
-                </audio>
-              )}
-            </li>
+            <TrackItem
+              key={track.trackId}
+              track={track}
+              query={query}
+              searchBy={searchBy}
+            />
           ))}
         </ul>
       )}
