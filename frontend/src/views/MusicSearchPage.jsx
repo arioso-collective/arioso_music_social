@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import TrackImage from "frontend/src/views/TrackImage.jsx"; 
 import './MusicSearchPage.css';
 
 function MusicSearchPage() {
