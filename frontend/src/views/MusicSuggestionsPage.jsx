@@ -1,7 +1,8 @@
 import { useState } from "react";
+import TrackItem from "./TrackItem"; // Make sure path is correct
 import "./MusicSuggestionsPage.css";
-const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
+const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
 export default function MusicSuggestionsPage() {
   const [messages, setMessages] = useState([]);
@@ -10,13 +11,13 @@ export default function MusicSuggestionsPage() {
 
   const sendMessage = async () => {
     if (!input.trim()) return;
-  
+
     const userMsg = { sender: "user", text: input };
     setMessages((prev) => [...prev, userMsg]);
     setLoading(true);
-  
+
     try {
-      // Step 1: Ask GPT to give a list of real songs for the request
+      // Step 1: Get GPT song list
       const gptRes = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
@@ -33,70 +34,61 @@ export default function MusicSuggestionsPage() {
           ],
         }),
       });
-  
+
       const gptData = await gptRes.json();
       const gptReply = gptData.choices[0].message.content.trim();
-  
-      // Step 2: Show GPT's response as a single message
-      //setMessages((prev) => [...prev, { sender: "bot", text: gptReply }]);
-  
-      // Step 3: Parse list of songs from GPT response
+
+      // Step 3: Parse songs and fetch previews
       const songLines = gptReply
         .split("\n")
-        .map(line => line.replace(/^\d+\.\s*/, "").trim())
-        .filter(line => line.toLowerCase().includes(" by "));
-  
-      // Step 4: For each song, search iTunes and show preview
-        for (const song of songLines) {
-          const encoded = encodeURIComponent(song);
-          const res = await fetch(`https://itunes.apple.com/search?term=${encoded}&media=music&limit=1`);
-          if (!res.ok) continue;
-        
-          const data = await res.json();
-          const track = data.results[0];
-        
-          if (track && track.previewUrl) {
-            const musicMsg = {
-              sender: "bot",
-              text: `${track.trackName} by ${track.artistName}`,
+        .map((line) => line.replace(/^\d+\.\s*/, "").trim())
+        .filter((line) => line.toLowerCase().includes(" by "));
+
+      for (const song of songLines) {
+        const encoded = encodeURIComponent(song);
+        const res = await fetch(`https://itunes.apple.com/search?term=${encoded}&media=music&limit=1`);
+        if (!res.ok) continue;
+
+        const data = await res.json();
+        const track = data.results[0];
+
+        if (track && track.previewUrl) {
+          const musicMsg = {
+            sender: "bot",
+            type: "track",
+            track: {
+              trackName: track.trackName,
+              artistName: track.artistName,
               previewUrl: track.previewUrl,
-            };
-            setMessages((prev) => [...prev, musicMsg]);
-          }
+              artworkUrl100: track.artworkUrl100,
+            },
+          };
+          setMessages((prev) => [...prev, musicMsg]);
         }
-        
-  
+      }
     } catch (err) {
       console.error("Error in sendMessage:", err);
       setMessages((prev) => [...prev, { sender: "bot", text: "Oops! Something went wrong." }]);
     }
-  
+
     setInput("");
     setLoading(false);
   };
-  
-   
-  
-  
 
   return (
     <div className="chat-container">
       <h2>🎵 Music Suggestions</h2>
 
       <div className="chat-box">
-      {messages.map((msg, i) => (
-      <div key={i} className={`chat-message ${msg.sender}`}>
-        <strong>{msg.sender === "user" ? "You" : "Bot"}:</strong> {msg.text}
-        {msg.previewUrl && (
-          <div className="audio-preview">
-            <audio controls src={msg.previewUrl}>
-              Your browser does not support the audio element.
-            </audio>
+        {messages.map((msg, i) => (
+          <div key={i} className={`chat-message ${msg.sender}`}>
+            {msg.type === "track" ? (
+              <TrackItem track={msg.track} query={input} searchBy="title" />
+            ) : (
+              <p>{msg.text}</p>
+            )}
           </div>
-        )}
-      </div>
-    ))}
-
+        ))}
         {loading && <div className="chat-message bot">Bot is thinking...</div>}
       </div>
 
