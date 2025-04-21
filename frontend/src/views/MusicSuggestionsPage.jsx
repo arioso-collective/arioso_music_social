@@ -16,11 +16,12 @@ export default function MusicSuggestionsPage() {
     setLoading(true);
   
     try {
-      const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      // First get GPT response
+      const gptRes = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
+          Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
           model: "gpt-3.5-turbo",
@@ -28,11 +29,31 @@ export default function MusicSuggestionsPage() {
         }),
       });
   
-      const data = await res.json();
-      const botReply = data.choices[0].message.content.trim();
+      const gptData = await gptRes.json();
+      const gptReply = gptData.choices[0].message.content.trim();
   
-      const botMsg = { sender: "bot", text: botReply };
+      const botMsg = { sender: "bot", text: gptReply };
       setMessages((prev) => [...prev, botMsg]);
+  
+      // Now use GPT reply OR original prompt as search term
+      const searchTerm = encodeURIComponent(gptReply || input);
+  
+      const musicRes = await fetch(`https://itunes.apple.com/search?term=${searchTerm}&media=music&limit=5`);
+      const musicData = await musicRes.json();
+  
+      if (musicData.results.length > 0) {
+        musicData.results.forEach((track) => {
+          const musicMsg = {
+            sender: "bot",
+            text: `${track.trackName} by ${track.artistName} - `,
+            previewUrl: track.previewUrl,
+          };
+          setMessages((prev) => [...prev, musicMsg]);
+        });
+      } else {
+        setMessages((prev) => [...prev, { sender: "bot", text: "No matching tracks found." }]);
+      }
+  
     } catch (err) {
       console.error("Fetch error:", err);
       setMessages((prev) => [...prev, { sender: "bot", text: "Oops! Something went wrong." }]);
@@ -41,6 +62,7 @@ export default function MusicSuggestionsPage() {
     setInput("");
     setLoading(false);
   };
+  
   
 
   return (
