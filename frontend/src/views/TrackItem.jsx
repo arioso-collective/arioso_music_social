@@ -1,5 +1,5 @@
 import React from 'react';
-//import './TrackImage.css'; // optional for isolated styling
+import './TrackImage.css'; // optional for isolated styling
 
 const highlightMatch = (text, query) => {
   const regex = new RegExp(`(${query})`, 'gi');
@@ -13,7 +13,7 @@ const highlightMatch = (text, query) => {
   );
 };
 
-export default function TrackImage({ track, query, searchBy }) {
+export default function TrackItem({ track, query, searchBy }) {
   return (
     <li className="result-item">
       <img
