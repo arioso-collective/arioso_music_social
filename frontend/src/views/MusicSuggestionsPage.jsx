@@ -16,8 +16,8 @@ export default function MusicSuggestionsPage() {
     setLoading(true);
   
     try {
-      // 1. Ask GPT to generate an intro sentence ONLY
-      const gptRes = await fetch("https://api.openai.com/v1/chat/completions", {
+      // Step 1: Get search term from GPT
+      const searchTermRes = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,25 +28,55 @@ export default function MusicSuggestionsPage() {
           messages: [
             {
               role: "user",
-              content: `Respond with one sentence to introduce a music playlist based on: "${input}"`,
+              content: `Extract just the most relevant search term (like artist, genre, or mood) from: "${input}". Respond with only the term.`,
             },
           ],
         }),
       });
   
-      const gptData = await gptRes.json();
-      const gptReply = gptData.choices[0].message.content.trim();
+      const searchTermData = await searchTermRes.json();
+      let searchTerm = searchTermData.choices[0].message.content.trim();
   
-      // 2. Show GPT's fun intro sentence
-      const botIntroMsg = { sender: "bot", text: gptReply };
-      setMessages((prev) => [...prev, botIntroMsg]);
+      console.log("🎯 Raw GPT search term:", searchTerm);
   
-      // 3. Use user input to search iTunes
-      const searchTerm = encodeURIComponent(input);
-      const musicRes = await fetch(`https://itunes.apple.com/search?term=${searchTerm}&media=music&limit=5`);
+      // Sanitize and fallback
+      searchTerm = searchTerm.replace(/["'`:.]/g, "").trim();
+      if (searchTerm.length === 0 || searchTerm.split(" ").length > 6) {
+        console.log("⚠️ GPT search term invalid, falling back to user input.");
+        searchTerm = input;
+      }
+  
+      // Step 2: GPT fun intro line
+      const introRes = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [
+            {
+              role: "user",
+              content: `Write a fun sentence to introduce a playlist based on: "${input}"`,
+            },
+          ],
+        }),
+      });
+  
+      const introData = await introRes.json();
+      const introText = introData.choices[0].message.content.trim();
+      setMessages((prev) => [...prev, { sender: "bot", text: introText }]);
+  
+      // Step 3: Use search term for iTunes
+      const encodedTerm = encodeURIComponent(searchTerm);
+      const musicRes = await fetch(`https://itunes.apple.com/search?term=${encodedTerm}&media=music&limit=5`);
+  
+      if (!musicRes.ok) throw new Error("iTunes API failed");
       const musicData = await musicRes.json();
   
-      // 4. Display exact tracks with previews
+      console.log("🎶 iTunes results:", musicData);
+  
       if (musicData.results.length > 0) {
         musicData.results.forEach((track) => {
           const musicMsg = {
@@ -61,14 +91,14 @@ export default function MusicSuggestionsPage() {
       }
   
     } catch (err) {
-      console.error("Fetch error:", err);
+      console.error("🔥 Error during sendMessage:", err);
       setMessages((prev) => [...prev, { sender: "bot", text: "Oops! Something went wrong." }]);
     }
   
     setInput("");
     setLoading(false);
   };
-  
+   
   
   
 
