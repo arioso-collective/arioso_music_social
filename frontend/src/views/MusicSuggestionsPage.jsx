@@ -16,8 +16,8 @@ export default function MusicSuggestionsPage() {
     setLoading(true);
   
     try {
-      // Step 1: Get search term from GPT
-      const searchTermRes = await fetch("https://api.openai.com/v1/chat/completions", {
+      // Step 1: Ask GPT to give a list of real songs for the request
+      const gptRes = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,76 +28,53 @@ export default function MusicSuggestionsPage() {
           messages: [
             {
               role: "user",
-              content: `Extract just the most relevant search term (like artist, genre, or mood) from: "${input}". Respond with only the term.`,
+              content: `List 5 real song titles with artist names that are perfect for: "${input}". Respond with just the list.`,
             },
           ],
         }),
       });
   
-      const searchTermData = await searchTermRes.json();
-      let searchTerm = searchTermData.choices[0].message.content.trim();
+      const gptData = await gptRes.json();
+      const gptReply = gptData.choices[0].message.content.trim();
   
-      console.log("🎯 Raw GPT search term:", searchTerm);
+      // Step 2: Show GPT's response as a single message
+      //setMessages((prev) => [...prev, { sender: "bot", text: gptReply }]);
   
-      // Sanitize and fallback
-      searchTerm = searchTerm.replace(/["'`:.]/g, "").trim();
-      if (searchTerm.length === 0 || searchTerm.split(" ").length > 6) {
-        console.log("⚠️ GPT search term invalid, falling back to user input.");
-        searchTerm = input;
-      }
+      // Step 3: Parse list of songs from GPT response
+      const songLines = gptReply
+        .split("\n")
+        .map(line => line.replace(/^\d+\.\s*/, "").trim())
+        .filter(line => line.toLowerCase().includes(" by "));
   
-      // Step 2: GPT fun intro line
-      const introRes = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [
-            {
-              role: "user",
-              content: `Write a fun sentence to introduce a playlist based on: "${input}"`,
-            },
-          ],
-        }),
-      });
-  
-      const introData = await introRes.json();
-      const introText = introData.choices[0].message.content.trim();
-      setMessages((prev) => [...prev, { sender: "bot", text: introText }]);
-  
-      // Step 3: Use search term for iTunes
-      const encodedTerm = encodeURIComponent(searchTerm);
-      const musicRes = await fetch(`https://itunes.apple.com/search?term=${encodedTerm}&media=music&limit=5`);
-  
-      if (!musicRes.ok) throw new Error("iTunes API failed");
-      const musicData = await musicRes.json();
-  
-      console.log("🎶 iTunes results:", musicData);
-  
-      if (musicData.results.length > 0) {
-        musicData.results.forEach((track) => {
-          const musicMsg = {
-            sender: "bot",
-            text: `${track.trackName} by ${track.artistName}`,
-            previewUrl: track.previewUrl,
-          };
-          setMessages((prev) => [...prev, musicMsg]);
-        });
-      } else {
-        setMessages((prev) => [...prev, { sender: "bot", text: "No matching tracks found on iTunes." }]);
-      }
+      // Step 4: For each song, search iTunes and show preview
+        for (const song of songLines) {
+          const encoded = encodeURIComponent(song);
+          const res = await fetch(`https://itunes.apple.com/search?term=${encoded}&media=music&limit=1`);
+          if (!res.ok) continue;
+        
+          const data = await res.json();
+          const track = data.results[0];
+        
+          if (track && track.previewUrl) {
+            const musicMsg = {
+              sender: "bot",
+              text: `${track.trackName} by ${track.artistName}`,
+              previewUrl: track.previewUrl,
+            };
+            setMessages((prev) => [...prev, musicMsg]);
+          }
+        }
+        
   
     } catch (err) {
-      console.error("🔥 Error during sendMessage:", err);
+      console.error("Error in sendMessage:", err);
       setMessages((prev) => [...prev, { sender: "bot", text: "Oops! Something went wrong." }]);
     }
   
     setInput("");
     setLoading(false);
   };
+  
    
   
   
@@ -107,11 +84,19 @@ export default function MusicSuggestionsPage() {
       <h2>🎵 Music Suggestions</h2>
 
       <div className="chat-box">
-        {messages.map((msg, i) => (
-          <div key={i} className={`chat-message ${msg.sender}`}>
-            <strong>{msg.sender === "user" ? "You" : "Bot"}:</strong> {msg.text}
+      {messages.map((msg, i) => (
+      <div key={i} className={`chat-message ${msg.sender}`}>
+        <strong>{msg.sender === "user" ? "You" : "Bot"}:</strong> {msg.text}
+        {msg.previewUrl && (
+          <div className="audio-preview">
+            <audio controls src={msg.previewUrl}>
+              Your browser does not support the audio element.
+            </audio>
           </div>
-        ))}
+        )}
+      </div>
+    ))}
+
         {loading && <div className="chat-message bot">Bot is thinking...</div>}
       </div>
 
