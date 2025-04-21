@@ -16,7 +16,7 @@ export default function MusicSuggestionsPage() {
     setLoading(true);
   
     try {
-      // First get GPT response
+      // 1. Get GPT response
       const gptRes = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
@@ -32,26 +32,27 @@ export default function MusicSuggestionsPage() {
       const gptData = await gptRes.json();
       const gptReply = gptData.choices[0].message.content.trim();
   
+      // 2. Show GPT reply
       const botMsg = { sender: "bot", text: gptReply };
       setMessages((prev) => [...prev, botMsg]);
   
-      // Now use GPT reply OR original prompt as search term
-      const searchTerm = encodeURIComponent(gptReply || input);
-  
+      // 3. Use original input to search iTunes
+      const searchTerm = encodeURIComponent(input);
       const musicRes = await fetch(`https://itunes.apple.com/search?term=${searchTerm}&media=music&limit=5`);
       const musicData = await musicRes.json();
   
+      // 4. Show top 5 song previews
       if (musicData.results.length > 0) {
         musicData.results.forEach((track) => {
           const musicMsg = {
             sender: "bot",
-            text: `${track.trackName} by ${track.artistName} - `,
+            text: `${track.trackName} by ${track.artistName}`,
             previewUrl: track.previewUrl,
           };
           setMessages((prev) => [...prev, musicMsg]);
         });
       } else {
-        setMessages((prev) => [...prev, { sender: "bot", text: "No matching tracks found." }]);
+        setMessages((prev) => [...prev, { sender: "bot", text: "No matching tracks found on iTunes." }]);
       }
   
     } catch (err) {
@@ -62,6 +63,7 @@ export default function MusicSuggestionsPage() {
     setInput("");
     setLoading(false);
   };
+  
   
   
 
