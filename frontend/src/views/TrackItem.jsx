@@ -1,5 +1,5 @@
 import React from 'react';
-import './TrackImage.css'; // optional for isolated styling
+import './TrackItem.css'; // optional for isolated styling
 
 const highlightMatch = (text, query) => {
   const regex = new RegExp(`(${query})`, 'gi');
