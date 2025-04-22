@@ -15,12 +15,9 @@ const NewPostModal = ({ onClose, onSubmit }) => {
   
     const postData = {
       caption: text,
-      url: selectedTrack.previewUrl,              // preview audio URL
-      musicID: selectedTrack.trackId.toString(),  // unique music identifier
-      song: selectedTrack.trackName,              // 🎵 song title
-      artist: selectedTrack.artistName            // 🎤 artist name
+      url: selectedTrack.previewUrl,
+      musicID: selectedTrack.trackName.toString(),
     };
-    ;
   
     try {
       const res = await fetch("http://localhost:5001/api/posts/create", {
