@@ -1,0 +1,20 @@
+.likesContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  
+  .likeButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    transition: color 0.2s, transform 0.2s;
+  }
+  
+  .likeButton:hover {
+    transform: scale(1.2);
+  }
+  
+  
