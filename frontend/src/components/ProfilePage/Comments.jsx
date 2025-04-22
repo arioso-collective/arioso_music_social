@@ -1,18 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdChatBubble } from "react-icons/md";
 import styles from "./Comments.module.css";
 
-const Comments = () => {
+const Comments = ({ postUrl }) => {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
-  const handleAddComment = () => {
-    if (newComment.trim() !== "") {
-      setComments([...comments, newComment.trim()]);
-      setNewComment("");
+  const token = localStorage.getItem("token");
+
+  const fetchComments = async () => {
+    console.log("💬 postUrl received by Comments:", postUrl);
+    try {
+      const res = await fetch(`http://localhost:5001/api/get_comment/${postUrl}`);
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        setComments(data);
+      } else {
+        console.error("Unexpected comment format", data);
+      }
+    } catch (err) {
+      console.error("Failed to load comments", err);
     }
   };
+
+  const handleAddComment = async () => {
+    if (newComment.trim() === "") return;
+
+    try {
+      const res = await fetch(`http://localhost:5001/api/create_comment/${postUrl}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ comment: newComment })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setComments([{ comment: newComment, createdAt: new Date().toISOString() }, ...comments]);
+        setNewComment("");
+      } else {
+        console.error("Failed to post comment", data.error || data);
+      }
+    } catch (err) {
+      console.error("Error creating comment", err);
+    }
+  };
+
+  useEffect(() => {
+    if (showComments) {
+      fetchComments();
+    }
+  }, [showComments]);
 
   return (
     <div className={styles.commentsContainer}>
@@ -26,9 +68,9 @@ const Comments = () => {
       {showComments && (
         <div className={styles.commentSection}>
           <ul className={styles.commentsList}>
-            {comments.map((comment, index) => (
+            {comments.map((c, index) => (
               <li key={index} className={styles.commentItem}>
-                {comment}
+                {c.comment}
               </li>
             ))}
           </ul>

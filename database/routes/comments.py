@@ -6,7 +6,7 @@ from datetime import datetime
 
 comments_bp = Blueprint('comments', __name__)
 
-comments_bp.route('/create_comment/<url>', methods=['POST'])
+@comments_bp.route('/create_comment/<url>', methods=['POST'])
 def create_comment(url):
     try:
         data = request.get_json()
