@@ -3,12 +3,12 @@ import MusicPost from "./MusicPost";
 import NewPostButton from "../NewPostButton";
 import NewPostModal from "../NewPostModal";
 import styles from "./MusicPostFeed.module.css";
-import { useProfile } from "../../context/ProfileContext";
 
-const MusicPostFeed = () => {
-  const { profile } = useProfile();
+const MusicPostFeed = ({profile}) => {
   const [posts, setPosts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  if (!profile) return <div>Loading feed... </div>;
 
   const handleNewPost = (newPost) => {
     const formattedPost = {
@@ -22,8 +22,8 @@ const MusicPostFeed = () => {
 
   return (
     <div className={styles.feedContainer}>
-      {[...posts, ...(profile.posts || [])].map((post) => (
-        <MusicPost key={post.id} text={post.text} song={post.song} path={post.path} />
+      {[...posts, ...(profile.posts || [])].map((post, index) => (
+        <MusicPost key={post.id || post.postId || index} text={post.text} song={post.song} path={post.path} />
       ))}
 
       {/* Floating Button */}
