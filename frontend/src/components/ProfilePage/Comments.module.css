@@ -1,0 +1,60 @@
+.commentsContainer {
+  margin-top: 1rem;
+}
+
+.commentIconButton {
+  all: unset; /* 💥 resets everything (border, padding, background, etc.) */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #900bb1; 
+  border-radius: 10%;
+  transition: color .2s ease;
+}
+
+.commentIconButton:hover {
+  color: #5d0074;
+}
+
+.commentSection {
+  margin-top: 0.5rem;
+  border-top: 1px solid #ccc;
+  padding-top: 0.5rem;
+}
+
+.commentsList {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+}
+
+.commentItem {
+  margin-bottom: 0.5rem;
+  background: #f2d4ff;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  color:rgb(0, 0, 0);
+}
+
+.commentForm {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.commentInput {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #9500ff;
+}
+
+.commentButton {
+  padding: 0.5rem 1rem;
+  background: #900bb1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}

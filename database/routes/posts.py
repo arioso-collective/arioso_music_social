@@ -1,34 +1,68 @@
 from flask import Blueprint, request, jsonify
 from bson import ObjectId
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from database.models.database import posts_collection, users_collection
 from datetime import datetime
 
 posts_bp = Blueprint('posts', __name__)
 
-@posts_bp.route('/create_post/<username>', methods=['POST'])
-def create_post(username):
+@posts_bp.route('/posts/create', methods=['POST'])
+@jwt_required()
+def create_post():
     try:
-        data = request.get_json()
-        user = users_collection.find_one({'username': username})
+        user_id = get_jwt_identity()
+        user = users_collection.find_one({'_id': ObjectId(user_id)})
         if not user:
             return jsonify({"error": "User not found"}), 404
+
+        data = request.get_json()
         post_data = {
-            "username": username,
-            "userID": str(user['_id']),
-            "caption": data.get('caption'),
+            "username": user["username"],
+            "userID": str(user["_id"]),
+            "caption": data.get("caption"),
             "createdAt": datetime.now(),
             "likes": 0,
-            "url": data.get('url'),
-            "musicID": data.get('musicID')
+            "url": data.get("url", ""),
+            "musicID": data.get("musicID", "")
         }
+
         result = posts_collection.insert_one(post_data)
+        post_id = result.inserted_id
+
+        # Create minimal post object to embed in user's profile
+        user_post_entry = {
+            "postId": str(post_id),
+            "content": data.get("caption", ""),
+            "createdAt": post_data["createdAt"]
+        }
+
+        users_collection.update_one(
+            {'_id': ObjectId(user_id)},
+            {'$push': {'posts': user_post_entry}}
+        )
+
         return jsonify({
-            "message": "Post created successfully.",
-            "post_id": str(result.inserted_id)
+            "message": "Post created and linked to user successfully.",
+            "post_id": str(post_id)
         }), 201
+
     except Exception as e:
         return jsonify({"error": f"Error occurred: {str(e)}"}), 500
+    
+@posts_bp.route('/profile/<username>/posts', methods=['GET'])
+@jwt_required()
+def get_user_posts(username):
+    user = users_collection.find_one({'username': username})
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    post_ids = [ObjectId(post["postId"]) for post in user.get("posts", []) if post.get("postId")]
+
+    posts = list(posts_collection.find({"_id": {"$in": post_ids}}))
+    for post in posts:
+        post["_id"] = str(post["_id"])
+    return jsonify(posts), 200
+
     
 @posts_bp.route('/get_post/<url>', methods=['GET'])
 def get_post(url):

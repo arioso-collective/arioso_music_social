@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./MusicPost.module.css";
+import Comments from "./Comments"; 
 
 const MusicPost = ({ text, song, path }) => {
   return (
@@ -18,6 +19,7 @@ const MusicPost = ({ text, song, path }) => {
             />
           </div>
         )}
+        <Comments />
       </div>
     </div>
   );
