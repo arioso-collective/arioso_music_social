@@ -50,4 +50,32 @@
   .modalButtons button[type="button"] {
     background-color: gray;
   }
+
+  .song-search-section {
+    margin-bottom: 20px;
+  }
+  
+  .search-results {
+    margin-top: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    background: #f2f2f2;
+    border-radius: 5px;
+  }
+  
+  .search-result-item {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .search-result-item:hover {
+    background-color: #ddd;
+  }
+  
+  .selected-track {
+    margin-top: 10px;
+    color: green;
+    font-weight: bold;
+  }
+  
   
