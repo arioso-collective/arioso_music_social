@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './EditProfilePage.module.css';
-import { useProfile } from '../context/ProfileContext';
+import { useSelfProfile } from '../context/SelfProfileContext';
 
 const EditProfilePage = () => {
   const navigate = useNavigate();
-  const { profile, updateProfile } = useProfile();
+  const { profile, updateProfile } = useSelfProfile();
   const [formData, setFormData] = useState({
     name: profile.name,
     username: profile.username,

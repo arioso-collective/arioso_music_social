@@ -5,7 +5,7 @@ import mongomock
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from app import app
 from bson import Binary
-from password_util import hash_password, compare_password
+from database.utils.password_util import hash_password, compare_password
 from datetime import datetime
 import HtmlTestRunner
 

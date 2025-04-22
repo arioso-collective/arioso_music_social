@@ -1,15 +1,15 @@
 import React from "react";
 import styles from "./ProfileStats.module.css";
-import { useProfile } from "../../context/ProfileContext";
 
-const ProfileStats = () => {
-  const { profile } = useProfile();
+const ProfileStats = ({profile}) => {
+  if (!profile) return <div>Loading profile...</div>;
 
+  const postCount = Array.isArray(profile.posts) ? profile.posts.length : 0;
   return (
     <div className={styles.statsContainer}>
-      <p><strong>Followers:</strong> {profile.followers} &nbsp; </p>
-      <p><strong>Following:</strong> {profile.following} &nbsp; </p>
-      <p><strong>Posts:</strong> {profile.posts.length} &nbsp;</p>
+      <p><strong>Followers:</strong> {profile.followerCount ?? 0} &nbsp; </p>
+      <p><strong>Following:</strong> {profile.followingCount ?? 0} &nbsp; </p>
+      <p><strong>Posts:</strong> {postCount} &nbsp;</p>
     </div>
   );
 };

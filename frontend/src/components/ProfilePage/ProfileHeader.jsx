@@ -1,14 +1,13 @@
 import React from "react";
 import styles from "./ProfileHeader.module.css";
-import { useProfile } from "../../context/ProfileContext";
 
 // TODO: Add profile picture and name from the database
 // Any other information will need to be fetched from the database
 // Name, Followers, Following, Posts, Bio, (Location?), (Playlists?: Sprint 3?)
 // Profile picture should be a circular image
 
-const ProfileHeader = () => {
-  const { profile } = useProfile();
+const ProfileHeader = ({profile}) => {
+  if (!profile) return <div>Loading profile...</div>;
 
   return (
     <div className={styles.headerContainer}>
@@ -20,9 +19,9 @@ const ProfileHeader = () => {
           className={styles.profilePic}
         />
         <div className={styles.profileText}>
-          <h2>{profile.name}</h2>
-          <p>{profile.username}</p>
-          <p>{profile.bio}</p>
+          <h2>{profile.name || "Name not available"}</h2>
+          <p>{profile.username || "Username not available"}</p>
+          <p>{profile.bio || "Bio not available"}</p>
         </div>
       </div>
     </div>
