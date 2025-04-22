@@ -3,12 +3,12 @@ import MusicPost from "./MusicPost";
 import NewPostButton from "../NewPostButton";
 import NewPostModal from "../NewPostModal";
 import styles from "./MusicPostFeed.module.css";
-import { useProfile } from "../../context/ProfileContext";
 
-const MusicPostFeed = () => {
-  const { profile } = useProfile();
+const MusicPostFeed = ({profile}) => {
   const [posts, setPosts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  if (!profile) return <div>Loading feed... </div>;
 
   const handleNewPost = (newPost) => {
     const formattedPost = {

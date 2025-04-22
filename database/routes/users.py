@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from bson import ObjectId, Binary
-from flask_jwt_extended import jwt_required
+from bson.errors import InvalidId
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from database.models.database import users_collection
 from datetime import datetime
 from pymongo.errors import PyMongoError
@@ -194,6 +195,22 @@ def get_user(username):
         user['_id'] = str(user['_id'])
         return jsonify(user), 200
     return jsonify({"error": "User not found"}), 404
+
+@users_bp.route('/profile/self', methods=['GET'])
+@jwt_required()
+def get_current_user_profile():
+    user_id = get_jwt_identity()
+    user = users_collection.find_one({'_id': ObjectId(user_id)})
+
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    # Remove non-serializable or sensitive fields
+    user['_id'] = str(user['_id'])  # Convert ObjectId to string
+    user.pop('password', None)
+    user.pop('profilePicture', None)  # Or convert if you want to return it another way
+
+    return jsonify(user), 200
 
 @users_bp.route('/update_user/<user_id>', methods=['PUT'])
 @jwt_required()
