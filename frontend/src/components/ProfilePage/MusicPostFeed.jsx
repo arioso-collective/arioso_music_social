@@ -22,8 +22,8 @@ const MusicPostFeed = ({profile}) => {
 
   return (
     <div className={styles.feedContainer}>
-      {[...posts, ...(profile.posts || [])].map((post) => (
-        <MusicPost key={post.id} text={post.text} song={post.song} path={post.path} />
+      {[...posts, ...(profile.posts || [])].map((post, index) => (
+        <MusicPost key={post.id || post.postId || index} text={post.text} song={post.song} path={post.path} />
       ))}
 
       {/* Floating Button */}
