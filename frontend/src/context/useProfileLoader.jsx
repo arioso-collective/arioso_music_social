@@ -15,31 +15,46 @@ const useProfileLoader = (username = null) => {
         return;
       }
 
-      const endpoint = username
-        ? `http://localhost:5001/api/get_user/${encodeURIComponent(username)}`
-        : `http://localhost:5001/api/profile/self`;
+      const profileEndpoint = username
+  ? `http://localhost:5001/api/get_user/${encodeURIComponent(username)}`
+  : `http://localhost:5001/api/profile/self`;
 
-      try {
-        const res = await fetch(endpoint, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+try {
+  const profileRes = await fetch(profileEndpoint, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  const profileData = await profileRes.json();
 
-        if (!res.ok) {
-          const errorData = await res.json().catch(() => ({}));
-          console.warn(`[ProfileLoader] Failed with ${res.status}`);
-          setError(errorData?.error || 'Failed to fetch profile');
-          setProfile(null);
-        } else {
-          const data = await res.json();
-          setProfile(data);
-        }
-      } catch (err) {
-        console.error(err);
-        setError('Network error');
-      } finally {
-        setLoading(false);
-      }
-    };
+  if (!profileRes.ok) {
+    setError(profileData?.error || "Failed to fetch profile");
+    setProfile(null);
+    setLoading(false);
+    return;
+  }
+
+  // Now use the profile's username to get their posts
+  const postsRes = await fetch(
+    `http://localhost:5001/api/profile/${encodeURIComponent(profileData.username)}/posts`,
+    {
+      headers: { Authorization: `Bearer ${token}` }
+    }
+  );
+  const postsData = await postsRes.json();
+
+  if (!postsRes.ok) {
+    setError(postsData?.error || "Failed to fetch posts");
+    setProfile(null);
+  } else {
+    setProfile({ ...profileData, posts: postsData });
+  }
+} catch (err) {
+  console.error(err);
+  setError("Network error");
+} finally {
+  setLoading(false);
+}
+
+};
 
     fetchProfile();
   }, [username]);
