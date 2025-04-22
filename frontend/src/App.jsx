@@ -10,11 +10,11 @@ import MusicSuggestionsPage from "./views/MusicSuggestionsPage";
 import SettingsPage from "./pages/SettingsPage";
 import Navbar from "./components/Navbar/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { ProfileProvider } from "./context/ProfileContext";
+import { SelfProfileProvider } from "./context/SelfProfileContext";
 
 function App() {
   return (
-    <ProfileProvider>
+    <SelfProfileProvider>
       <Router>
         <Routes>
           {/* Public routes */}
@@ -36,6 +36,17 @@ function App() {
           />
           <Route
             path="/profile"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Navbar />
+                  <ProfilePage />
+                </>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile/:username"
             element={
               <ProtectedRoute>
                 <>
@@ -91,7 +102,7 @@ function App() {
           />
         </Routes>
       </Router>
-    </ProfileProvider>
+    </SelfProfileProvider>
   );
 }
 

@@ -1,8 +1,10 @@
 import React from "react";
 import styles from "./MusicPost.module.css";
-import Comments from "./Comments"; 
+import Comments from "./Comments";
 
 const MusicPost = ({ text, song, path }) => {
+  console.log("🎶 path received by MusicPost:", path);
+
   return (
     <div className={styles.postContainer}>
       <p>{text}</p>
@@ -19,7 +21,7 @@ const MusicPost = ({ text, song, path }) => {
             />
           </div>
         )}
-        <Comments />
+        <Comments postUrl={path} />
       </div>
     </div>
   );
