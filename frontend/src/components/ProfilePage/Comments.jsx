@@ -51,10 +51,11 @@ const Comments = ({ postUrl }) => {
   };
 
   useEffect(() => {
-    if (showComments) {
+    if (showComments && postUrl) {
       fetchComments();
     }
-  }, [showComments]);
+  }, [showComments, postUrl]);
+  
 
   return (
     <div className={styles.commentsContainer}>
