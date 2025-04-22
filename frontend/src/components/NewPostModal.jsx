@@ -2,47 +2,13 @@ import React, { useState } from 'react';
 import styles from './NewPostModal.module.css';
 import { useProfile } from "../context/ProfileContext";
 
-const NewPostModal = ({ onClose, onSubmit }) => {
+const NewPostModal = ({ onClose }) => {
+  const { profile, updateProfile } = useProfile();
   const [text, setText] = useState("");
-  const [song, setSong] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedTrack, setSelectedTrack] = useState(null);
-  const { profile, updateProfile } = useProfile();
 
-
-  const handlePostSubmit = (e) => {
-    e.preventDefault();
-  
-    if (!selectedTrack || !text.trim()) {
-      alert("Please select a song and write something!");
-      return;
-    }
-  
-    const newPost = {
-      id: Date.now(), // Unique ID based on timestamp
-      text: text,
-      song: selectedTrack.name,
-      artist: selectedTrack.artist,
-      previewUrl: selectedTrack.previewUrl,
-      albumArt: selectedTrack.albumArt,
-    };
-  
-    // Update the profile context with the new post
-    updateProfile((prevProfile) => ({
-      ...prevProfile,
-      posts: [newPost, ...prevProfile.posts], // Add new post at the top
-    }));
-  
-    // Optionally reset form and close modal
-    setText("");           // Clear text input
-    setSelectedTrack(null);     // Clear selected song
-    setSearchResults([]);      // Clear search results
-    onClose();              // Close the modal (if you have a function for it)
-  
-    console.log("✅ New post added:", newPost);
-  };
-  
   const fetchSpotifyToken = async () => {
     const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
     const clientSecret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
@@ -64,14 +30,7 @@ const NewPostModal = ({ onClose, onSubmit }) => {
         body: "grant_type=client_credentials",
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error("Failed to fetch Spotify token:", errorData);
-        return null;
-      }
-
       const data = await response.json();
-      console.log("Successfully fetched Spotify token ✅:", data.access_token);
       return data.access_token;
     } catch (err) {
       console.error("Error fetching Spotify token:", err);
@@ -84,9 +43,8 @@ const NewPostModal = ({ onClose, onSubmit }) => {
 
     try {
       const token = await fetchSpotifyToken();
-
       if (!token) {
-        console.error("No token available. Cannot search Spotify.");
+        console.error("No token available.");
         return;
       }
 
@@ -98,15 +56,10 @@ const NewPostModal = ({ onClose, onSubmit }) => {
 
       const data = await response.json();
 
-      if (!data.tracks || !data.tracks.items) {
-        console.error("No tracks found or invalid search response:", data);
-        return;
-      }
-
       const tracks = data.tracks.items.map((item) => ({
         id: item.id,
         name: item.name,
-        artist: item.artists[0]?.name || "Unknown",
+        artist: item.artists.map(a => a.name).join(", "),
         previewUrl: item.preview_url,
         albumArt: item.album?.images?.[0]?.url || "",
       }));
@@ -116,11 +69,38 @@ const NewPostModal = ({ onClose, onSubmit }) => {
       console.error("Error searching Spotify:", err);
     }
   };
-  
+
   const handleSelectTrack = (track) => {
     setSelectedTrack(track);
   };
-  
+
+  const handlePostSubmit = (e) => {
+    e.preventDefault();
+
+    if (!selectedTrack || !text.trim()) {
+      alert("Please select a song and write something!");
+      return;
+    }
+
+    const newPost = {
+      id: Date.now(),
+      text: text,
+      song: selectedTrack.name,
+      artist: selectedTrack.artist,
+      previewUrl: selectedTrack.previewUrl,
+      albumArt: selectedTrack.albumArt,
+    };
+
+    updateProfile({
+      posts: [newPost, ...profile.posts],
+    });
+
+    setText("");
+    setSearchTerm("");
+    setSearchResults([]);
+    setSelectedTrack(null);
+    onClose();
+  };
 
   return (
     <div className={styles.modalOverlay}>
@@ -136,7 +116,6 @@ const NewPostModal = ({ onClose, onSubmit }) => {
             />
             <button type="button" onClick={handleSearch}>Search</button>
 
-            {/* Show search results */}
             <div className="search-results">
               {searchResults.map((track) => (
                 <div
@@ -149,7 +128,6 @@ const NewPostModal = ({ onClose, onSubmit }) => {
               ))}
             </div>
 
-            {/* Show selected track */}
             {selectedTrack && (
               <div className="selected-track">
                 Selected: <strong>{selectedTrack.name}</strong> by {selectedTrack.artist}
@@ -161,12 +139,6 @@ const NewPostModal = ({ onClose, onSubmit }) => {
             value={text}
             onChange={(e) => setText(e.target.value)}
             rows="4"
-          />
-          <input
-            type="text"
-            placeholder="Song Title"
-            value={song}
-            onChange={(e) => setSong(e.target.value)}
           />
           <div className={styles.modalButtons}>
             <button type="submit">Post</button>
