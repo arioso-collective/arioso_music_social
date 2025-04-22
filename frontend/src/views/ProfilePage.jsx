@@ -12,14 +12,17 @@ import useIsCurrentUser from "../context/useIsCurrentUser";
 import { useSelfProfile } from "../context/SelfProfileContext";
 
 const ProfilePage = () => {
+  const { username } = useParams();
+  const { profile, loading, error } = useProfileLoader(username);
   const navigate = useNavigate();
-  const { profile, loading, error } = useSelfProfile();
+  const isCurrentUser = useIsCurrentUser(username);
+  
 
   if (loading) return <div>Loading profile...</div>;
   if (error) return <div>Error loading profile: {error}</div>;
   if (!profile) return <div>Profile not found</div>;
   // TODO: Replace with actual auth check
-  const isCurrentUser = true;
+  
 
   return (
     <div className={styles.profileContainer}>

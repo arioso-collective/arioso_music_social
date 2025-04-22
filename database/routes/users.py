@@ -1,6 +1,8 @@
 from flask import Blueprint, request, jsonify
 from bson import ObjectId, Binary
 from bson.errors import InvalidId
+from bson.json_util import dumps
+import json
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from database.models.database import users_collection
 from datetime import datetime
@@ -190,13 +192,18 @@ def get_users():
 @users_bp.route('/get_user/<username>', methods=['GET'])
 @jwt_required()
 def get_user(username):
-    user = users_collection.find_one({'username': username})
-    if user:
-        user['_id'] = str(user['_id'])
-        user.pop('password', None)
-        user.pop('profilePicture', None)
-        return jsonify(user), 200
-    return jsonify({"error": "User not found"}), 404
+    user = users_collection.find_one({"username": {"$regex": f"^{username}$", "$options": "i"}})
+    
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    # Optional: remove sensitive fields before serializing
+    user.pop('password', None)
+    user.pop('profilePicture', None)
+
+    # Use bson.json_util.dumps to handle BSON types like ObjectId, Binary, and datetime
+    user_json = json.loads(dumps(user))  # Convert to string, then back to dict for jsonify
+    return jsonify(user_json), 200
 
 @users_bp.route('/profile/self', methods=['GET'])
 @jwt_required()

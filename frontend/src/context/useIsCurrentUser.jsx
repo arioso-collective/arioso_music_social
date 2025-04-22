@@ -8,7 +8,10 @@ import { useSelfProfile } from "../context/SelfProfileContext";
 const useIsCurrentUser = (username) => {
   const { profile: selfProfile, loading } = useSelfProfile();
 
-  if (loading || !selfProfile) return null;
+  if (loading || !selfProfile) return false;
+  
+  if (!username) return true;
+
   return selfProfile.username === username;
 };
 
