@@ -16,6 +16,7 @@ const MusicPostFeed = () => {
       text: newPost.text,
       song: newPost.song,
       path: "", // could be upgraded later for song preview
+      username: profile.username || "Anonymous", // <-- ADD USERNAME when creating a new post
     };
     setPosts([formattedPost, ...posts]);
   };
@@ -23,7 +24,7 @@ const MusicPostFeed = () => {
   return (
     <div className={styles.feedContainer}>
       {[...posts, ...(profile.posts || [])].map((post) => (
-        <MusicPost key={post.id} text={post.text} song={post.song} path={post.path} />
+        <MusicPost key={post.id} text={post.text} song={post.song} path={post.path} username={post.username} />
       ))}
 
       {/* Floating Button */}

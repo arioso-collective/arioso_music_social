@@ -3,10 +3,15 @@ import styles from "./MusicPost.module.css";
 import Comments from "./Comments";
 import Likes from "./Likes";
 
-const MusicPost = ({ text, song, path }) => {
+const MusicPost = ({ text, song, path, username }) => {
   return (
     <div className={styles.postContainer}>
+      <div className={styles.postHeader}>
+        <strong>{username || "Unknown User"}</strong>
+      </div>
+
       <p>{text}</p>
+
       <div className={styles.songEmbed}>🎶 {song}
         {path && (
           <div className={styles.audioPlayer}>
