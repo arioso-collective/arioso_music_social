@@ -40,7 +40,7 @@ const ProfilePage = () => {
             )}
           </div>
           <ProfileStats />
-          <MusicPostFeed />
+          <MusicPostFeed userId={profile.id}/>
         </div>
         <FavoritesSidebar />
       </div>

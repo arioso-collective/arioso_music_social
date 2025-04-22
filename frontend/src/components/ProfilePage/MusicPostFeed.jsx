@@ -5,7 +5,7 @@ import NewPostModal from "../NewPostModal";
 import styles from "./MusicPostFeed.module.css";
 import { useProfile } from "../../context/ProfileContext";
 
-const MusicPostFeed = () => {
+const MusicPostFeed = ({userId = null}) => {
   const { profile } = useProfile();
   const [posts, setPosts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,14 +16,26 @@ const MusicPostFeed = () => {
       text: newPost.text,
       song: newPost.song,
       path: "", // could be upgraded later for song preview
+      userId: profile.id,
     };
     setPosts([formattedPost, ...posts]);
   };
 
+  const combinedPosts = [...posts, ...(profile.posts || [])];
+
+  const filteredPosts = userId
+    ? combinedPosts.filter((post) => post.userId == userId)
+    : combinedPosts;
+
   return (
     <div className={styles.feedContainer}>
       {[...posts, ...(profile.posts || [])].map((post) => (
-        <MusicPost key={post.id} text={post.text} song={post.song} path={post.path} />
+        <MusicPost 
+          key={post.id} 
+          text={post.text} 
+          song={post.song} 
+          path={post.path} 
+        />
       ))}
 
       {/* Floating Button */}
