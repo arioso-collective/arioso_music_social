@@ -13,4 +13,26 @@
     border-radius: 5px;
     width: 100%;
   }
+
+  .postBottomRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    gap: 20px; /* Optional: Adds a little space between comments and likes */
+  }
+  
+  .commentsContainer {
+    flex-grow: 2; /* Take up MOST of the space */
+  }
+  
+  .likesContainer {
+    flex-grow: 0; /* Only take up as much space as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  
   
