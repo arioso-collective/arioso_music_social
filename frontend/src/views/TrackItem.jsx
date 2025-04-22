@@ -1,7 +1,6 @@
 import React from 'react';
-import './TrackItem.css'; // You can tweak styling here
+import './TrackItem.css';
 
-// Optional: highlight matching words from search
 const highlightMatch = (text, query) => {
   if (!query) return text;
   const regex = new RegExp(`(${query})`, 'gi');
@@ -15,9 +14,9 @@ const highlightMatch = (text, query) => {
   );
 };
 
-export default function TrackItem({ track, query, searchBy = "title" }) {
+export default function TrackItem({ track, query, searchBy = "title", onClick }) {
   return (
-    <li className="result-item">
+    <li className="result-item" onClick={onClick}>
       <img
         src={track.artworkUrl100}
         alt={`${track.trackName} album cover`}

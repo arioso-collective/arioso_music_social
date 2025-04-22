@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import TrackItem from "./TrackItem"; 
 import './MusicSearchPage.css';
 
-function MusicSearchPage() {
+function MusicSearchPage({onSongSelect}) {
   const [query, setQuery] = useState("");
   const [searchBy, setSearchBy] = useState("title"); // "title" or "artist"
   const [results, setResults] = useState([]);
@@ -85,6 +85,7 @@ function MusicSearchPage() {
               track={track}
               query={query}
               searchBy={searchBy}
+              onClick={() => onSongSelect(track)} 
             />
           ))}
         </ul>
