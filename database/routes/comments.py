@@ -11,7 +11,7 @@ def create_comment(url):
     try:
         data = request.get_json()
         post = posts_collection.find_one({'url': url})
-        if not url:
+        if not post:
             return jsonify({"error": "Post not found"}), 404
         userID = str(post['userID'])
         comment_data = {
@@ -30,12 +30,21 @@ def create_comment(url):
         return jsonify({"error": f"Error occurred: {str(e)}"}), 500
 
 @comments_bp.route('/get_comment/<url>', methods=['GET'])
-def get_comment(url):
-    comment = comments_collection.find_one({'url': url})
-    if comment:
-        comment['_id'] = str(comment['_id'])
-        return jsonify(comment), 200
-    return jsonify({"error": "Comment not found"}), 404
+def get_comments(url):
+    try:
+        comments_cursor = comments_collection.find({'url': url}).sort('createdAt', -1)
+        comments = []
+        for c in comments_cursor:
+            comments.append({
+                "_id": str(c["_id"]),
+                "comment": c.get("comment"),
+                "userID": c.get("userID"),
+                "createdAt": c.get("createdAt").isoformat() if c.get("createdAt") else None
+            })
+        return jsonify(comments), 200
+    except Exception as e:
+        return jsonify({"error": f"Error occurred: {str(e)}"}), 500
+
 
 @comments_bp.route('/update_comment/<comment_id>', methods=['PUT'])
 @jwt_required()
