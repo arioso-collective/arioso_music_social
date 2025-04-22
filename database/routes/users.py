@@ -193,6 +193,8 @@ def get_user(username):
     user = users_collection.find_one({'username': username})
     if user:
         user['_id'] = str(user['_id'])
+        user.pop('password', None)
+        user.pop('profilePicture', None)
         return jsonify(user), 200
     return jsonify({"error": "User not found"}), 404
 
