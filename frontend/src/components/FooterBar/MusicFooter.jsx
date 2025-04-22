@@ -1,10 +1,9 @@
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styles from "./MusicFooter.module.css";
-//import soulSyrup from '../../assets/Ketsa - Soul Syrup.mp3'; // Replace with your own or mock
-
 
 const MusicFooter = ({ currentlyPlaying }) => {
   const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
@@ -12,28 +11,36 @@ const MusicFooter = ({ currentlyPlaying }) => {
   useEffect(() => {
     if (currentlyPlaying && audioRef.current) {
       audioRef.current.load();
-      audioRef.current.play().catch((err) => {
-        console.error("Playback failed:", err);
-      });
+      audioRef.current.play().catch((err) => console.error("Playback failed", err));
+      setIsPlaying(true);
     }
   }, [currentlyPlaying]);
 
-  if (!currentlyPlaying) {
-    return null; // Don't show footer if nothing playing
-  }
+  const togglePlayPause = () => {
+    const audio = audioRef.current;
+    if (audio) {
+      if (isPlaying) {
+        audio.pause();
+      } else {
+        audio.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   const handleTimeUpdate = () => {
     const audio = audioRef.current;
     setProgress(audio.currentTime);
-    setDuration(audio.duration);
+    setDuration(audio.duration || 0);
   };
-  
+
   const handleProgressChange = (e) => {
     const audio = audioRef.current;
-    audio.currentTime = e.target.value;
-    setProgress(e.target.value);
+    const newTime = e.target.value;
+    audio.currentTime = newTime;
+    setProgress(newTime);
   };
-  
+
   const handleVolumeChange = (e) => {
     const newVolume = e.target.value;
     setVolume(newVolume);
@@ -41,27 +48,38 @@ const MusicFooter = ({ currentlyPlaying }) => {
       audioRef.current.volume = newVolume;
     }
   };
-  
+
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60) || 0;
     const secs = Math.floor(seconds % 60) || 0;
     return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
   };
 
+  if (!currentlyPlaying) return null; // Nothing to render if no song selected
+
   return (
-    <div className={styles.musicFooter}>
-      {/* Song Meta: Album Art + Info */}
-      <div className={styles.leftSection}>
-        <img src={currentlyPlaying.albumArt} alt="Album" className={styles.albumArt} />
-        <div className={styles.songDetails}>
-          <div className={styles.songTitle}>{currentlyPlaying.title}</div>
-          <div className={styles.songArtist}>{currentlyPlaying.artist}</div>
-        </div>
+    <div className={styles.footerContainer}>
+      <audio
+        ref={audioRef}
+        src={currentlyPlaying.previewUrl}
+        onTimeUpdate={handleTimeUpdate}
+        preload="metadata"
+      />
+
+      {/* Play/Pause Button */}
+      <div className={styles.leftControls}>
+        <button onClick={togglePlayPause} className={styles.playPauseButton}>
+          {isPlaying ? "⏸️" : "▶️"}
+        </button>
       </div>
-  
-      {/* Progress Bar */}
-      <div className={styles.centerSection}>
-        <div className={styles.progressContainer}>
+
+      {/* Song Info and Progress */}
+      <div className={styles.centerControls}>
+        <div className={styles.songInfo}>
+          <strong>{currentlyPlaying.title}</strong> &nbsp;
+          <span>{currentlyPlaying.artist}</span>
+        </div>
+        <div className={styles.progressBar}>
           <span>{formatTime(progress)}</span>
           <input
             type="range"
@@ -73,9 +91,9 @@ const MusicFooter = ({ currentlyPlaying }) => {
           <span>{formatTime(duration)}</span>
         </div>
       </div>
-  
-      {/* Volume Control */}
-      <div className={styles.rightSection}>
+
+      {/* Volume */}
+      <div className={styles.rightControls}>
         <input
           type="range"
           min="0"
@@ -83,21 +101,13 @@ const MusicFooter = ({ currentlyPlaying }) => {
           step="0.01"
           value={volume}
           onChange={handleVolumeChange}
+          className={styles.volumeSlider}
         />
         <span className={styles.volumeIcon}>🔊</span>
       </div>
-  
-      {/* Hidden Audio Tag */}
-      <audio
-        ref={audioRef}
-        src={currentlyPlaying.previewUrl}
-        onTimeUpdate={handleTimeUpdate}
-        preload="metadata"
-      />
-
     </div>
   );
-  
 };
 
 export default MusicFooter;
+
