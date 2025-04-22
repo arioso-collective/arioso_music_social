@@ -78,6 +78,7 @@ function MusicSearchPage({onSongSelect}) {
       {loading && <p className="status-text">Loading...</p>}
 
       {!loading && results.length > 0 && (
+      <div className="scrollable-results">
         <ul className="results-list">
           {results.map((track) => (
             <TrackItem
@@ -89,7 +90,9 @@ function MusicSearchPage({onSongSelect}) {
             />
           ))}
         </ul>
-      )}
+      </div>
+    )}
+
 
       {!loading && query.length >= 2 && results.length === 0 && (
         <p className="status-text">No results found.</p>

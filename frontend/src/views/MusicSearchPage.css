@@ -64,3 +64,13 @@
     background-color: rgb(222, 175, 255);
     font-weight: bold;
   }
+
+  .scrollable-results {
+    max-height: 300px;       /* You can increase/decrease this value */
+    overflow-y: auto;
+    margin-top: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding-right: 8px;      /* optional, gives space for scrollbar */
+  }
+  
