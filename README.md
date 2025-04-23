@@ -267,6 +267,68 @@ This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2
     - Continue researching Firebase Deployment
     - Work with frontend team to develop JWT Token functionality
     - Assist frontend and backend team with debugging as needed
+---
+    
+# Sprint 3 (4/02/25 - 4/21/25) :notes:
+## Contributions
+### All contributions were merged into our new development branch (development_new) unless stated otherwise. We created development_new because we changed technologies between the first and second Sprint.
+  - **Juluissa:** "Worked as part of backend team to get skeleton of database started and layout of app routes"    
+      - `Jira Task SCRUM-121: Allow users to find music based on title` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-121
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-121-allow-users-to-find-music-base
+      - `Jira Task SCRUM-122: Allow users to find music based on artist `
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-122
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-122-allow-users-to-find-music-base    
+      - `Jira Task SCRUM-123: Show track image when searching song`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-123
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-123-show-track-image-when-searchin
+      - `Jira Task SCRUM-124: Give users recommended artists`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-124
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-124-give-users-recommended-artists
+      - `Jira Task SCRUM-125: Connect Itunes API and Chat API`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-125
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-125-connect-itunes-api-and-chat-ap
+      - `Jira Task SCRUM-126: Allow users to comment on posts`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-126
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-126-allow-users-to-comment-on-post
+      - `Jira Task SCRUM-153: Research Partial searches`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-153
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-153-research-partial-searches
+      - `Jira Task SCRUM-165: Testing plan`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-165
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-165-testing-plan
+      - `Jira Task SCRUM-166: Test Execution and Results`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-166
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-166-test-execution-and-results
+      - `Jira Task SCRUM-171: Connect Comment Component to Database`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-171
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-171-connect-comment-component-to-d
+<br />
+  - **Aaron:**  
+
+<br />
+  - **Cameron:** 
+<br />
+  - **Sebastian:** 
+<br />
+
+## Sprint Progress Chart
+
+This chart represents the sprint progress from April 2nd, 2025, to April 21st, 2025.
+
+![Sprint Progress](https://bitbucket.org/cs3398-enceladus-s25/arioso/raw/3be0b7d83c8ca30f93611ce9ed8826fce93c56e6/burn_up_2.png)
+
+## Next Steps 2
+- **Juluissa:**
+    - Work on polishing up the CSS 
+    - Making our code adhere more to SOLID principles 
+    - Help load the followers and following profiles to the main profile 
+- **Aaron:**
+
+- **Cameron:**
+
+- **Sebastian:**
+
 
 ## Contact
 Created by Juluissa Elias, Aaron Reed, Cameron Salazar, and Sebastian Zeidler.  
