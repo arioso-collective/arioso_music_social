@@ -1,4 +1,4 @@
-# Arioso :headphones:
+# Arioso 🎧
 > A social media platform for music lovers to collect, share, and connect through music.
 
 ---
@@ -7,8 +7,8 @@
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
-* [Sprint 1](#sprint-1-(2/10/25-2/21/25)-:musical_note:)
-* [Sprint 2](#Sprint-2-(3/03/25-3/24/25)-:notes:)
+* [Sprint 1](#sprint-1-(2/10/25-2/21/25))
+* [Sprint 2](#Sprint-2-(3/03/25-3/24/25))
 * [Next Steps](#next_steps)
 
 <!--
@@ -49,6 +49,9 @@
 - [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
 - [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/)
 - [Flask-JWT-Extended](https://flask-jwt-extended.readthedocs.io/en/stable/)
+- [Bcrypt](https://pypi.org/project/bcrypt/)
+- [iTunes API](https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html)
+- [Spotify API](https://developer.spotify.com/documentation/web-api)
 <!-- Include links to documentation where possible. -->
 
 ---
@@ -71,7 +74,7 @@
 
 ---
 
-# Sprint 1 (2/10/25 - 2/21/25) :musical_note:
+# Sprint 1 (2/10/25 - 2/21/25) 🎵
 ## Contributions
   - **Juluissa:** "Researched and started creating a comment form to interact with the database. Basis for how site will gather information"    
       - `Jira Task SCRUM-45: Create a comment form using flask` 
@@ -154,7 +157,7 @@ This chart represents the sprint progress from February 10th, 2025, to February 
     
 ---
     
-# Sprint 2 (3/03/25 - 3/24/25) :notes:
+# Sprint 2 (3/03/25 - 3/24/25) 🎶
 ## Contributions
 ### All contributions were merged into our new development branch (development_new) unless stated otherwise. We created development_new because we changed technologies between the first and second Sprint.
   - **Juluissa:** "Worked as part of backend team to get skeleton of database started and layout of app routes"    
@@ -269,9 +272,9 @@ This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2
     - Assist frontend and backend team with debugging as needed
 ---
     
-# Sprint 3 (4/02/25 - 4/21/25) :notes:
+# Sprint 3 (4/02/25 - 4/21/25) 🎵
 ## Contributions
-### All contributions were merged into our new development branch (development_new) unless stated otherwise. We created development_new because we changed technologies between the first and second Sprint.
+### All contributions were merged into our new development branch (development_new) unless stated otherwise. We created development_new because we changed technologies between the first and second Sprint. Any special cases have been tagged in Jira on the associated task.
   - **Juluissa:** "Worked to make connections between the backend and frontend and worked on the UI as well"    
       - `Jira Task SCRUM-121: Allow users to find music based on title` 
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-121
@@ -309,7 +312,36 @@ This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2
 <br />
   - **Cameron:** 
 <br />
-  - **Sebastian:** 
+
+  - **Sebastian:** "Worked on JWT Token functionality, backend API routes, and SpotifyAPI connection. Additionally, worked on miscellaneous tasks for website polish and refactoring as needed."
+      - `Jira Task SCRUM-115: Research the best approach to integrate music or song sharing into posts (e.g., using music APIs like Spotify, Apple Music, or SoundCloud).` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-115
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-115-research-the-best-approach-to-
+      - `Jira Task SCRUM-116: Make sure passwords are compared against the database when signing in.` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-116
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-116-make-sure-passwords-are-compar
+      - `Jira Task SCRUM-120: Implement Spotify API Authenticator` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-120
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-120-implement-api-functionality-to
+      - `Jira Task SCRUM-135: Reformat App.py` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-135
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-135-protected-routes
+      - `Jira Task SCRUM-140: Login JWT Creation` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-140
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-140-login-jwt-creation
+      - `Jira Task SCRUM-163: Testing Plan` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-163
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-163-testing-plan
+      - `Jira Task SCRUM-167: Testing Execution and Results` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-167
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-167-testing-execution-and-results
+          - *This branch was merged into SCRUM-163's branch, as Sebastian began working on the test execution on SCRUM-163 before realizing his mistake and making a new branch.*
+      - `Jira Task SCRUM-168: Update Favicon and Name` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-168
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-168-update-favicon-and-name
+      - `Jira Task SCRUM-173: Logout API Route` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-173
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-173-logout-api-route
 <br />
 
 ## Sprint Progress Chart
@@ -328,7 +360,11 @@ This chart represents the sprint progress from April 2nd, 2025, to April 21st, 2
 - **Cameron:**
 
 - **Sebastian:**
-
+    - Work on fixing and polishing the post feed
+    - Develop an algorithm for the post feed to best suit user needs
+    - Fully connect the SpotifyAPI while adhering to all branding guidelines
+    - Work on polishing the CSS and other frontend work as needed to enhance UI/UX
+    - Test all code for Quality Assurance and eliminate any bugs
 
 ## Contact
 Created by Juluissa Elias, Aaron Reed, Cameron Salazar, and Sebastian Zeidler.  
