@@ -272,7 +272,7 @@ This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2
 # Sprint 3 (4/02/25 - 4/21/25) :notes:
 ## Contributions
 ### All contributions were merged into our new development branch (development_new) unless stated otherwise. We created development_new because we changed technologies between the first and second Sprint.
-  - **Juluissa:** "Worked as part of backend team to get skeleton of database started and layout of app routes"    
+  - **Juluissa:** "Worked to make connections between the backend and frontend and worked on the UI as well"    
       - `Jira Task SCRUM-121: Allow users to find music based on title` 
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-121
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-121-allow-users-to-find-music-base
