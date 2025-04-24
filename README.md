@@ -312,7 +312,40 @@ This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2
   - **Aaron:**  
 
 <br />
-  - **Cameron:** 
+  - **Cameron:** "Worked on making the footer bar and settings page while making the UI the same across the website and visually accessible."    
+      - `Jira Task SCRUM-129: Design and Position the Footer Bar` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-129
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-129-design-and-position-the-footer
+      - `Jira Task SCRUM-162: Testing Plan & Execution & Results `
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-162
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-162-testing-plan-salazar    
+      - `Jira Task SCRUM-143: Create the Settings Page Component`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-143
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-143-create-the-settings-page-compo
+      - `Jira Task SCRUM-142: Add 'Settings' Button to Profile Page`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-142
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-142-add-settings-button-to-profile
+      - `Jira Task SCRUM-144: Add Save Changes Button to Settings Page`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-144
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-144-add-back-button-to-return-to-p
+      - `Jira Task SCRUM-145: Integrate Settings Form/Sections`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-145
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-145-integrate-settings-form-sectio
+      - `Jira Task SCRUM-138: Implement Light/Dark Mode Toggle`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-138
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-138-implement-light-dark-mode-togg
+      - `Jira Task SCRUM-139: Improve Visual Accessibility for Login/Signup Pages`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-139
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-139-improve-visual-accessibility-w
+      - `Jira Task SCRUM-64: Enhance MusicPostFeed.jsx to Manage Posting`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-64
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-64-enhance-musicpostfeed.jsx-to-ma
+      - `Jira Task SCRUM-65: Update MusicPost.jsx to Display Text + Music Info`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-65
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-65-update-musicpost.jsx-to-display
+      - `Jira Task SCRUM-175: Make NavBar fit styling of entire page`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-175
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-175-make-navbar-fit-styling-of-ent
 <br />
 
   - **Sebastian:** "Worked on JWT Token functionality, backend API routes, and SpotifyAPI connection. Additionally, worked on miscellaneous tasks for website polish and refactoring as needed."
@@ -360,6 +393,9 @@ This chart represents the sprint progress from April 2nd, 2025, to April 21st, 2
 - **Aaron:**
 
 - **Cameron:**
+    - Add like button to posts
+    - Add usernames to posts
+    - Implement direct messaging among users
 
 - **Sebastian:**
     - Work on fixing and polishing the post feed
