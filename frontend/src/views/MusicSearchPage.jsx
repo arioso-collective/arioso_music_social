@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import TrackItem from "./TrackItem"; 
 import './MusicSearchPage.css';
 
-function MusicSearchPage() {
+function MusicSearchPage({onSongSelect}) {
   const [query, setQuery] = useState("");
   const [searchBy, setSearchBy] = useState("title"); // "title" or "artist"
   const [results, setResults] = useState([]);
@@ -78,6 +78,7 @@ function MusicSearchPage() {
       {loading && <p className="status-text">Loading...</p>}
 
       {!loading && results.length > 0 && (
+      <div className="scrollable-results">
         <ul className="results-list">
           {results.map((track) => (
             <TrackItem
@@ -85,10 +86,13 @@ function MusicSearchPage() {
               track={track}
               query={query}
               searchBy={searchBy}
+              onClick={() => onSongSelect(track)} 
             />
           ))}
         </ul>
-      )}
+      </div>
+    )}
+
 
       {!loading && query.length >= 2 && results.length === 0 && (
         <p className="status-text">No results found.</p>

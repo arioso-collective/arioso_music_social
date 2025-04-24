@@ -9,11 +9,7 @@
     background-position: center;
   }
   
-  .coverPhoto {
-    width: 100%;
-    height: 250px; /* Increase cover photo size for desktop */
-    background-color: #ddd;
-  }
+
   
   .profileContent {
     display: flex;

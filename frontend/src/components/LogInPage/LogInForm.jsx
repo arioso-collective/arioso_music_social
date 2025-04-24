@@ -76,6 +76,36 @@ const LogInForm = () => {
       setLoading(false);
     }
   };
+  const handleLogin = async (e) => {
+    e.preventDefault();
+  
+    const credentials = { username, password };
+  
+    try {
+      const res = await fetch("http://localhost:5001/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(credentials),
+      });
+  
+      const data = await res.json();
+  
+      if (res.ok) {
+        // ✅ Store token
+        localStorage.setItem("token", data.access_token);
+        // Optionally store username
+        localStorage.setItem("username", data.username || credentials.username);
+        
+        // Redirect or update UI
+        navigate("/home");
+      } else {
+        setError(data.error || "Login failed");
+      }
+    } catch (err) {
+      setError("Network error");
+    }
+  };
+  
 
   return (
     <div className="login-container">
