@@ -10,7 +10,7 @@
 * [Sprint 1](#sprint-1-(2/10/25-2/21/25))
 * [Sprint 2](#Sprint-2-(3/03/25-3/24/25))
 * [Next Steps](#next_steps)
-* [Sprint 2](#sprint-2-(3/03/25-3/24/25))
+* [Sprint 3](#sprint-3-(4/02/25 - 4/21/25))
 * [Next Steps 2](#next_steps_2)
 
 <!--
@@ -309,6 +309,27 @@ This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-171-connect-comment-component-to-d
 <br />
   - **Aaron:**  
+      - `Jira Task SCRUM-133: Research CORS`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-133
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/branch/SCRUM-133-research-cors
+      - `Jira Task SCRUM-169: Connect Profile Page to Database` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-169
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/branch/SCRUM-169-connect-profile-page-to-databa
+      - `Jira Task SCRUM-134: Token Storage and Use`
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-134
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/branch/SCRUM-140-login-jwt-creation (Token Storage was handled collaboratively in SCRUM-140)
+      - `Jira Task SCRUM-97: Handle API Requests for User Actions` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-97
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/branch/SCRUM-97-handle-api-requests-for-user-ac
+      - `Jira Task SCRUM-136: Logout` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-136
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/branch/SCRUM-136-logout
+      - `Jira Task SCRUM-161: Testing Plan` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-161
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/branch/SCRUM-161-testing-plan-reed
+      - `Jira Task SCRUM-164: Test Execution and Results` 
+        - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-164
+          - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/branch/SCRUM-164-test-execution-and-results-reed
 <br />
   - **Cameron:** "Worked on making the footer bar and settings page while making the UI the same across the website and visually accessible."    
       - `Jira Task SCRUM-129: Design and Position the Footer Bar` 
@@ -389,12 +410,15 @@ This chart represents the sprint progress from April 2nd, 2025, to April 21st, 2
     - Making our code adhere more to SOLID principles 
     - Help load the followers and following profiles to the main profile 
 - **Aaron:**
-
+    - Connect Edit Profile to Database
+    - Support Image Uploads for User Photo
+    - Pull Data from User Posts to Populate Favorite Artist and Favorite Genres
+    - Convert Styling to Framework like Tailwind or Bootstrap
 - **Cameron:**
     - Add like button to posts
     - Add usernames to posts
     - Implement direct messaging among users
-
+    - Link UserNames on Posts/Comments to Profiles
 - **Sebastian:**
     - Work on fixing and polishing the post feed
     - Develop an algorithm for the post feed to best suit user needs
