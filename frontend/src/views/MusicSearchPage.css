@@ -1,0 +1,76 @@
+.music-search-container {
+    padding: 2rem;
+    max-width: 720px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .music-search-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s ease;
+    margin-bottom: 1.5rem;
+  }
+  
+  .search-input:focus {
+    border-color: #cc00ff;
+  }
+  
+  .results-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+  }
+  
+  .result-item {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .track-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+  
+  .artist-name {
+    font-size: 0.9rem;
+  }
+  
+  audio {
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+  
+  .status-text {
+    margin-top: 1rem;
+    color: #888;
+    font-style: italic;
+  }
+  
+  .highlight {
+    background-color: rgb(222, 175, 255);
+    font-weight: bold;
+  }
+
+  .scrollable-results {
+    max-height: 300px;       /* You can increase/decrease this value */
+    overflow-y: auto;
+    margin-top: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding-right: 8px;      /* optional, gives space for scrollbar */
+  }
+  

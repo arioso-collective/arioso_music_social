@@ -1,0 +1,48 @@
+.login-page {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../assets/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  /* Left side: Logo section */
+.left-section {
+  flex: 0.7; /* Reduce space taken by logo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 5%;
+}
+
+/* Right side: Login form section */
+.right-section {
+  flex: 1; /* Login form takes more space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Logo styling */
+.logo {
+  max-width: 100%; /* Reduce logo size */
+  height: auto;
+}
+
+.logo-container {
+  text-align: center;
+  max-width: 100%;
+}
+
+.welcome-text {
+  margin-top: 10px;
+  font-size: 30px;
+  color: white; /* Adjust to match your theme */
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+}
+  

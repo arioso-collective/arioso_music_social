@@ -1,0 +1,126 @@
+.login-container {
+    width: 350px;
+    padding: 30px;
+    background: rgb(106, 52, 232);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 26px;
+    margin-bottom: 15px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    text-align: left;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  input {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  button {
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .login-links {
+    margin-top: 15px;
+  }
+  
+  .login-links a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .login-links a:hover {
+    text-decoration: underline;
+  }
+
+  .login-message {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  /* Green background for success */
+  .login-message.success {
+    background-color: #d4fcd4;
+    color: #155724;
+    border: 1px solid #78e378;
+  }
+  
+  /* Red background for error */
+  .login-message.error {
+    background-color: #fddede;
+    color: #a30000;
+    border: 1px solid #ff7c7c;
+  }
+
+  .error {
+    background-color: #fddede;
+    color: #a30000;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 8px;
+    text-align: center;
+    width: 93%;
+  }  
+  
+
+  button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+  }
+
+  .loading-btn {
+    background-color: gray;
+    cursor: not-allowed;
+  }
+
+  .password-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  .password-container input {
+    width: 100%;
+    padding-right: 40px;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-10%);
+    cursor: pointer;
+    font-size: 18px;
+  }
+  

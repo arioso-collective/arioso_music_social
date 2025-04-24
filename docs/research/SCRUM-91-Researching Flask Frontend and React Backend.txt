@@ -1,0 +1,34 @@
+How to connect Flask Backend and React Front end
+
+
+We will be figuring out how to do API calls on flask that will interact with our react 
+front end. We are trying to see how we should format both ends so they can connect smoothly once
+the database and API calls are set up.
+
+Trying to understand exactly how they interact and to what extend each software is used. 
+Also trying to see how other sites did simple API calls and use user input to transfer 
+We want to make sure that while both ends are worked on seperately we know what part of the front end to format the backend
+to when we set up flaskbackend to make API calls
+After making the tabels we will use this information to ensure that the flask backend is collecting the correct data 
+and that the react front end can recieve this information such as music and image options 
+
+
+https://www.reddit.com/r/flask/comments/vhod8c/react_frontend_on_a_flask_backend/?rdt=62372 
+
+How to Create a Flask + React Project | Python Backend + React Frontend:
+https://www.youtube.com/watch?v=7LNl2JlZKHA 
+
+How to Call a Flask API in React:
+https://www.youtube.com/watch?v=06pWsB_hoD4
+
+https://www.geeksforgeeks.org/how-to-connect-reactjs-with-flask-api/
+Quick sum:
+In react: In general what proxy does is, when we request into the javascript web server which serves the react frontend will 
+automatically be redirected to the proxy key. In this case, it will be our flask server. 
+For fetching the API useState and useEffect hooks are used in react app.
+
+For hooks:
+https://javascript.plainenglish.io/hooking-your-react-frontend-to-your-flask-api-fa83b14c9684 
+https://www.youtube.com/watch?v=Zr5jtRhUVJA 
+
+

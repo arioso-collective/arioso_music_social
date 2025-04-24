@@ -10,6 +10,8 @@
 * [Sprint 1](#sprint-1-(2/10/25-2/21/25))
 * [Sprint 2](#Sprint-2-(3/03/25-3/24/25))
 * [Next Steps](#next_steps)
+* [Sprint 2](#sprint-2-(3/03/25-3/24/25))
+* [Next Steps 2](#next_steps_2)
 
 <!--
 * [Screenshots](#screenshots)

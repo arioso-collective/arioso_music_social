@@ -1,0 +1,68 @@
+.pageLayout {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  width: 100%;
+}
+
+.mainContent {
+  width: 100%;
+  /* Remove the margin-right since sidebar will overlay */
+}
+
+.profileContainer {
+  width: 100vw;  /* Make the page take up the full viewport width */
+  min-height: 100vh;  /* Ensure it takes up the full height of the screen */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Keeps content centered */
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.contentLayout {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 0 1rem;
+  margin-top: 1rem;
+}
+
+.mainSection {
+  flex: 1;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem; /* Add consistent spacing between main section components */
+}
+
+.buttonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.editButton {
+  padding: 8px 20px;
+  background-color: #6a34e8;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.editButton:hover {
+  background-color: #5826c9;
+}
+  

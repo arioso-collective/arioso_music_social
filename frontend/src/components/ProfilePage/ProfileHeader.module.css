@@ -1,0 +1,30 @@
+.headerContainer {
+    width: 100%; /* Make it take the full page width */
+    max-width: 1200px; /* Prevent it from being too stretched on large screens */
+    margin: 0 auto;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    box-shadow: var(--box-shadow);
+    background-size: cover;
+    background-position: center;
+  }
+  
+
+  
+  .profileContent {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px; /* Matches header width */
+  }
+
+  .profilePic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  

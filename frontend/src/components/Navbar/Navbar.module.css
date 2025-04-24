@@ -1,0 +1,40 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px; /* <-- smaller padding */
+  box-sizing: border-box; 
+  background-color: rgb(106, 52, 232);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.logoImage {
+  height: 50px;
+  object-fit: contain;
+}
+
+.navLinks {
+  display: flex;
+  gap: 2rem;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 575;
+  font-size: 18px;
+  transition: color 0.2s;
+}
+
+.navLink:hover {
+  color: #3c73ff;
+} 

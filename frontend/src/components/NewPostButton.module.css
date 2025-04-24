@@ -1,0 +1,21 @@
+.floatingButton {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgb(106, 52, 232); /* Arioso Purple */
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s;
+  }
+  
+  .floatingButton:hover {
+    background-color: rgb(86, 42, 192); /* Darker purple when hovered */
+  }
+  

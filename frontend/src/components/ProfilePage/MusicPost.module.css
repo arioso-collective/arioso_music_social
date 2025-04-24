@@ -1,0 +1,16 @@
+.postContainer {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    width: 100%; /* Make sure posts take full width */
+    text-align: left;
+    box-shadow: var(--box-shadow);
+  }
+  
+  .songEmbed {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+  }
+  

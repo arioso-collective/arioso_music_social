@@ -1,0 +1,158 @@
+.signup-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: rgb(106, 52, 232);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container input {
+  width: calc(100% - 40px);
+  padding-right: 40px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.signup-message {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Green background for success */
+.signup-message.success {
+  background-color: #d4fcd4;
+  color: #155724;
+  border: 1px solid #78e378;
+}
+
+/* Red background for error */
+.signup-message.error {
+  background-color: #fddede;
+  color: #a30000;
+  border: 1px solid #ff7c7c;
+}
+
+.error {
+  background-color: #fddede;
+  color: #a30000;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 8px;
+  text-align: center;
+  width: 93%;
+}
+
+.password-strength {
+  font-size: 14px;
+  padding: 5px;
+  margin-top: -5px;
+}
+
+.password-strength.weak {
+  background-color: #fddede;
+  color: #a30000;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 8px;
+  text-align: center;
+  width: 93%;
+}
+
+.password-strength.medium {
+  background-color: #fdecde;
+  color: #b65002;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 8px;
+  text-align: center;
+  width: 93%;
+}
+
+.password-strength.strong {
+  background-color: #e2fdde;
+  color: #018e20;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 8px;
+  text-align: center;
+  width: 93%;
+}
+
+p {
+  margin-top: 10px;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+  
