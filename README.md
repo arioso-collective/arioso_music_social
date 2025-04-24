@@ -350,9 +350,9 @@ This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2
 
 This chart represents the sprint progress from April 2nd, 2025, to April 21st, 2025.
 
-![Sprint Progress](https://bitbucket.org/cs3398-enceladus-s25/arioso/raw/3be0b7d83c8ca30f93611ce9ed8826fce93c56e6/burn_up_2.png)
+![Sprint Progress](https://bitbucket.org/cs3398-enceladus-s25/arioso/raw/96aaf73e9b3a64855c499b0b31d08a0920cc57e9/BurnUpChart/burn_up_3.png)
 
-## Next Steps 2
+## Next Steps 3
 - **Juluissa:**
     - Work on polishing up the CSS 
     - Making our code adhere more to SOLID principles 
