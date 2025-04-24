@@ -310,7 +310,6 @@ This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-171-connect-comment-component-to-d
 <br />
   - **Aaron:**  
-
 <br />
   - **Cameron:** "Worked on making the footer bar and settings page while making the UI the same across the website and visually accessible."    
       - `Jira Task SCRUM-129: Design and Position the Footer Bar` 
