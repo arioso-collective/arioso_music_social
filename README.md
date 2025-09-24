@@ -10,7 +10,7 @@
 * [Sprint 1](#sprint-1-(2/10/25-2/21/25))
 * [Sprint 2](#Sprint-2-(3/03/25-3/24/25))
 * [Next Steps](#next_steps)
-* [Sprint 3](#sprint-3-(4/02/25 - 4/21/25))
+* [Sprint 3](#sprint-3-(4/02/25-4/21/25))
 * [Next Steps 2](#next_steps_2)
 
 <!--
@@ -101,7 +101,6 @@
       - `Jira Task SCRUM-33: Add a gallery of pre-created icons that users can select from`
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-33
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-33-add-a-gallery-of-pre-created-ic
-<br />
   - **Cameron:** "Started an account settings form to let users personalize their profile and keep their information up to date."
        - `Jira Task SCRUM-23: Design and implement the account settings UI` 
           - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-23
@@ -112,7 +111,6 @@
       - `Jira Task SCRUM-24: Create backend routes to handle username and email updates with validation`
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-24
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-24-create-backend-routes
-<br />
   - **Sebastian:** "Researched and set up initial database structure while providing functions to access and modify the database file."    
       - `Jira Task SCRUM-15: Database Schema Design & Modification Task: Design and modify the database schema to include an encrypted password field.` 
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-15
@@ -175,7 +173,6 @@ This chart represents the sprint progress from February 10th, 2025, to February 
       - `Jira Task SCRUM-93: Implement Delete Operations`
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-93
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-93-implement-delete-operations
-<br />
   - **Aaron:** "Worked as part of the frontend team to setup ProfilePage and related components. Built off the backends api routes to 
         connect the frontend SignUp an Login pages to our cloud database."
       - `Jira Task SCRUM-84: Setup Profile Page and Component Structure` 
@@ -193,7 +190,6 @@ This chart represents the sprint progress from February 10th, 2025, to February 
       - `Jira Task SCRUM-94: Setup API Connection`
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-95
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/branch/SCRUM-95-setup-api-connection
-<br />
   - **Cameron:** "Worked as part of the frontend team to set up SignUp page and LogIn page.
       - `Jira Task SCRUM-112: Research React and JavaScript` 
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-112
@@ -222,7 +218,6 @@ This chart represents the sprint progress from February 10th, 2025, to February 
       - `Jira Task SCRUM-62: Enhance User Experience`
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-62
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-62-enhance-user-experience-and-acc
-<br />
   - **Sebastian:** "Worked on the backend team to create a Flask Backend API that can be called by the React frontend to access and modify the cloud database."
     - `Jira Task SCRUM-17: Implementing Password Hashing` 
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-17
@@ -307,7 +302,6 @@ This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2
       - `Jira Task SCRUM-171: Connect Comment Component to Database`
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-171
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-171-connect-comment-component-to-d
-<br />
   - **Aaron:**  
       - `Jira Task SCRUM-133: Research CORS`
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-133
@@ -330,7 +324,6 @@ This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2
       - `Jira Task SCRUM-164: Test Execution and Results` 
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-164
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/branch/SCRUM-164-test-execution-and-results-reed
-<br />
   - **Cameron:** "Worked on making the footer bar and settings page while making the UI the same across the website and visually accessible."    
       - `Jira Task SCRUM-129: Design and Position the Footer Bar` 
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-129
@@ -365,8 +358,6 @@ This chart represents the sprint progress from March 3rd, 2025, to March 24th, 2
       - `Jira Task SCRUM-175: Make NavBar fit styling of entire page`
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-175
           - Reference: https://bitbucket.org/cs3398-enceladus-s25/arioso/commits/branch/SCRUM-175-make-navbar-fit-styling-of-ent
-<br />
-
   - **Sebastian:** "Worked on JWT Token functionality, backend API routes, and SpotifyAPI connection. Additionally, worked on miscellaneous tasks for website polish and refactoring as needed."
       - `Jira Task SCRUM-115: Research the best approach to integrate music or song sharing into posts (e.g., using music APIs like Spotify, Apple Music, or SoundCloud).` 
         - Jira Link: https://cs3398-enceladus-spring.atlassian.net/browse/SCRUM-115
