@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './NewPostModal.module.css';
-import MusicSearchPage from '/Users/juluissaelias/arioso/frontend/src/views/MusicSearchPage.jsx';
+import MusicSearchPage from '/src/views/MusicSearchPage.jsx';
 
 const NewPostModal = ({ onClose, onSubmit }) => {
   const [text, setText] = useState("");
